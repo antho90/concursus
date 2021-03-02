@@ -136,7 +136,7 @@ class __TwigTemplate_143f7bf0387c6ca1929eb569a00d85cbf62512a3cd9c8295239d87f2997
         } else {
             echo "Title";
         }
-        echo " | Nom du site
+        echo " | Concursus
             ";
         
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->leave($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof);
@@ -506,7 +506,7 @@ class __TwigTemplate_143f7bf0387c6ca1929eb569a00d85cbf62512a3cd9c8295239d87f2997
         <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"/>
         <title>
             {% block title %}
-                {% if title is defined %}{{title}}{% else %}Title{% endif %} | Nom du site
+                {% if title is defined %}{{title}}{% else %}Title{% endif %} | Concursus
             {% endblock %}
         </title>
         {% block stylesheets %}
