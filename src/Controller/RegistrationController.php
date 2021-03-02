@@ -27,7 +27,7 @@ class RegistrationController extends AbstractController
             $user->setPassword($password);
             //on active par défaut
             $user->setIsActive(true);
-            //$user->addRole("ROLE_ADMIN");
+            $user->addRole("ROLE_ADMIN");
             // 4) save the User!
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
@@ -35,7 +35,7 @@ class RegistrationController extends AbstractController
             // ... do any other work - like sending them an email, etc
             // maybe set a "flash" success message for the user
             $this->addFlash('success', 'Votre compte à bien été enregistré.');
-            //return $this->redirectToRoute('login');
+            return $this->redirectToRoute('login');
         }
         return $this->render('registration/register.html.twig', ['form' => $form->createView(), 'mainNavRegistration' => true, 'title' => 'Inscription']);
     }
