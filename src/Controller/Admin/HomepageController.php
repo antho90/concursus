@@ -15,4 +15,18 @@ class HomepageController extends AbstractController {
         return $this->render('admin/index.html.twig', ['mainNavAdmin' => true, 'title' => 'Espace Admin']);
     }
 
+    /**
+     * @Route("/creation_competition")
+     */
+    public function creation_competition() {
+        return $this->render('admin/creation_competition.html.twig');
+    }
+
+    /**
+     * @Route("/CRUD_mentor")
+     */
+    public function CRUD_mentor() {
+        return $this->render('admin/CRUD_mentor.html.twig');
+    }
+
 }
