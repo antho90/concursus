@@ -1,0 +1,58 @@
+<?php
+
+namespace App\Entity;
+
+use App\Repository\EquipeRepository;
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * @ORM\Entity(repositoryClass=EquipeRepository::class)
+ */
+class Equipe
+{
+    /**
+     * @ORM\Id
+     * @ORM\GeneratedValue
+     * @ORM\Column(type="integer")
+     */
+    private $id;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $acces;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $nom;
+
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    public function getAcces(): ?string
+    {
+        return $this->acces;
+    }
+
+    public function setAcces(string $acces): self
+    {
+        $this->acces = $acces;
+
+        return $this;
+    }
+
+    public function getNom(): ?string
+    {
+        return $this->nom;
+    }
+
+    public function setNom(string $nom): self
+    {
+        $this->nom = $nom;
+
+        return $this;
+    }
+}
