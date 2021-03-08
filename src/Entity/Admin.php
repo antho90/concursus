@@ -34,6 +34,11 @@ class Admin
      */
     private $mentor;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Competiton::class, inversedBy="admins")
+     */
+    private $competition;
+
     public function __construct()
     {
         $this->mentor = new ArrayCollection();
@@ -88,6 +93,18 @@ class Admin
     public function removeMentor(Mentor $mentor): self
     {
         $this->mentor->removeElement($mentor);
+
+        return $this;
+    }
+
+    public function getCompetition(): ?Competiton
+    {
+        return $this->competition;
+    }
+
+    public function setCompetition(?Competiton $competition): self
+    {
+        $this->competition = $competition;
 
         return $this;
     }
