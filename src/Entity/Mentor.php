@@ -39,6 +39,11 @@ class Mentor
      */
     private $admins;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Equipe::class, inversedBy="mentors")
+     */
+    private $equipe;
+
     public function __construct()
     {
         $this->admins = new ArrayCollection();
@@ -108,6 +113,18 @@ class Mentor
         if ($this->admins->removeElement($admin)) {
             $admin->removeMentor($this);
         }
+
+        return $this;
+    }
+
+    public function getEquipe(): ?Equipe
+    {
+        return $this->equipe;
+    }
+
+    public function setEquipe(?Equipe $equipe): self
+    {
+        $this->equipe = $equipe;
 
         return $this;
     }
