@@ -24,8 +24,8 @@
 					{{competition.nom}}
 				</div>
 				<div class="card-body">
-					<h5 class="card-title">Du  au  </h5>
-					<p class="card-text">A partir de </p>
+					<h5 class="card-title">{{ competition.date | date('d/m/Y') }} </h5>
+					<p class="card-text">A partir de {{ competition.date | date('H:i') }} </p>
 					<a href="{{path('app_homepage_index')}}" class="btn btn-primary">Voir plus</a>
 				</div>
 			</div><br><br>
