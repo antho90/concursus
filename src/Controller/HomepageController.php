@@ -14,4 +14,11 @@ class HomepageController extends AbstractController
     public function index() {
         return $this->render('homepage/index.html.twig', ['mainNavHome'=>true, 'title'=>'Accueil']);
     }
+
+    /**
+     * @Route("/programme")
+     */
+    public function programme() {
+        return $this->render('homepage/programme.html.twig', ['mainNavHome'=>true, 'title'=>'Programme']);
+    }
 }
