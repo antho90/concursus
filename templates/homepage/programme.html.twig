@@ -1,12 +1,25 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+
 <style>
     .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
     .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
 </style>
 
 <div class="example-wrapper">
-    <h1>Je suis la page des Programme</h1>
+    <h1 class=" text-center ">Programmes</h1>
+
+        <div class="card text-center">
+  <div class="card-header">
+    Compétition
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">Special title treatment</h5>
+    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+    <a href="{{path('app_homepage_index')}}" class="btn btn-primary">Voir plus</a>
+  </div>
+</div>
+
 </div>
 {% endblock %}

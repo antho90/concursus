@@ -30,7 +30,7 @@
 									<a class="nav-link" href="{{path('app_homepage_index')}}">Accueil</a>
 								</li>
 								<li class="nav-item">
-									<a class="nav-link" href="{{path('app_homepage_programme')}}">Programme</a>
+									<a class="nav-link" href="{{path('app_homepage_programme')}}">Programmes</a>
 								</li>
 
 								{% if is_granted('ROLE_USER') %}
@@ -97,10 +97,10 @@
 					{% endblock %}
 
 					{% block javascripts %}
-						<!-- jQuery -->
-						<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-						<!-- Javascript de Bootstrap -->
-						<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src="https://bootswatch.com/_vendor/jquery/dist/jquery.min.js"></script>
+    <script src="https://bootswatch.com/_vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://bootswatch.com/_assets/js/custom.js"></script>
+
 					{% endblock %}
 
 
