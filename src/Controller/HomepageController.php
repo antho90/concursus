@@ -5,6 +5,7 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Repository\CompetitonRepository;
 
 class HomepageController extends AbstractController
 {
@@ -18,7 +19,10 @@ class HomepageController extends AbstractController
     /**
      * @Route("/programme")
      */
-    public function programme() {
-        return $this->render('homepage/programme.html.twig', ['mainNavHome'=>true, 'title'=>'Programme']);
+    public function programme(CompetitonRepository $repository) {
+
+        $competitions = $repository->findAll();
+
+        return $this->render('homepage/programme.html.twig', ['competitions'=> $competitions, 'title'=>'Programme']);
     }
 }

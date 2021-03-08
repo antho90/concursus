@@ -2,24 +2,35 @@
 
 {% block body %}
 
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
 
-<div class="example-wrapper">
-    <h1 class=" text-center ">Programmes</h1>
+	<style>
+		.example-wrapper {
+			margin: 1em auto;
+			max-width: 800px;
+			width: 95%;
+			font: 18px / 1.5 sans-serif;
+		}
+		.example-wrapper code {
+			background: #F5F5F5;
+			padding: 2px 6px;
+		}
+	</style>
 
-        <div class="card text-center">
-  <div class="card-header">
-    Compétition
-  </div>
-  <div class="card-body">
-    <h5 class="card-title">Special title treatment</h5>
-    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-    <a href="{{path('app_homepage_index')}}" class="btn btn-primary">Voir plus</a>
-  </div>
-</div>
-
-</div>
+	<div class="example-wrapper">
+		<h1 class=" text-center ">Programmes</h1>
+		{% for competition in competitions %}
+			<div class="card text-center">
+				<div class="card-header">
+					{{competition.nom}}
+				</div>
+				<div class="card-body">
+					<h5 class="card-title">Du  au  </h5>
+					<p class="card-text">A partir de </p>
+					<a href="{{path('app_homepage_index')}}" class="btn btn-primary">Voir plus</a>
+				</div>
+			</div><br><br>
+		{% else %}
+			<h2>Aucune compétition pour le moment</h2>
+		{% endfor %}
+	</div>
 {% endblock %}
