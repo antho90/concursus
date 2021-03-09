@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\CompetitonRepository;
+use Doctrine\DBAL\Driver\Connection;
 
 class HomepageController extends AbstractController
 {
@@ -21,8 +22,15 @@ class HomepageController extends AbstractController
      */
     public function programme(CompetitonRepository $repository) {
 
-        $competitions = $repository->findAll();
+        $programmes = $repository->findAll();
 
-        return $this->render('homepage/programme.html.twig', ['competitions'=> $competitions, 'title'=>'Programme']);
+        return $this->render('homepage/programme.html.twig', ['programmes'=> $programmes, 'title'=>'Programme']);
+    }
+
+    /**
+     * @Route("/competition")
+     */
+    public function competition() {
+        return $this->render('homepage/competition.html.twig', ['title'=>'Competition']);
     }
 }
