@@ -29,9 +29,6 @@
 								<li class="nav-item {% if mainNavHome is defined %}active{% endif %}">
 									<a class="nav-link" href="{{path('app_homepage_index')}}">Accueil</a>
 								</li>
-								<li class="nav-item">
-									<a class="nav-link" href="{{path('app_homepage_programme')}}">Programmes</a>
-								</li>
 
 								{% if is_granted('ROLE_USER') %}
 									<li class="nav-item {% if mainNavMember is defined %}active{% endif %}">
@@ -43,6 +40,13 @@
 										<a class="nav-link" href="{{path('app_admin_homepage_index')}}">Espace admin</a>
 									</li>
 								{% endif %}
+
+								      <li class="nav-item dropdown">
+										<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Evenement</a>
+										<div class="dropdown-menu">
+										<a class="dropdown-item" href="{{path('app_homepage_programme')}}">Programmes</a>
+										</div>
+									</li>
 							</ul>
 							<ul class="navbar-nav ml-auto">
 								{% if is_granted('ROLE_USER') %}
