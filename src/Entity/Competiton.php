@@ -39,6 +39,16 @@ class Competiton
      */
     private $admins;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $description;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $info;
+
     public function __construct()
     {
         $this->admins = new ArrayCollection();
@@ -111,6 +121,30 @@ class Competiton
                 $admin->setCompetition(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(string $description): self
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    public function getInfo(): ?string
+    {
+        return $this->info;
+    }
+
+    public function setInfo(string $info): self
+    {
+        $this->info = $info;
 
         return $this;
     }

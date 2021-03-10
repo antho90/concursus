@@ -1,5 +1,9 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-<h1> Compétition </h1>
+
+<h1 class ="text-center"> {{competition.nom}} </h1>
+
+<p class ="text-center">{{competition.date | date('d/m/Y')}}</p>
+
 {% endblock %}

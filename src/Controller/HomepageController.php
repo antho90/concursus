@@ -27,43 +27,17 @@ class HomepageController extends AbstractController
 
         $programmes = $repository->findAll();
 
-        $competitions = $repository->findAll();
-        return $this->render('homepage/programme.html.twig', ['competitions' => $competitions,'programmes' => $programmes, 'title' => 'Programme']);
+        return $this->render('homepage/programme.html.twig', ['programmes' => $programmes, 'title' => 'Programme']);
     }
 
     /**
      * @Route("/competition/{id}")
      */
-    public function competition(CompetitonRepository $repository)
+    public function competition(CompetitonRepository $repository, $id)
     {
-        $competitions = $repository->findAll();
-        return $this->render('homepage/competition.html.twig', ['competitions' => $competitions,'title' => 'Competition']);
+        $competitions = $repository->find($id);
+
+        return $this->render('homepage/competition.html.twig', ['competition' => $competitions,'title' => 'Competition']);
     }
 
-    /**
-     * @Route("/competition/{id}", name="competition")
-     */
-
-
-    public function showCompetiton($id)
-    {
-        $repo = $this->getDoctrine()->getRepository(Competiton::class);
-        $competition = $repo->find($id);
-        return $this->render('homepage/competition.html.twig', [
-            'competition' => $competition
-        ]);
-    }
-
-    // public function showCompetiton($id)
-    // {
-    //     $competition = $this->getDoctrine()
-    //         ->getRepository('App:Competiton')
-    //         ->find($id);
-
-    //     if (!$competition) {
-    //         throw $this->createNotFoundException('Aucune compétition ne correspond à l\'id');
-    //     }
-
-    //     return $this->render('homepage/competition.html.twig', ['title' => 'Competition']);
-    // }
 }

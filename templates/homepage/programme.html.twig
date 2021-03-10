@@ -24,10 +24,18 @@
 					{{programme.nom}}
 				</div>
 				<div class="card-body">
-					<h5 class="card-title">{{ programme.date | date('d/m/Y') }} </h5>
-					<p class="card-text">A partir de {{ programme.date | date('H:i') }} </p>
-					<a href="{{path('app_homepage_competition', {'id': competition.id})}}" class="btn btn-primary">Voir plus</a>
+					<h5 class="card-title">{{ programme.date | date('d/m/Y') }}
+					</h5>
+					<p class="card-text">A partir de
+						{{ programme.date | date('H:i') }}
+					</p>
+					<pre>
+						
+					</pre>
+
+					<a href="{{path('app_homepage_competition', {'id': programme.id})}}" class="btn btn-primary">Voir plus</a>
 				</div>
+
 			</div><br><br>
 		{% else %}
 			<h2>Aucune compétition pour le moment</h2>
