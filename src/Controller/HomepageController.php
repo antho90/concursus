@@ -40,4 +40,22 @@ class HomepageController extends AbstractController
         return $this->render('homepage/competition.html.twig', ['competition' => $competitions,'title' => 'Competition']);
     }
 
+    /**
+     * @Route("/livevideos")
+     */
+    public function livevideos()
+    {
+
+        return $this->render('homepage/livevideos.html.twig', ['title' => 'livevideos']);
+    }
+
+    /**
+     * @Route("/aide")
+     */
+    public function aide()
+    {
+
+        return $this->render('homepage/aide.html.twig', ['title' => 'aide']);
+    }
+
 }
