@@ -27,7 +27,8 @@ class HomepageController extends AbstractController
 
         $programmes = $repository->findAll();
 
-        return $this->render('homepage/programme.html.twig', ['programmes' => $programmes, 'title' => 'Programme']);
+        $competitions = $repository->findAll();
+        return $this->render('homepage/programme.html.twig', ['competitions' => $competitions,'programmes' => $programmes, 'title' => 'Programme']);
     }
 
     /**
@@ -35,7 +36,7 @@ class HomepageController extends AbstractController
      */
     public function competition()
     {
-        return $this->render('homepage/competition.html.twig', ['title' => 'Competition']);
+        return $this->render('homepage/programme.html.twig', ['title' => 'Competition']);
     }
 
     /**
