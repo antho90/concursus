@@ -13,7 +13,11 @@ class CompetitionFixtures extends Fixture
         for($i = 1; $i <= 5; $i++){
             $competition = new Competiton();
             $competition->setNom("Competition $i")
-                        ->setDate(new \DateTime());
+                        ->setDate(new \DateTime())
+                        ->setInfo("Info de la compétition n°$i")
+                        ->setDescription("Description de la compétition n°$i");
+                        
+
 
             $manager->persist($competition);
         }
