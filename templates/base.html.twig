@@ -19,16 +19,13 @@
 
 				{% block nav %}
 					<nav class="navbar navbar-default navbar-expand-lg navbar-dark bg-primary">
-						<a class="navbar-brand" href="#">Concursus</a>
+						<a class="navbar-brand" href="{{path('app_homepage_index')}}">Concursus</a>
 						<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
 							<span class="navbar-toggler-icon"></span>
 						</button>
 
 						<div class="collapse navbar-collapse" id="navbarColor01">
 							<ul class="navbar-nav mr-auto">
-								<li class="nav-item {% if mainNavHome is defined %}active{% endif %}">
-									<a class="nav-link" href="{{path('app_homepage_index')}}">Accueil</a>
-								</li>
 
 								{% if is_granted('ROLE_USER') %}
 									<li class="nav-item {% if mainNavMember is defined %}active{% endif %}">
