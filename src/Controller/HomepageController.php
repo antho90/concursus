@@ -32,11 +32,12 @@ class HomepageController extends AbstractController
     }
 
     /**
-     * @Route("/competition")
+     * @Route("/competition/{id}")
      */
-    public function competition()
+    public function competition(CompetitonRepository $repository)
     {
-        return $this->render('homepage/programme.html.twig', ['title' => 'Competition']);
+        $competitions = $repository->findAll();
+        return $this->render('homepage/competition.html.twig', ['competitions' => $competitions,'title' => 'Competition']);
     }
 
     /**
