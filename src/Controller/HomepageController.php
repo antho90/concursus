@@ -14,9 +14,11 @@ class HomepageController extends AbstractController
     /**
      * @Route("/")
      */
-    public function index()
+    public function index(CompetitonRepository $repository)
     {
-        return $this->render('homepage/index.html.twig', ['mainNavHome' => true, 'title' => 'Accueil']);
+        $programmes = $repository->findAll();
+        
+        return $this->render('homepage/index.html.twig', ['programmes' => $programmes,'mainNavHome' => true, 'title' => 'Accueil']);
     }
 
     /**
