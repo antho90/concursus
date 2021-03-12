@@ -2,12 +2,32 @@
 
 {% block body %}
 
-<h1 class ="text-center"> Live et vidéos </h1>
-<div class="text-center">
-<div class="container">
+	<div id="nav_gauche" class="sidebar-container slideInLeft atss-left at-custom-sidebar addthis-animated">
+		<ul class="sidebar-navigation">
+			<li class="header">Evénement</li>
+			<li>
+				<a href="{{path('app_homepage_programme')}}">
+					<i class="fa fa-home" aria-hidden="true"></i>
+					Programme
+				</a>
+			</li>
+			<li>
+				<a href="{{path('app_homepage_livevideos')}}">
+					<i class="fa fa-tachometer" aria-hidden="true"></i>
+					Live et Vidéos
+				</a>
+			</li>
+		</ul>
+	</div>
 
-<iframe width="50%" height="315" src="https://www.youtube.com/embed/twuQFm9zD5Q" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-</div>
-</div>
+	<h1 class="text-center pt-5">
+		Live et vidéos
+	</h1>
+	<div class="text-center pt-5">
+		<div class="container ">
+
+			<iframe width="100%" height="500" src="https://www.youtube.com/embed/twuQFm9zD5Q" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+		</div>
+	</div>
 
 {% endblock %}

@@ -1,31 +1,39 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-	<div class="text-center">
+
+	<div class="text-center pt-5">
 
 		<h1>Concursus</h1>
 
 	</div>
 
 	<div class="row pt-5">
-		<div class="col-md-3 text-center">
 
-			<h4>Programme</h4>
-
-			{% for programme in programmes %}
-				<a href="{{path('app_homepage_competition', {'id': programme.id})}}"> <strong>{{programme.nom}}</strong></a>
-                <p>le : {{ programme.date | date('d/m/Y') }} </p>
-			{% endfor %}
-		</div>
 
 		<div class="col-md-9">
 
 
 			<div class="text-center pt-5">
 
-				<iframe width="100%" height="315" src="https://www.youtube.com/embed/twuQFm9zD5Q" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+				<iframe width="100%" height="400" src="https://www.youtube.com/embed/twuQFm9zD5Q" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 			</div>
+		</div>
+ 
+				<div class="col-md-3 text-center pt-5">
+
+			<h4>Programme</h4>
+
+			{% for programme in programmes %}
+				<a href="{{path('app_homepage_competition', {'id': programme.id})}}">
+					<strong>{{programme.nom}}</strong>
+				</a>
+				<p>le :
+					{{ programme.date | date('d/m/Y') }}
+				</p>
+			{% endfor %}
+
 		</div>
 	</div>
 
@@ -33,7 +41,7 @@
 
 		<h2>Bienvenue</h2>
 
-		<p>
+		<p class="text-justify">
 			Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been th  standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled     type specimen book. It has survived not only five centuries, but also the leap into electronic typesettin   essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing  passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
 		</p>
 
@@ -154,7 +162,7 @@
 
 		<h2>A propos de l'événement</h2>
 
-		<p>
+		<p class="text-justify">
 			Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been th  standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled     type specimen book. It has survived not only five centuries, but also the leap into electronic typesettin   essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing  passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
 		</p>
 
