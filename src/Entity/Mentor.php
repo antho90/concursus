@@ -6,6 +6,7 @@ use App\Repository\MentorRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=MentorRepository::class)
@@ -20,9 +21,15 @@ class Mentor
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=64)
+     * @ORM\Column(type="string", length=255)
+     * @Assert\Length(min="8", minMessage="Votre mot de passe doit contenir au moins 8 caractères" )
      */
     private $password;
+
+     /**
+     * @Assert\EqualTo(propertyPath="password", message="Vous n'avez pas tapé le même mot de passe")
+     */
+    public $confirm_password;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -53,6 +60,8 @@ class Mentor
      * @ORM\Column(type="string", length=255)
      */
     private $structure;
+
+    
 
     public function __construct()
     {

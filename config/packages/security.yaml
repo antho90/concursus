@@ -3,6 +3,8 @@ security:
     encoders:
         App\Entity\User:
             algorithm: bcrypt
+        App\Entity\Mentor:
+            algorithm: bcrypt
    
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     providers:
@@ -10,7 +12,7 @@ security:
             entity:
                 class: App\Entity\User
                 property: email
-       
+
     firewalls:
         main:
             pattern:   ^/
