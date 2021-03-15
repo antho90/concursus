@@ -44,6 +44,16 @@ class Mentor
      */
     private $equipe;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $prenom;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $structure;
+
     public function __construct()
     {
         $this->admins = new ArrayCollection();
@@ -125,6 +135,30 @@ class Mentor
     public function setEquipe(?Equipe $equipe): self
     {
         $this->equipe = $equipe;
+
+        return $this;
+    }
+
+    public function getPrenom(): ?string
+    {
+        return $this->prenom;
+    }
+
+    public function setPrenom(string $prenom): self
+    {
+        $this->prenom = $prenom;
+
+        return $this;
+    }
+
+    public function getStructure(): ?string
+    {
+        return $this->structure;
+    }
+
+    public function setStructure(string $structure): self
+    {
+        $this->structure = $structure;
 
         return $this;
     }
