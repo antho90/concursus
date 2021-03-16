@@ -2,7 +2,7 @@
 
 {% block body %}
 
-    <h1>Inscription Mentor</h1>
+    <h1 class=" text-center pt-5">Inscription Mentor</h1>
 
     {{ form_start(form) }}
 
@@ -14,7 +14,9 @@
     {{ form_row(form.confirm_password, {'label': 'Confirmation mot de passe', 'attr' : {'placeholder' : 'Confirmer mot de passe...' }}) }}
 
 
-    <button type="submit" class="btn btn-success">Valider</button>
+    <button type="submit" class="btn-primary btn-block btn ">Valider</button>
     {{ form_end(form) }}
+
+    <a href="{{path('security_login_mentor')}}">Vous avez déjà un compte? Connectez vous</a>
 
 {% endblock %}

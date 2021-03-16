@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Connexion Mentor</h1>
+    <h1 class=" text-center pt-5">Connexion Mentor</h1>
 
     <form action="{{ path('security_login_mentor') }}" method="post">
     <div>
@@ -11,6 +11,6 @@
         <input placeholder="Mot de passe..." required name="_password" type="password" class="form-control">
     </div><br>
     <div>
-        <button type="submit" class="btn btn-success">Connexion</button>
+        <button type="submit" class="btn-primary btn-block btn ">Connexion</button>
     </div>
 {% endblock %}
