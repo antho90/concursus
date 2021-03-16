@@ -34,11 +34,29 @@ class SecurityMentorController extends AbstractController
             
             $manager->persist($mentor);
             $manager->flush();
+
+            return $this->redirectToRoute('security_login_mentor');
         }
 
-        return $this->render('security_mentor/registration_mentor.html.twig', [
+        return $this->render('securityMentor/registrationMentor.html.twig', [
             'form' => $form->createView()
         ]);
 
+    }
+
+    /**
+     * @Route("/connexion/mentor", name="security_login_mentor")
+     */
+
+    
+
+    public function loginMentor(){
+        return $this->render('securityMentor/loginMentor.html.twig');
+    }
+
+     /**
+     * @Route("/deconnexion/mentor", name="security_logout_mentor")
+     */
+    public function logoutMentor(){
     }
 }
