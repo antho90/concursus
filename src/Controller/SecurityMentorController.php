@@ -28,6 +28,9 @@ class SecurityMentorController extends AbstractController
 
         if($form->isSubmitted() && $form-> isValid()) {
 
+            $hash = $encoder->encodePassword($mentor, $mentor->getPassword());
+
+            $mentor->setPassword($hash);
             
             $manager->persist($mentor);
             $manager->flush();

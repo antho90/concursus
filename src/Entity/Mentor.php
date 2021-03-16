@@ -6,12 +6,13 @@ use App\Repository\MentorRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=MentorRepository::class)
  */
-class Mentor
+class Mentor implements UserInterface
 {
     /**
      * @ORM\Id
@@ -170,5 +171,25 @@ class Mentor
         $this->structure = $structure;
 
         return $this;
+    }
+
+    public function eraseCredentials()
+    {
+        
+    }
+
+    public function getSalt()
+    {
+        
+    }
+
+    public function getRoles()
+    {
+        return ['ROLE_USER'];
+    }
+
+    public function getUsername()
+    {
+        
     }
 }
