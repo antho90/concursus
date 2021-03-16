@@ -8,22 +8,39 @@ security:
    
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     providers:
-        our_db_provider:
+
+        # chain_provider:
+        #     chain:
+        #         providers: [our_db_provider, in_database]
+
+        # our_db_provider:
+        #     entity:
+        #         class: App\Entity\User
+        #         property: email
+        in_database:
             entity:
-                class: App\Entity\User
+                class: App\Entity\Mentor
                 property: email
 
     firewalls:
         main:
             pattern:   ^/
             http_basic: ~
-            provider: our_db_provider
+            # provider: our_db_provider
             anonymous: ~
+            # form_login:
+            #     login_path: login
+            #     check_path: login
+            # logout:
+            #     path:  /logout
+            #     target: /programme
+
+            provider: in_database
             form_login:
-                login_path: login
-                check_path: login
+                login_path: security_login_mentor
+                check_path: security_login_mentor
             logout:
-                path:  /logout
+                path:  security_logout_mentor
                 target: /
            
     role_hierarchy:
