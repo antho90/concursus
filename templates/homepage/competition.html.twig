@@ -47,8 +47,18 @@
 		M'incrire en tant que Mentor :
 	</p>
 
-	<div class="text-center">
-		<a href="{{path('security_registration_mentor')}}" class="btn btn-warning">M'inscrire</a>
-	</div>
+	{% if is_granted('ROLE_MENTOR') %}
+
+		<div class="text-center">
+			<a href="#" class="btn btn-warning">M'inscrire</a>
+		</div>
+
+	{% else %}
+
+		<div class="text-center">
+			<a href="{{path('security_registration_mentor')}}" class="btn btn-warning">M'inscrire</a>
+		</div>
+		
+	{% endif %}
 
 {% endblock %}
