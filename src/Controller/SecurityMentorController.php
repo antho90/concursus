@@ -35,6 +35,7 @@ class SecurityMentorController extends AbstractController
             $manager->persist($mentor);
             $manager->flush();
 
+            $this->addFlash('success', 'Votre compte à bien été enregistré.');
             return $this->redirectToRoute('security_login_mentor');
         }
 
