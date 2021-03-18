@@ -2,7 +2,7 @@
 
 {% block body %}
 
-    <h1 class=" text-center pt-5">Inscription Mentor</h1>
+    <h1 class=" text-center pt-5">Inscription</h1>
 
     {{ form_start(form) }}
 
@@ -17,6 +17,6 @@
     <button type="submit" class="btn-primary btn-block btn ">Valider</button>
     {{ form_end(form) }}
 
-    <a href="{{path('security_login_mentor')}}">Vous avez déjà un compte? Connectez vous</a>
+    <a href="{{path('security_login')}}">Vous avez déjà un compte? Connectez vous</a>
 
 {% endblock %}

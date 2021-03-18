@@ -43,11 +43,13 @@
 		Cette compétition vous intéresse ?
 	</h3>
 
-	<p class="text-center">
-		M'incrire en tant que Mentor :
-	</p>
 
-	{% if is_granted('ROLE_MENTOR') %}
+
+	{% if is_granted('ROLE_MENTOR') %}	
+	
+	<p class="text-center">
+		M'incrire avec mon équipe à cette compétition :
+	</p>
 
 		<div class="text-center">
 			<a href="#" class="btn btn-warning">M'inscrire</a>
@@ -55,8 +57,12 @@
 
 	{% else %}
 
+		<p class="text-center">
+			M'incrire en tant que Mentor :
+		</p>
+
 		<div class="text-center">
-			<a href="{{path('security_registration_mentor')}}" class="btn btn-warning">M'inscrire</a>
+			<a href="{{path('security_registration')}}" class="btn btn-warning">M'inscrire</a>
 		</div>
 		
 	{% endif %}

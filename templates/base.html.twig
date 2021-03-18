@@ -21,6 +21,7 @@
 				{% block nav %}
 
 				{% if is_granted('ROLE_MENTOR') %}
+
 					<nav class="navbar navbar-default navbar-expand-lg navbar-dark bg-primary">
 						<a class="navbar-brand" href="{{path('app_homepage_index')}}"><img width="130" height="50" src="/images/logo_concursus.png" alt=""></a>
 						<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
@@ -51,7 +52,7 @@
 										<a class="dropdown-item" href="#">Equipe</a>
 										</div>
 									</li>
-
+									
 									<li class="nav-item">
 										<a class="nav-link" href="{{path('app_homepage_aide')}}"><img width="20" height="20" src="https://img.icons8.com/doodle/48/000000/help.png"/> Aide</a>
 									</li>
@@ -59,7 +60,7 @@
 							</ul>
 							<ul class="navbar-nav ml-auto">
 									<li class="nav-item">
-										<a class="nav-link" href="{{path('security_logout_mentor')}}">Déconnexion</a>
+										<a class="nav-link" href="{{path('security_logout')}}">Déconnexion</a>
 									</li>
 							</ul>
 						</div>
@@ -76,17 +77,6 @@
 						<div class="collapse navbar-collapse" id="navbarColor01">
 							<ul class="navbar-nav mr-auto">
 
-								{% if is_granted('ROLE_USER') %}
-									<li class="nav-item {% if mainNavMember is defined %}active{% endif %}">
-										<a class="nav-link" href="{{path('app_member_index')}}">Espace membre</a>
-									</li>
-								{% endif %}
-								{% if is_granted('ROLE_ADMIN') %}
-									<li class="nav-item {% if mainNavAdmin is defined %}active{% endif %}">
-										<a class="nav-link" href="{{path('app_admin_homepage_index')}}">Espace admin</a>
-									</li>
-								{% endif %}
-
 								      <li class="nav-item dropdown">
 										<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Evenement</a>
 										<div class="dropdown-menu">
@@ -95,9 +85,9 @@
 										</div>
 									</li>
 
-									<li class="nav-item">
+									{# <li class="nav-item">
 										<a class="nav-link" href="{{path('security_login_mentor')}}">Mentor</a>
-									</li>
+									</li> #}
 
 									<li class="nav-item">
 										<a class="nav-link" href="{{path('app_homepage_aide')}}"><img width="20" height="20" src="https://img.icons8.com/doodle/48/000000/help.png"/> Aide</a>
@@ -105,19 +95,17 @@
 
 							</ul>
 							<ul class="navbar-nav ml-auto">
-								{% if is_granted('ROLE_USER') %}
+
+								<ul class="navbar-nav ml-auto">
 									<li class="nav-item">
-										<a class="nav-link" href="{{path('logout')}}">Déconnexion</a>
+										<a class="nav-link" href="{{path('security_login')}}">Connexion</a>
 									</li>
-								{% else %}
-									<li class="nav-item {% if mainNavLogin is defined %}active{% endif %}">
-										<a class="nav-link" href="{{path('login')}}">Connexion</a>
-									</li>
-									<li class="nav-item {% if mainNavRegistration is defined %}active{% endif %}">
+								</ul>
+
+									{# <li class="nav-item {% if mainNavRegistration is defined %}active{% endif %}">
 										<a class="nav-link" href="{{path('app_registration_register')}}">Inscription</a>
-									</li>
-								{% endif %}
-							</ul>
+									</li> #}
+
 						</div>
 					</nav>
 					{% endif %}
