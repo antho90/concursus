@@ -29,8 +29,8 @@
                         {% for role in user.roles %}
                             {%  if role == "ROLE_MENTOR" %}
                                 Mentor
-                            {# {% elseif role == "ROLE_ADMIN" %}
-                                Admin #}
+                            {% elseif role == "ROLE_ADMIN" %}
+                                Admin
                             {% elseif role == "ROLE_JUGE" %}
                                 Juge
                             {% endif %}
