@@ -31,18 +31,17 @@ class EditUsersType extends AbstractType
             ->add('roles', ChoiceType::class, [
                 'choices' => [
                     'Mentor' => 'ROLE_MENTOR',
-                    // 'Admin' => 'ROLE_ADMIN',
+                    'Admin' => 'ROLE_ADMIN',
                     'Juge' => 'ROLE_JUGE'
                 ],
                 'expanded' => true,
                 'multiple' => true,
                 'label' => 'Rôles'
             ])
-            ->add('Valider', SubmitType::class)
-            
             ->add('prenom')
             ->add('nom')
             ->add('structure')
+            ->add('Valider', SubmitType::class)
         ;
     }
 

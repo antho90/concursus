@@ -25,6 +25,7 @@
                     <td>{{ user.email }}</td>
                     <td>{{ user.prenom }}</td>
                     <td>{{ user.nom }}</td>
+                    <td>{{ user.structure }}</td>
                     <td>
                         {% for role in user.roles %}
                             {%  if role == "ROLE_MENTOR" %}

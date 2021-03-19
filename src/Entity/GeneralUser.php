@@ -61,6 +61,15 @@ class GeneralUser implements UserInterface
      */
     private $structure;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $modif;
+
+    public function __construct() {
+        $this->modif = true;
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -154,6 +163,18 @@ class GeneralUser implements UserInterface
     public function getUsername()
     {
         return $this->prenom;
+    }
+
+    public function getModif(): ?bool
+    {
+        return $this->modif;
+    }
+
+    public function setModif(bool $modif): self
+    {
+        $this->modif = $modif;
+
+        return $this;
     }
 
 }

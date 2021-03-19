@@ -70,7 +70,9 @@ class HomepageController extends AbstractController
      * @Route("/utilisateurs", name="utilisateurs")
      */
     public function usersList(GeneralUserRepository $users){
-        return $this->render('admin/users.html.twig', ['users' => $users->findAll()]);
+        return $this->render('admin/users.html.twig', ['users' => $users->findBy(
+            array('modif' =>'1')
+        )]);
     }
 
     /**
