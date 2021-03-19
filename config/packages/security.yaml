@@ -27,7 +27,8 @@ security:
            
     role_hierarchy:
         # ROLE_MENTOR:     ROLE_USER
-        ROLE_ADMIN:      ROLE_MENTOR
+        ROLE_ADMIN:      ROLE_JUGE
+        ROLE_JUGE:       ROLE_MENTOR
         #ROLE_SUPER_ADMIN: [ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
 
     # Easy way to control access for large sections of your site

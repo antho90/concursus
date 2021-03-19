@@ -4,7 +4,7 @@
 
 {% block body %}
 
-    <h1>Liste des utilisateurs</h1>
+    <h1 class="text-center pt-5">Liste des utilisateurs</h1>
 
     <table class="table">
         <thead>
@@ -25,8 +25,18 @@
                     <td>{{ user.email }}</td>
                     <td>{{ user.prenom }}</td>
                     <td>{{ user.nom }}</td>
-                    <td></td>
-                    <td></td>
+                    <td>
+                        {% for role in user.roles %}
+                            {%  if role == "ROLE_MENTOR" %}
+                                Mentor
+                            {# {% elseif role == "ROLE_ADMIN" %}
+                                Admin #}
+                            {% elseif role == "ROLE_JUGE" %}
+                                Juge
+                            {% endif %}
+                        {% endfor %}
+                    </td>
+                    <td><a href="{{ path('modifier_utilisateur', {'id': user.id})}}" class=" btn btn-warning">Modifier</a></td>
                 </tr>
             {% else %}
                 <tr>

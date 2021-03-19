@@ -3,11 +3,15 @@
 namespace App\Controller;
 
 use App\Entity\Competiton;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Entity\GeneralUser;
+use App\Form\EditUsersType;
+use Doctrine\DBAL\Driver\Connection;
+use App\Repository\CompetitonRepository;
+use App\Repository\GeneralUserRepository;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use App\Repository\CompetitonRepository;
-use Doctrine\DBAL\Driver\Connection;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class HomepageController extends AbstractController
 {
@@ -58,6 +62,34 @@ class HomepageController extends AbstractController
     {
 
         return $this->render('homepage/aide.html.twig', ['title' => 'aide']);
+    }
+
+    /**
+     * @Route("/utilisateurs", name="utilisateurs")
+     */
+    public function usersList(GeneralUserRepository $users){
+        return $this->render('admin/users.html.twig', ['users' => $users->findAll()]);
+    }
+
+    /**
+     * @Route("/utilisateurs/modifier/{id}", name="modifier_utilisateur")
+     */
+    public function editUser(GeneralUser $user, Request $request){
+        $form = $this->createForm(EditUsersType::class, $user);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()){
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager ->persist($user);
+            $entityManager->flush();
+
+            $this->addFlash('message', 'Utilisateur modifié avec succès');
+            return $this->redirectToRoute('utilisateurs');
+        }
+
+        return $this->render('admin/edituser.html.twig', [
+            'userForm' => $form->createView()
+        ]);
     }
 
 }
