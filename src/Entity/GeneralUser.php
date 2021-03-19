@@ -12,7 +12,8 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  * @ORM\Entity(repositoryClass=GeneralUserRepository::class)
  * @UniqueEntity(
  * fields={"email"},
- * message="L'email que vous avez indiqué est déjà utilisé !")
+ * message="L'email que vous avez indiqué est déjà utilisé !"
+ * )
  */
 class GeneralUser implements UserInterface
 {
@@ -89,12 +90,12 @@ class GeneralUser implements UserInterface
         return $this;
     }
 
-    public function getRoles(): ?array
+    public function getRoles(): array
     {
-        if (empty($this->roles)) {
-            return ['ROLE_MENTOR'];
-        }
-        return $this->roles;
+            $roles = $this->roles;
+            $roles[] = 'ROLE_MENTOR';
+        
+        return array_unique($roles);
     }
 
     public function setRoles(array $roles): self

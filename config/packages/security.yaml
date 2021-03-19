@@ -26,7 +26,7 @@ security:
                 target: /
            
     role_hierarchy:
-        ROLE_MENTOR:     ROLE_USER
+        # ROLE_MENTOR:     ROLE_USER
         ROLE_ADMIN:      ROLE_MENTOR
         #ROLE_SUPER_ADMIN: [ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
 
@@ -34,5 +34,4 @@ security:
     # Note: Only the *first* access control that matches will be used
     access_control:
         - { path: ^/admin, roles: ROLE_ADMIN }
-        - { path: ^/member, roles: ROLE_USER }
         - { path: ^/mentor, roles: ROLE_MENTOR }
