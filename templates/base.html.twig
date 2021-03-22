@@ -1,102 +1,220 @@
 <!DOCTYPE html>
 <html lang="{{ app.request.locale }}">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1"/>
-        <title>
-            {% block title %}
-                {% if title is defined %}{{title}}{% else %}Title{% endif %} | Concursus
-            {% endblock %}
-        </title>
-        {% block stylesheets %}
-            {# bootstrap #}
-            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-            {# custom #}
-            <link rel="stylesheet" href="{{ asset('assets/css/styles.css') }}">
-        {% endblock %}
-        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
-    </head>
-    <body>
-    <body id="{% block body_id %}{% endblock %}">
+	<head>
+		<meta charset="UTF-8"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1"/>
+		<link rel="stylesheet" href="/assets/css/style.css">
+		<title>
+			{% block title %}
+				{% if title is defined %}
+					{{title}}{% else %}Title
+				{% endif %}
+				| Concursus
+			{% endblock %}
+		</title>
+		<link rel="stylesheet" href="https://bootswatch.com/4/flatly/bootstrap.min.css">
+		{% block stylesheets %}
+		{# bootstrap #}
+		<link</body {# rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> #} {# custom #} <link rel="stylesheet" href="{{ asset('assets/css/styles.css') }}"> {% endblock %} <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}"/> </head> <body>
+			<body id="{% block body_id %}{% endblock %}"> {% block header %}{% endblock %}
 
-        {% block header %}
-            <header id="header" class="bck1 border-bottom">
-                <div class="container">
-                    <h1>{% if title is defined %}{{title}}{% else %}Header{% endif %}</h1>
-                </div>
-            </header>
-        {% endblock %}
+				{% block nav %}
 
-        {% block nav %}
-            <nav id="main-nav" class="container navbar navbar-expand-lg navbar-light bg-light border rounded mb-3">
-                <ul class="navbar-nav">
-                    <li class="nav-item {% if mainNavHome is defined %}active{% endif %}">
-                        <a class="nav-link" href="{{path('app_homepage_index')}}">Accueil</a>
-                    </li>
-                    {% if is_granted('ROLE_USER') %}
-                        <li class="nav-item {% if mainNavMember is defined %}active{% endif %}">
-                            <a class="nav-link" href="{{path('app_member_index')}}">Espace membre</a>
-                        </li>
-                    {% endif %}
-                    {% if is_granted('ROLE_ADMIN') %}
-                        <li class="nav-item {% if mainNavAdmin is defined %}active{% endif %}">
-                            <a class="nav-link" href="{{path('app_admin_homepage_index')}}">Espace admin</a>
-                        </li>
-                    {% endif %}
-                </ul>
-                <ul class="navbar-nav ml-auto">
-                    {% if is_granted('ROLE_USER') %}
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{path('logout')}}">Déconnexion</a>
-                        </li>
-                    {% else %}
-                        <li class="nav-item {% if mainNavLogin is defined %}active{% endif %}">
-                            <a class="nav-link" href="{{path('login')}}">Connexion</a>
-                        </li>
-                        <li class="nav-item {% if mainNavRegistration is defined %}active{% endif %}">
-                            <a class="nav-link" href="{{path('app_registration_register')}}">Inscription</a>
-                        </li>
-                    {% endif %}
-                </ul>
-            </nav>
-        {% endblock %}
+{% if is_granted('ROLE_ADMIN') %}
 
-        {% block flash %}
-            {% for flash_message in app.session.flashbag.get('success') %}
-                <div class="container alert alert-success" role="alert">
-                    {{ flash_message }}
-                </div>
-            {% endfor %}
-            {% for flash_message in app.session.flashbag.get('info') %}
-                <div class="container alert alert-info" role="alert">
-                    {{ flash_message }}
-                </div>
-            {% endfor %}
-            {% for flash_message in app.session.flashbag.get('warning') %}
-                <div class="container alert alert-warning" role="alert">
-                    {{ flash_message }}
-                </div>
-            {% endfor %}
-            {% for flash_message in app.session.flashbag.get('danger') %}
-                <div class="container alert alert-danger" role="alert">
-                    {{ flash_message }}
-                </div>
-            {% endfor %}
-        {% endblock %}
+					<nav class="navbar navbar-default navbar-expand-lg navbar-dark bg-primary">
+						<a class="navbar-brand" href="{{path('app_homepage_index')}}"><img width="130" height="50" src="/images/logo_concursus.png" alt=""></a>
+						<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+							<span class="navbar-toggler-icon"></span>
+						</button>
 
-        <div class="container bck1 padded">
-            {% block body %}
-            {% endblock %}
-        </div>
+						<div class="collapse navbar-collapse" id="navbarColor01">
+							<ul class="navbar-nav mr-auto">
 
-        {% block footer %}
-            <footer id="footer" class="bck1 border-top">
-                <div class="container">
-                    <h4>Footer</h4>
-                </div>
-            </footer>
-        {% endblock %}
+									{# <li class="nav-item {% if mainNavMember is defined %}active{% endif %}">
+										<a class="nav-link" href="{{path('app_member_index')}}">Espace membre</a>
+									</li> #}
 
-        {% block javascripts %}{% endblock %}
-    </body>
-</html>
+								      <li class="nav-item dropdown">
+										<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Evenement</a>
+										<div class="dropdown-menu">
+										<a class="dropdown-item" href="{{path('app_homepage_programme')}}">Programmes</a>
+										<a class="dropdown-item" href="{{path('app_homepage_livevideos')}}">Lives/Vidéos</a>
+										</div>
+									</li>
+
+									<li class="nav-item dropdown">
+										<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Mentor</a>
+										<div class="dropdown-menu">
+										<a class="dropdown-item" href="#">Profil</a>
+										<a class="dropdown-item" href="#">Réglages</a>
+										<a class="dropdown-item" href="#">Vos compétitions</a>
+										<a class="dropdown-item" href="#">Equipe</a>
+										</div>
+									</li>
+
+									<li class="nav-item dropdown">
+										<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Manage</a>
+										<div class="dropdown-menu">
+										<a class="dropdown-item" href="{{path('utilisateurs')}}">Utilisateurs</a>
+										<a class="dropdown-item" href="{{path('admins')}}">Admins</a>
+										<a class="dropdown-item" href="{{path('mentors')}}">Mentors</a>
+										<a class="dropdown-item" href="{{path('juges')}}">Juges</a>
+										<a class="dropdown-item" href="#">Equipes</a>
+										<a class="dropdown-item" href="#">Compétitions</a>
+
+										</div>
+									</li>
+									
+									<li class="nav-item">
+										<a class="nav-link" href="{{path('app_homepage_aide')}}"><img width="20" height="20" src="https://img.icons8.com/doodle/48/000000/help.png"/> Aide</a>
+									</li>
+
+							</ul>
+							<ul class="navbar-nav ml-auto">
+									<li class="nav-item">
+										<a class="nav-link" href="{{path('security_logout')}}">Déconnexion</a>
+									</li>
+							</ul>
+						</div>
+					</nav>
+
+				{# {% else %} #}
+
+
+
+				{% elseif is_granted('ROLE_MENTOR') %}
+
+					<nav class="navbar navbar-default navbar-expand-lg navbar-dark bg-primary">
+						<a class="navbar-brand" href="{{path('app_homepage_index')}}"><img width="130" height="50" src="/images/logo_concursus.png" alt=""></a>
+						<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+							<span class="navbar-toggler-icon"></span>
+						</button>
+
+						<div class="collapse navbar-collapse" id="navbarColor01">
+							<ul class="navbar-nav mr-auto">
+
+									{# <li class="nav-item {% if mainNavMember is defined %}active{% endif %}">
+										<a class="nav-link" href="{{path('app_member_index')}}">Espace membre</a>
+									</li> #}
+
+								      <li class="nav-item dropdown">
+										<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Evenement</a>
+										<div class="dropdown-menu">
+										<a class="dropdown-item" href="{{path('app_homepage_programme')}}">Programmes</a>
+										<a class="dropdown-item" href="{{path('app_homepage_livevideos')}}">Lives/Vidéos</a>
+										</div>
+									</li>
+
+									<li class="nav-item dropdown">
+										<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Mentor</a>
+										<div class="dropdown-menu">
+										<a class="dropdown-item" href="#">Profil</a>
+										<a class="dropdown-item" href="#">Réglages</a>
+										<a class="dropdown-item" href="#">Vos compétitions</a>
+										<a class="dropdown-item" href="#">Equipe</a>
+										</div>
+									</li>
+									
+									<li class="nav-item">
+										<a class="nav-link" href="{{path('app_homepage_aide')}}"><img width="20" height="20" src="https://img.icons8.com/doodle/48/000000/help.png"/> Aide</a>
+									</li>
+
+							</ul>
+							<ul class="navbar-nav ml-auto">
+									<li class="nav-item">
+										<a class="nav-link" href="{{path('security_logout')}}">Déconnexion</a>
+									</li>
+							</ul>
+						</div>
+					</nav>
+
+				{% else %}
+
+					<nav class="navbar navbar-default navbar-expand-lg navbar-dark bg-primary">
+						<a class="navbar-brand" href="{{path('app_homepage_index')}}"><img width="130" height="50" src="/images/logo_concursus.png" alt=""></a>
+						<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+							<span class="navbar-toggler-icon"></span>
+						</button>
+
+						<div class="collapse navbar-collapse" id="navbarColor01">
+							<ul class="navbar-nav mr-auto">
+
+								      <li class="nav-item dropdown">
+										<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Evenement</a>
+										<div class="dropdown-menu">
+										<a class="dropdown-item" href="{{path('app_homepage_programme')}}">Programmes</a>
+										<a class="dropdown-item" href="{{path('app_homepage_livevideos')}}">Lives/Vidéos</a>
+										</div>
+									</li>
+
+									{# <li class="nav-item">
+										<a class="nav-link" href="{{path('security_login_mentor')}}">Mentor</a>
+									</li> #}
+
+									<li class="nav-item">
+										<a class="nav-link" href="{{path('app_homepage_aide')}}"><img width="20" height="20" src="https://img.icons8.com/doodle/48/000000/help.png"/> Aide</a>
+									</li>
+
+							</ul>
+								<ul class="navbar-nav ml-auto">
+									<li class="nav-item">
+										<a class="nav-link" href="{{path('security_login')}}">Connexion</a>
+									</li>
+								</ul>
+
+									{# <li class="nav-item {% if mainNavRegistration is defined %}active{% endif %}">
+										<a class="nav-link" href="{{path('app_registration_register')}}">Inscription</a>
+									</li> #}
+
+						</div>
+					</nav>
+					{% endif %}
+				{% endblock %}
+
+				{% block flash %}
+					{% for flash_message in app.session.flashbag.get('success') %}
+						<div class="container alert alert-success" role="alert">
+							{{ flash_message }}
+						</div>
+					{% endfor %}
+					{% for flash_message in app.session.flashbag.get('info') %}
+						<div class="container alert alert-info" role="alert">
+							{{ flash_message }}
+						</div>
+					{% endfor %}
+					{% for flash_message in app.session.flashbag.get('warning') %}
+						<div class="container alert alert-warning" role="alert">
+							{{ flash_message }}
+						</div>
+					{% endfor %}
+					{% for flash_message in app.session.flashbag.get('danger') %}
+						<div class="container alert alert-danger" role="alert">
+							{{ flash_message }}
+						</div>
+					{% endfor %}
+				{% endblock %}
+
+				<div class="container bck1 padded"> {% block body %}{% endblock %}
+					</div>
+
+					{# {% block footer %}
+						<footer id="footer" class="bck1 border-top">
+							<div class="container">
+								<h4>Footer</h4>
+							</div>
+						</footer>
+					{% endblock %} #}
+
+					{% block javascripts %}
+    <script src="https://bootswatch.com/_vendor/jquery/dist/jquery.min.js"></script>
+    <script src="https://bootswatch.com/_vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://bootswatch.com/_assets/js/custom.js"></script>
+
+					{% endblock %}
+
+
+				</body>
+			</html>
+		</head>
+	</html>

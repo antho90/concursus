@@ -1,35 +1,40 @@
 security:
    # encoder
     encoders:
-        App\Entity\User:
+        App\Entity\GeneralUser:
             algorithm: bcrypt
    
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     providers:
-        our_db_provider:
+
+        in_database:
             entity:
-                class: App\Entity\User
+                class: App\Entity\GeneralUser
                 property: email
-       
+
     firewalls:
         main:
             pattern:   ^/
             http_basic: ~
-            provider: our_db_provider
             anonymous: ~
+            provider: in_database
             form_login:
-                login_path: login
-                check_path: login
+                login_path: security_login
+                check_path: security_login
             logout:
-                path:  /logout
+                path:  security_logout
                 target: /
            
     role_hierarchy:
-        ROLE_ADMIN:      ROLE_USER
+        # ROLE_MENTOR:     ROLE_USER 
+        ROLE_SUPER_ADMIN: ROLE_ADMIN
+        ROLE_ADMIN:      ROLE_JUGE
+        ROLE_JUGE:       ROLE_MENTOR
+
         #ROLE_SUPER_ADMIN: [ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
 
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
         - { path: ^/admin, roles: ROLE_ADMIN }
-        - { path: ^/member, roles: ROLE_USER }
+        - { path: ^/mentor, roles: ROLE_MENTOR }

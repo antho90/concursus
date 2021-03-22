@@ -1,0 +1,70 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+	<div id="nav_gauche" class="sidebar-container slideInLeft atss-left at-custom-sidebar addthis-animated">
+		<ul class="sidebar-navigation">
+			<li class="header">Navigation</li>
+			<li>
+				<a href="{{path('app_homepage_programme')}}">
+					<i class="fa fa-home" aria-hidden="true"></i>
+					Programme
+				</a>
+			</li>
+			<li>
+				<a href="{{path('app_homepage_livevideos')}}">
+					<i class="fa fa-tachometer" aria-hidden="true"></i>
+					Live et Vidéos
+				</a>
+			</li>
+		</ul>
+	</div>
+
+
+	<h1 class="text-center pt-5">
+		{{competition.nom}}
+	</h1>
+
+	<p class="text-center">{{competition.date | date('d/m/Y')}}</p>
+
+	<h3 class="text-center pt-5">
+		Info
+	</h3>
+
+	<p class="text-center">{{competition.info}}</p>
+
+	<h3 class="text-center pt-5">
+		Description
+	</h3>
+
+	<p class="text-center">{{competition.description}}</p>
+
+	<h3 class="text-center pt-5">
+		Cette compétition vous intéresse ?
+	</h3>
+
+
+
+	{% if is_granted('ROLE_MENTOR') %}	
+	
+	<p class="text-center">
+		M'incrire avec mon équipe à cette compétition :
+	</p>
+
+		<div class="text-center">
+			<a href="#" class="btn btn-warning">M'inscrire</a>
+		</div>
+
+	{% else %}
+
+		<p class="text-center">
+			M'incrire en tant que Mentor :
+		</p>
+
+		<div class="text-center">
+			<a href="{{path('security_registration')}}" class="btn btn-warning">M'inscrire</a>
+		</div>
+		
+	{% endif %}
+
+{% endblock %}

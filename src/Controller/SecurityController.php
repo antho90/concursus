@@ -2,35 +2,60 @@
 
 namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Entity\GeneralUser;
+use App\Form\RegistrationType;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+
+
 
 class SecurityController extends AbstractController
 {
     /**
-     * @Route("/login", name="login")
+     * @Route("/inscription", name ="security_registration")
      */
-    public function login(Request $request, AuthenticationUtils $authenticationUtils) {
-        // get the login error if there is one
-        $error = $authenticationUtils->getLastAuthenticationError();
-        // last username entered by the user
-        $lastUsername = $authenticationUtils->getLastUsername();
-        //
-        $form = $this->get('form.factory')
-                ->createNamedBuilder(null)
-                ->add('_username', null, ['label' => 'Email'])
-                ->add('_password', \Symfony\Component\Form\Extension\Core\Type\PasswordType::class, ['label' => 'Mot de passe'])
-                ->add('ok', \Symfony\Component\Form\Extension\Core\Type\SubmitType::class, ['label' => 'Ok', 'attr' => ['class' => 'btn-primary btn-block']])
-                ->getForm();
-        return $this->render('security/login.html.twig', [
-                    'mainNavLogin' => true, 'title' => 'Connexion',
-                    //
-                    'form' => $form->createView(),
-                    'last_username' => $lastUsername,
-                    'error' => $error,
+    public function registrationMentor(Request $request, EntityManagerInterface $manager, UserPasswordEncoderInterface $encoder) {
+
+        $user = new GeneralUser();
+
+        $form = $this->createForm(RegistrationType::class, $user);
+
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form-> isValid()) {
+
+            $hash = $encoder->encodePassword($user, $user->getPassword());
+
+            $user->setPassword($hash);
+            
+            $manager->persist($user);
+            $manager->flush();
+
+            $this->addFlash('success', 'Votre compte à bien été enregistré.');
+            return $this->redirectToRoute('security_login');
+        }
+
+        return $this->render('security/registration.html.twig', [
+            'form' => $form->createView()
         ]);
+
+    }
+
+    /**
+     * @Route("/connexion", name="security_login")
+     */
+
+    public function login(){
+        return $this->render('security/login.html.twig');
+    }
+
+     /**
+     * @Route("/deconnexion", name="security_logout")
+     */
+    public function logout(){
     }
 }

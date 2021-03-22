@@ -1,12 +1,219 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
 
-<div class="example-wrapper">
-    <h1>Je suis la page d'accueil</h1>
-</div>
+	<div class="text-center pt-5">
+
+		<h1>Concursus</h1>
+
+	</div>
+
+	<div class="row pt-5">
+
+
+		<div class="col-md-9">
+
+
+			<div class="text-center pt-5">
+
+				<iframe width="100%" height="400" src="https://www.youtube.com/embed/twuQFm9zD5Q" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+			</div>
+		</div>
+ 
+				<div class="col-md-3 text-center pt-5">
+
+			<h4>Programme</h4>
+
+			{% for programme in programmes %}
+				<a href="{{path('app_homepage_competition', {'id': programme.id})}}">
+					<strong>{{programme.nom}}</strong>
+				</a>
+				<p>le :
+					{{ programme.date | date('d/m/Y') }}
+				</p>
+			{% endfor %}
+
+		</div>
+	</div>
+
+	<div class="text-center pt-5">
+
+		<h2>Bienvenue</h2>
+
+		<p class="text-justify">
+			Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been th  standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled     type specimen book. It has survived not only five centuries, but also the leap into electronic typesettin   essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing  passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+		</p>
+
+	</div>
+
+	<div class="text-center pt-5">
+
+		<h2>L'équipe KidsLab</h2>
+
+	</div>
+
+	<div>
+		<section>
+			<div class="container">
+				<div class="row">
+
+					<div class="col-md-4  mt-5">
+						<div>
+							<div class="text-center" itemprop="image">
+								<img width="180" height="180" src="http://placehold.it/150x50?text=Photo">
+							</div>
+							<div class="text-center">
+								<p>
+									Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+								</p>
+							</div>
+							<div class="text-center">
+								<strong>Prénom Nom</strong>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-md-4  mt-5">
+						<div>
+							<div class="text-center" itemprop="image">
+								<img width="180" height="180" src="http://placehold.it/150x50?text=Photo">
+							</div>
+							<div class="text-center">
+								<p>
+									Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+								</p>
+							</div>
+							<div class="text-center">
+								<strong>Prénom Nom</strong>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-md-4  mt-5">
+						<div>
+							<div class="text-center" itemprop="image">
+								<img width="180" height="180" src="http://placehold.it/150x50?text=Photo">
+							</div>
+							<div class="text-center">
+								<p>
+									Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+								</p>
+							</div>
+							<div class="text-center">
+								<strong>Prénom Nom</strong>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-md-4  mt-5">
+						<div>
+							<div class="text-center" itemprop="image">
+								<img width="180" height="180" src="http://placehold.it/150x50?text=Photo">
+							</div>
+							<div class="text-center">
+								<p>
+									Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+								</p>
+							</div>
+							<div class="text-center">
+								<strong>Prénom Nom</strong>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-md-4  mt-5">
+						<div>
+							<div class="text-center" itemprop="image">
+								<img width="180" height="180" src="http://placehold.it/150x50?text=Photo">
+							</div>
+							<div class="text-center">
+								<p>
+									Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+								</p>
+							</div>
+							<div class="text-center">
+								<strong>Prénom Nom</strong>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-md-4  mt-5">
+						<div>
+							<div class="text-center" itemprop="image">
+								<img width="180" height="180" src="http://placehold.it/150x50?text=Photo">
+							</div>
+							<div class="text-center">
+								<p>
+									Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+								</p>
+							</div>
+							<div class="text-center">
+								<strong>Prénom Nom</strong>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</div>
+
+	<div class="text-center pt-5">
+
+		<h2>A propos de l'événement</h2>
+
+		<p class="text-justify">
+			Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been th  standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled     type specimen book. It has survived not only five centuries, but also the leap into electronic typesettin   essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing  passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+		</p>
+
+	</div>
+
+	<div class="text-center pt-5">
+
+		<h2>Sponsors</h2>
+
+		<section>
+			<div class="container">
+				<div class="row">
+
+					<div class="col-md-4  mt-5">
+						<div>
+							<div class="text-center" itemprop="image">
+								<img width="90" height="90" src="http://placehold.it/150x50?text=Sponsors">
+							</div>
+							<div class="text-center">
+								<strong>Nom du sponsors</strong>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-md-4  mt-5">
+						<div>
+							<div class="text-center" itemprop="image">
+								<img width="90" height="90" src="http://placehold.it/150x50?text=Sponsors">
+							</div>
+							<div class="text-center">
+								<strong>Nom du sponsors</strong>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-md-4  mt-5">
+						<div>
+							<div class="text-center" itemprop="image">
+								<img width="90" height="90" src="http://placehold.it/150x50?text=Sponsors">
+							</div>
+							<div class="text-center">
+								<strong>Nom du sponsors</strong>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+
+		</div>
+
+
+	</div>
 {% endblock %}

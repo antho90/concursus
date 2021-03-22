@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+	<div id="nav_gauche" class="sidebar-container slideInLeft atss-left at-custom-sidebar addthis-animated">
+		<ul class="sidebar-navigation">
+			<li class="header">Navigation</li>
+			<li>
+				<a href="{{path('app_homepage_programme')}}">
+					<i class="fa fa-home" aria-hidden="true"></i>
+					Programme
+				</a>
+			</li>
+			<li>
+				<a href="{{path('app_homepage_livevideos')}}">
+					<i class="fa fa-tachometer" aria-hidden="true"></i>
+					Live et Vidéos
+				</a>
+			</li>
+		</ul>
+	</div>
+
+	<div class="example-wrapper">
+		<h1 class=" text-center pt-5">Programmes</h1>
+		{% for programme in programmes %}
+			<div class="card1 text-center">
+				<div class="card-header">
+					{{programme.nom}}
+				</div>
+				<div class="card-body">
+					<h5 class="card-title">{{ programme.date | date('d/m/Y') }}
+					</h5>
+					<p class="card-text">A partir de
+						{{ programme.date | date('H:i') }}
+					</p>
+					<pre>
+						
+					</pre>
+
+					<a href="{{path('app_homepage_competition', {'id': programme.id})}}" class="btn btn-primary">Voir plus</a>
+				</div>
+
+			</div><br><br>
+		{% else %}
+			<h2>Aucune compétition pour le moment</h2>
+		{% endfor %}
+	</div>
+{% endblock %}
