@@ -80,6 +80,37 @@ class HomepageController extends AbstractController
 
     /**
      * @IsGranted("ROLE_ADMIN")
+     * @Route("/admins", name="admins")
+     */
+    public function adminsList(GeneralUserRepository $users){
+        return $this->render('admin/adminsList.html.twig', ['users' => $users->findBy(
+            array('modif' =>'1')
+        )]);
+    }
+
+    /**
+     * @IsGranted("ROLE_ADMIN")
+     * @Route("/juges", name="juges")
+     */
+    public function jugesList(GeneralUserRepository $users){
+        return $this->render('admin/jugesList.html.twig', ['users' => $users->findBy(
+            array('modif' =>'1')
+        )]);
+    }
+
+    /**
+     * @IsGranted("ROLE_ADMIN")
+     * @Route("/mentors", name="mentors")
+     */
+    public function mentorsList(GeneralUserRepository $users){
+        return $this->render('admin/mentorsList.html.twig', ['users' => $users->findBy(
+            array('modif' =>'1')
+        )]);
+    }
+
+
+    /**
+     * @IsGranted("ROLE_ADMIN")
      * @Route("/utilisateurs/modifier/{id}", name="modifier_utilisateur")
      */
     public function editUser(GeneralUser $user, Request $request){

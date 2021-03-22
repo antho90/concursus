@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Liste des utilisateurs
+{% block title %}Liste des Mentors
 {% endblock %}
 
 {% block body %}
@@ -36,7 +36,7 @@
 	</div>
 
 
-	<h1 class="text-center pt-5">Liste des utilisateurs</h1>
+	<h1 class="text-center pt-5">Liste des Mentors</h1>
 
 	<div class="text-center pt-5">
 		<a href="{{ path('new_utilisateur')}}" class=" btn btn-success">Ajouter</a>
@@ -57,29 +57,33 @@
 
 			{% for user in users %}
 				<tr>
-					<td>{{ user.id }}</td>
-					<td>{{ user.email }}</td>
-					<td>{{ user.prenom }}</td>
-					<td>{{ user.nom }}</td>
-					<td>{{ user.structure }}</td>
-					<td>
-						{% for role in user.roles %}
-							{%  if role == "ROLE_MENTOR" %}
-								Mentor
-							{% elseif role == "ROLE_ADMIN" %}
-								Admin
-							{% elseif role == "ROLE_JUGE" %}
-								Juge
-							{% endif %}
-						{% endfor %}
-					</td>
+					{% for role in user.roles %}
+						{%  if role == "ROLE_MENTOR" %}
+							<td>{{ user.id }}</td>
+							<td>{{ user.email }}</td>
+							<td>{{ user.prenom }}</td>
+							<td>{{ user.nom }}</td>
+							<td>{{ user.structure }}</td>
+							<td>
+								{% for role in user.roles %}
+									{%  if role == "ROLE_MENTOR" %}
+										Mentor
+									{% elseif role == "ROLE_ADMIN" %}
+										Admin
+									{% elseif role == "ROLE_JUGE" %}
+										Juge
+									{% endif %}
+								{% endfor %}
+							</td>
 
-					<td>
-						<a href="{{ path('modifier_utilisateur', {'id': user.id})}}" class=" btn btn-warning">Modifier</a>
+							<td>
+								<a href="{{ path('modifier_utilisateur', {'id': user.id})}}" class=" btn btn-warning">Modifier</a>
 
-						<a href="{{ path('delete_utilisateur', {'id': user.id})}}" class=" btn btn-danger ml-2" onclick="return confirm('Voulez-vous vraiment suprimmer cette utilisateur ?')">Suprimmer</a>
-					</td>
-				</tr>
+								<a href="{{ path('delete_utilisateur', {'id': user.id})}}" class=" btn btn-danger ml-2" onclick="return confirm('Voulez-vous vraiment suprimmer cette utilisateur ?')">Suprimmer</a>
+							</td>
+						</tr>
+					{% endif %}
+				{% endfor %}
 			{% else %}
 				<tr>
 					<td colspan="5">Il n'y a pas d'utilisateurs inscrit</td>
