@@ -37,7 +37,9 @@
                             {% endif %}
                         {% endfor %}
                     </td>
-                    <td><a href="{{ path('modifier_utilisateur', {'id': user.id})}}" class=" btn btn-warning">Modifier</a></td>
+                    <td><a href="{{ path('modifier_utilisateur', {'id': user.id})}}" class=" btn btn-warning">Modifier</a>
+                    
+                    <a href="{{ path('delete_utilisateur', {'id': user.id})}}" class=" btn btn-danger ml-2"onclick="return confirm('Voulez-vous vraiment suprimmer cette utilisateur ?')">Suprimmer</a></td>
                 </tr>
             {% else %}
                 <tr>

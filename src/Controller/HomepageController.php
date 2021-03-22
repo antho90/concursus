@@ -13,6 +13,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class HomepageController extends AbstractController
 {
@@ -95,6 +96,19 @@ class HomepageController extends AbstractController
         return $this->render('admin/edituser.html.twig', [
             'userForm' => $form->createView()
         ]);
+    }
+
+    /**
+     * @IsGranted("ROLE_ADMIN")
+     * @Route("/deleteUser/{id}", name="delete_utilisateur")
+     * @return RedirectResponse
+     */
+    public function deleteUser(GeneralUser $user): RedirectResponse{
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($user);
+        $em->flush();
+        
+        return $this->redirectToRoute('utilisateurs');
     }
 
 }
