@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Form\NewUserType;
 use App\Entity\Competiton;
 use App\Entity\GeneralUser;
 use App\Form\EditUsersType;
@@ -11,9 +12,10 @@ use App\Repository\GeneralUserRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class HomepageController extends AbstractController
 {
@@ -107,8 +109,36 @@ class HomepageController extends AbstractController
         $em = $this->getDoctrine()->getManager();
         $em->remove($user);
         $em->flush();
-        
+
         return $this->redirectToRoute('utilisateurs');
+    }
+
+    /**
+     * @IsGranted("ROLE_ADMIN")
+     * @Route("/new", name="new_utilisateur")
+     * @return Response
+     */
+    public function newUser(Request $request,UserPasswordEncoderInterface $encoder): Response{
+        $user = new GeneralUser;
+        $form = $this->createForm(NewUserType::class, $user);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+
+            $hash = $encoder->encodePassword($user, $user->getPassword());
+
+            $user->setPassword($hash);
+
+            $em->persist($user);
+            $em->flush();
+
+            return $this->redirectToRoute('utilisateurs');
+
+        }
+        return $this->render('admin/new.html.twig', [
+            'userForm' => $form->createView()
+        ]);
     }
 
 }
