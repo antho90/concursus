@@ -6,6 +6,7 @@ use App\Form\NewUserType;
 use App\Entity\Competiton;
 use App\Entity\GeneralUser;
 use App\Form\EditUsersType;
+use App\Form\CompetitionType;
 use Doctrine\DBAL\Driver\Connection;
 use App\Repository\CompetitonRepository;
 use App\Repository\GeneralUserRepository;
@@ -108,6 +109,15 @@ class HomepageController extends AbstractController
         )]);
     }
 
+    /**
+     * @IsGranted("ROLE_ADMIN")
+     * @Route("/competitionsList", name="competitionsList")
+     */
+    public function competitionsList(CompetitonRepository $competitions){
+        return $this->render('admin/competitionsList.html.twig', ['competitions' => $competitions->findAll()]);
+    }
+
+
 
     /**
      * @IsGranted("ROLE_ADMIN")
@@ -170,6 +180,46 @@ class HomepageController extends AbstractController
         return $this->render('admin/new.html.twig', [
             'userForm' => $form->createView()
         ]);
+    }
+
+    /**
+     * @IsGranted("ROLE_ADMIN")
+     * @Route("/new_competition", name="new_competition")
+     * @return Response
+     */
+    public function newCompetition(Request $request): Response{
+        $competition = new Competiton;
+        $form = $this->createForm(CompetitionType::class, $competition);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+
+            $em->persist($competition);
+            $em->flush();
+
+            return $this->redirectToRoute('competitionsList');
+
+        }
+        return $this->render('admin/newCompetition.html.twig', [
+            'competitionForm' => $form->createView()
+        ]);
+    }
+
+    /**
+     * @IsGranted("ROLE_ADMIN")
+     * @Route("/manage_competition", name="manage_competition")
+     */
+    public function manage_competition(){
+        
+    }
+
+    /**
+     * @IsGranted("ROLE_ADMIN")
+     * @Route("/new_competiton", name="new_competiton")
+     */
+    public function new_competiton(){
+
     }
 
 }
