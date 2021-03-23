@@ -118,6 +118,14 @@ class HomepageController extends AbstractController
         return $this->render('admin/competitionsList.html.twig', ['competitions' => $competitions->findAll()]);
     }
 
+    /**
+     * @IsGranted("ROLE_ADMIN")
+     * @Route("/competition/{id}/classement", name="classement_competition")
+     */
+    public function classement_competition(CompetitonRepository $competitions){
+        return $this->render('admin/classement_competition.html.twig', ['competitions' => $competitions->findAll()]);
+    }
+
 
 
     /**

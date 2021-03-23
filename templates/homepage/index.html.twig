@@ -20,12 +20,12 @@
 
 			</div>
 		</div>
- 
-				<div class="col-md-3 text-center pt-5">
+
+		<div class="col-md-3 text-center pt-5">
 
 			<h4>Programme</h4>
 
-			{% for programme in programmes %}
+			{% for programme in programmes |sort((a, b) => a.id < b.id) |slice(0, 6) %}
 				<a href="{{path('app_homepage_competition', {'id': programme.id})}}">
 					<strong>{{programme.nom}}</strong>
 				</a>
@@ -42,7 +42,8 @@
 		<h2>Bienvenue</h2>
 
 		<p class="text-justify">
-			Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been th  standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled     type specimen book. It has survived not only five centuries, but also the leap into electronic typesettin   essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing  passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+			Lors des compétitions MakerFight Jr., les kids créent des robots qui s'affrontent sur plusieurs playgrounds. Le plaisir d'apprendre, les échanges entre élèves et le travail d'équipe sont au premier plan. Cet événement permet aux kids de s'enthousiasmer pour les mathématiques, l'informatique, les sciences naturelles et la technologie grâce à la résolution de problèmes pratiques liés aux challenges.
+			La plupart des compétitions sont internationales et ouvertes aux groupes de la région et du monde entier. Les meilleurs équipes poursuivront leur aventure au niveau national, européen voire international… que la science soit avec vous !
 		</p>
 
 	</div>
@@ -163,7 +164,7 @@
 		<h2>A propos de l'événement</h2>
 
 		<p class="text-justify">
-			Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been th  standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled     type specimen book. It has survived not only five centuries, but also the leap into electronic typesettin   essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing  passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+			Cette année, au vu des contraintes liées à la pandémie, l’événmenent aura lieu en grande partie à distance. Mais nous avons souhaité conserver une partie non virtuelle c’est pourquoi, en plus de vous demander d’allumer vos caméras, nous créerons des playgrounds avec des vrais robots équipés de caméras pour garder l’esprit MakerFight.
 		</p>
 
 	</div>
