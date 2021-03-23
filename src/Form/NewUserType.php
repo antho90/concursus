@@ -7,6 +7,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -39,9 +40,39 @@ class NewUserType extends AbstractType
                 'multiple' => true,
                 'label' => 'Rôles'
             ])
-            ->add('prenom')
-            ->add('nom')
-            ->add('structure')
+            ->add('prenom', TextType::class ,[
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Merci de saisir un prénom'
+                    ])
+                    ],
+                    'required' => true,
+                    'attr' => [
+                        'class' => 'form-control'
+                    ]
+            ])
+            ->add('nom', TextType::class ,[
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Merci de saisir un nom'
+                    ])
+                    ],
+                    'required' => true,
+                    'attr' => [
+                        'class' => 'form-control'
+                    ]
+            ])
+            ->add('structure', TextType::class ,[
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Merci de saisir une structure'
+                    ])
+                    ],
+                    'required' => true,
+                    'attr' => [
+                        'class' => 'form-control'
+                    ]
+            ])
             ->add('Valider', SubmitType::class)
         ;
     }

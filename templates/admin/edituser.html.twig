@@ -5,6 +5,10 @@
 {% block body %}
 
     <h1 class="text-center pt-5">Modifier utilisateur</h1>
+    
+	<div class="text-center pt-5">
+		<a href="{{ path('utilisateurs')}}" class=" btn btn-info ">Retour</a>
+	</div>
 
         {{ form(userForm) }}
 

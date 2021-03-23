@@ -20,16 +20,22 @@
 					Admins
 				</a>
 			</li>
-            <li>
+			<li>
 				<a href="{{path('mentors')}}">
 					<i class="fa fa-tachometer" aria-hidden="true"></i>
 					Mentors
 				</a>
 			</li>
-            <li>
+			<li>
 				<a href="{{path('juges')}}">
 					<i class="fa fa-tachometer" aria-hidden="true"></i>
 					Juges
+				</a>
+			</li>
+			<li>
+				<a href="{{path('competitionsList')}}">
+					<i class="fa fa-tachometer" aria-hidden="true"></i>
+					Compétitions
 				</a>
 			</li>
 		</ul>
@@ -49,13 +55,14 @@
 			<th>Email</th>
 			<th>Prénom</th>
 			<th>Nom</th>
+			<th>Structure</th>
 			<th>Rôles</th>
 			<th>Actions</th>
 
 		</thead>
 		<tbody>
 
-			{% for user in users %}
+			{% for user in users |sort((a, b) => a.id < b.id) %}
 				<tr>
 					{% for role in user.roles %}
 						{%  if role == "ROLE_MENTOR" %}

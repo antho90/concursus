@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Liste des Mentors
+{% block title %}Liste des Admins
 {% endblock %}
 
 {% block body %}
@@ -20,27 +20,34 @@
 					Admins
 				</a>
 			</li>
-            <li>
+			<li>
 				<a href="{{path('mentors')}}">
 					<i class="fa fa-tachometer" aria-hidden="true"></i>
 					Mentors
 				</a>
 			</li>
-            <li>
+			<li>
 				<a href="{{path('juges')}}">
 					<i class="fa fa-tachometer" aria-hidden="true"></i>
 					Juges
+				</a>
+			</li>
+			<li>
+				<a href="{{path('competitionsList')}}">
+					<i class="fa fa-tachometer" aria-hidden="true"></i>
+					Compétitions
 				</a>
 			</li>
 		</ul>
 	</div>
 
 
-	<h1 class="text-center pt-5">Liste des Mentors</h1>
+	<h1 class="text-center pt-5">Liste des Admins</h1>
 
 	<div class="text-center pt-5">
 		<a href="{{ path('new_utilisateur')}}" class=" btn btn-success">Ajouter</a>
 	</div>
+	
 
 	<table class="table">
 		<thead>
@@ -49,13 +56,14 @@
 			<th>Email</th>
 			<th>Prénom</th>
 			<th>Nom</th>
+			<th>Structure</th>
 			<th>Rôles</th>
 			<th>Actions</th>
 
 		</thead>
 		<tbody>
 
-			{% for user in users %}
+			{% for user in users |sort((a, b) => a.id < b.id) %}
 				<tr>
 					{% for role in user.roles %}
 						{%  if role == "ROLE_ADMIN" %}

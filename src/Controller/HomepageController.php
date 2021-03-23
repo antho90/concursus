@@ -6,6 +6,8 @@ use App\Form\NewUserType;
 use App\Entity\Competiton;
 use App\Entity\GeneralUser;
 use App\Form\EditUsersType;
+use App\Form\CompetitionType;
+use App\Form\EditCompetitionType;
 use Doctrine\DBAL\Driver\Connection;
 use App\Repository\CompetitonRepository;
 use App\Repository\GeneralUserRepository;
@@ -108,6 +110,23 @@ class HomepageController extends AbstractController
         )]);
     }
 
+    /**
+     * @IsGranted("ROLE_ADMIN")
+     * @Route("/competitionsList", name="competitionsList")
+     */
+    public function competitionsList(CompetitonRepository $competitions){
+        return $this->render('admin/competitionsList.html.twig', ['competitions' => $competitions->findAll()]);
+    }
+
+    /**
+     * @IsGranted("ROLE_ADMIN")
+     * @Route("/competition/{id}/classement", name="classement_competition")
+     */
+    public function classement_competition(CompetitonRepository $competitions){
+        return $this->render('admin/classement_competition.html.twig', ['competitions' => $competitions->findAll()]);
+    }
+
+
 
     /**
      * @IsGranted("ROLE_ADMIN")
@@ -133,6 +152,28 @@ class HomepageController extends AbstractController
 
     /**
      * @IsGranted("ROLE_ADMIN")
+     * @Route("/competitionsList/modifier/{id}", name="modifier_competition")
+     */
+    public function editCompetition(Competiton $competition, Request $request){
+        $form = $this->createForm(EditCompetitionType::class, $competition);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()){
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager ->persist($competition);
+            $entityManager->flush();
+
+            $this->addFlash('message', 'Compétition modifié avec succès');
+            return $this->redirectToRoute('competitionsList');
+        }
+
+        return $this->render('admin/editcompetition.html.twig', [
+            'competitionForm' => $form->createView()
+        ]);
+    }
+
+    /**
+     * @IsGranted("ROLE_ADMIN")
      * @Route("/deleteUser/{id}", name="delete_utilisateur")
      * @return RedirectResponse
      */
@@ -142,6 +183,19 @@ class HomepageController extends AbstractController
         $em->flush();
 
         return $this->redirectToRoute('utilisateurs');
+    }
+
+    /**
+     * @IsGranted("ROLE_ADMIN")
+     * @Route("/deleteCompetition/{id}", name="delete_competition")
+     * @return RedirectResponse
+     */
+    public function deleteCompetition(Competiton $competition): RedirectResponse{
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($competition);
+        $em->flush();
+
+        return $this->redirectToRoute('competitionsList');
     }
 
     /**
@@ -170,6 +224,46 @@ class HomepageController extends AbstractController
         return $this->render('admin/new.html.twig', [
             'userForm' => $form->createView()
         ]);
+    }
+
+    /**
+     * @IsGranted("ROLE_ADMIN")
+     * @Route("/new_competition", name="new_competition")
+     * @return Response
+     */
+    public function newCompetition(Request $request): Response{
+        $competition = new Competiton;
+        $form = $this->createForm(CompetitionType::class, $competition);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+
+            $em->persist($competition);
+            $em->flush();
+
+            return $this->redirectToRoute('competitionsList');
+
+        }
+        return $this->render('admin/newCompetition.html.twig', [
+            'competitionForm' => $form->createView()
+        ]);
+    }
+
+    /**
+     * @IsGranted("ROLE_ADMIN")
+     * @Route("/manage_competition", name="manage_competition")
+     */
+    public function manage_competition(){
+        
+    }
+
+    /**
+     * @IsGranted("ROLE_ADMIN")
+     * @Route("/new_competiton", name="new_competiton")
+     */
+    public function new_competiton(){
+
     }
 
 }
