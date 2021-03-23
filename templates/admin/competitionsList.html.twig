@@ -70,9 +70,9 @@
 							<td>{{ competition.info }}</td>
 
 							<td>
-								<a href="{{ path('modifier_utilisateur', {'id': competition.id})}}" class=" btn btn-warning">Modifier</a>
+								<a href="{{ path('modifier_competition', {'id': competition.id})}}" class=" btn btn-warning">Modifier</a>
 
-								<a href="{{ path('delete_utilisateur', {'id': competition.id})}}" class=" btn btn-danger ml-2" onclick="return confirm('Voulez-vous vraiment suprimmer cette utilisateur ?')">Suprimmer</a>
+								<a href="{{ path('delete_competition', {'id': competition.id})}}" class=" btn btn-danger ml-2" onclick="return confirm('Voulez-vous vraiment suprimmer cette compétition ?')">Suprimmer</a>
 							</td>
 						</tr>
 			{% else %}
