@@ -10,6 +10,7 @@ use App\Form\EditUsersType;
 use App\Form\NewEquipeType;
 use App\Form\CompetitionType;
 use App\Form\EditCompetitionType;
+use App\Repository\EquipeRepository;
 use Doctrine\DBAL\Driver\Connection;
 use App\Repository\CompetitonRepository;
 use App\Repository\GeneralUserRepository;
@@ -122,6 +123,14 @@ class HomepageController extends AbstractController
 
     /**
      * @IsGranted("ROLE_ADMIN")
+     * @Route("/equipes", name="equipes")
+     */
+    public function equipeList(EquipeRepository $equipes){
+        return $this->render('admin/equipesList.html.twig', ['equipes' => $equipes->findAll()]);
+    }
+
+    /**
+     * @IsGranted("ROLE_ADMIN")
      * @Route("/competition/{id}/classement", name="classement_competition")
      */
     public function classement_competition(CompetitonRepository $competitions){
@@ -143,7 +152,7 @@ class HomepageController extends AbstractController
             $entityManager ->persist($user);
             $entityManager->flush();
 
-            $this->addFlash('message', 'Utilisateur modifié avec succès');
+            $this->addFlash('success', 'Utilisateur modifié avec succès');
             return $this->redirectToRoute('utilisateurs');
         }
 
@@ -165,7 +174,7 @@ class HomepageController extends AbstractController
             $entityManager ->persist($competition);
             $entityManager->flush();
 
-            $this->addFlash('message', 'Compétition modifié avec succès');
+            $this->addFlash('success', 'Compétition modifié avec succès');
             return $this->redirectToRoute('competitionsList');
         }
 
@@ -184,6 +193,8 @@ class HomepageController extends AbstractController
         $em->remove($user);
         $em->flush();
 
+        $this->addFlash('success', 'Votre utilisateur à bien été supprimer.');
+
         return $this->redirectToRoute('utilisateurs');
     }
 
@@ -196,6 +207,8 @@ class HomepageController extends AbstractController
         $em = $this->getDoctrine()->getManager();
         $em->remove($competition);
         $em->flush();
+
+        $this->addFlash('success', 'Votre compétition à bien été supprimer.');
 
         return $this->redirectToRoute('competitionsList');
     }
@@ -220,6 +233,8 @@ class HomepageController extends AbstractController
             $em->persist($user);
             $em->flush();
 
+            $this->addFlash('success', 'Votre nouvel utilisateur à bien été enregistré.');
+
             return $this->redirectToRoute('utilisateurs');
 
         }
@@ -243,6 +258,8 @@ class HomepageController extends AbstractController
 
             $em->persist($competition);
             $em->flush();
+
+            $this->addFlash('success', 'Votre compétition à bien été enregistré.');
 
             return $this->redirectToRoute('competitionsList');
 
