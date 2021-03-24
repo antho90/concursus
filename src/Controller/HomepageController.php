@@ -2,10 +2,12 @@
 
 namespace App\Controller;
 
+use App\Entity\Equipe;
 use App\Form\NewUserType;
 use App\Entity\Competiton;
 use App\Entity\GeneralUser;
 use App\Form\EditUsersType;
+use App\Form\NewEquipeType;
 use App\Form\CompetitionType;
 use App\Form\EditCompetitionType;
 use Doctrine\DBAL\Driver\Connection;
@@ -247,6 +249,32 @@ class HomepageController extends AbstractController
         }
         return $this->render('admin/newCompetition.html.twig', [
             'competitionForm' => $form->createView()
+        ]);
+    }
+
+    /**
+     * @IsGranted("ROLE_MENTOR")
+     * @Route("/new_equipe", name="new_equipe")
+     * @return Response
+     */
+    public function newEquipe(Request $request): Response{
+        $equipe = new Equipe;
+        $form = $this->createForm(NewEquipeType::class, $equipe);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+
+            $em->persist($equipe);
+            $em->flush();
+
+            $this->addFlash('success', 'Votre équipe à bien été enregistré.');
+
+            return $this->redirectToRoute('app_homepage_programme');
+
+        }
+        return $this->render('mentor/newEquipe.html.twig', [
+            'equipeForm' => $form->createView()
         ]);
     }
 

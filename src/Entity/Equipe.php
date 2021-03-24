@@ -6,11 +6,18 @@ use App\Repository\EquipeRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+
 
 /**
  * @ORM\Entity(repositoryClass=EquipeRepository::class)
+ * @UniqueEntity(
+ * fields={"nom"},
+ * message="Le nom que vous avez indiqué est déjà utilisé !"
+ * )
  */
-class Equipe
+
+class Equipe 
 {
     /**
      * @ORM\Id
@@ -33,6 +40,20 @@ class Equipe
      * @ORM\OneToMany(targetEntity=Mentor::class, mappedBy="equipe")
      */
     private $mentors;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $structure;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $ville;
+
+    public $validation;
+    
+    public $validationImage;
 
     public function __construct()
     {
@@ -94,6 +115,30 @@ class Equipe
                 $mentor->setEquipe(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getStructure(): ?string
+    {
+        return $this->structure;
+    }
+
+    public function setStructure(string $structure): self
+    {
+        $this->structure = $structure;
+
+        return $this;
+    }
+
+    public function getVille(): ?string
+    {
+        return $this->ville;
+    }
+
+    public function setVille(string $ville): self
+    {
+        $this->ville = $ville;
 
         return $this;
     }
