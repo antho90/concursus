@@ -55,9 +55,15 @@ class Equipe
     
     public $validationImage;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=Competiton::class, mappedBy="equipe")
+     */
+    private $competitons;
+
     public function __construct()
     {
         $this->mentors = new ArrayCollection();
+        $this->competitons = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -139,6 +145,33 @@ class Equipe
     public function setVille(string $ville): self
     {
         $this->ville = $ville;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Competiton[]
+     */
+    public function getCompetitons(): Collection
+    {
+        return $this->competitons;
+    }
+
+    public function addCompetiton(Competiton $competiton): self
+    {
+        if (!$this->competitons->contains($competiton)) {
+            $this->competitons[] = $competiton;
+            $competiton->addEquipe($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCompetiton(Competiton $competiton): self
+    {
+        if ($this->competitons->removeElement($competiton)) {
+            $competiton->removeEquipe($this);
+        }
 
         return $this;
     }

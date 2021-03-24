@@ -55,9 +55,15 @@ class Competiton
      */
     private $info;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=Equipe::class, inversedBy="competitons")
+     */
+    private $equipe;
+
     public function __construct()
     {
         $this->admins = new ArrayCollection();
+        $this->equipe = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -151,6 +157,30 @@ class Competiton
     public function setInfo(string $info): self
     {
         $this->info = $info;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Equipe[]
+     */
+    public function getEquipe(): Collection
+    {
+        return $this->equipe;
+    }
+
+    public function addEquipe(Equipe $equipe): self
+    {
+        if (!$this->equipe->contains($equipe)) {
+            $this->equipe[] = $equipe;
+        }
+
+        return $this;
+    }
+
+    public function removeEquipe(Equipe $equipe): self
+    {
+        $this->equipe->removeElement($equipe);
 
         return $this;
     }
