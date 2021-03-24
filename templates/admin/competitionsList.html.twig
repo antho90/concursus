@@ -20,19 +20,25 @@
 					Admins
 				</a>
 			</li>
-            <li>
+			<li>
 				<a href="{{path('mentors')}}">
 					<i class="fa fa-tachometer" aria-hidden="true"></i>
 					Mentors
 				</a>
 			</li>
-            <li>
+			<li>
 				<a href="{{path('juges')}}">
 					<i class="fa fa-tachometer" aria-hidden="true"></i>
 					Juges
 				</a>
 			</li>
-            <li>
+			<li>
+				<a href="{{path('equipes')}}">
+					<i class="fa fa-tachometer" aria-hidden="true"></i>
+					Equipes
+				</a>
+			</li>
+			<li>
 				<a href="{{path('competitionsList')}}">
 					<i class="fa fa-tachometer" aria-hidden="true"></i>
 					Compétitions
@@ -63,27 +69,27 @@
 
 			{% for competition in competitions |sort((a, b) => a.id < b.id) %}
 				<tr>
-							<td>{{ competition.id }}</td>
-							<td>{{ competition.nom }}</td>
-							<td>{{ competition.date | date('d/m/Y H:i:s')}}</td>
-							<td>{{ competition.description }}</td>
-							<td>{{ competition.info }}</td>
+					<td>{{ competition.id }}</td>
+					<td>{{ competition.nom }}</td>
+					<td>{{ competition.date | date('d/m/Y H:i:s')}}</td>
+					<td>{{ competition.description }}</td>
+					<td>{{ competition.info }}</td>
 
-							<td>
-								<a href="{{ path('modifier_competition', {'id': competition.id})}}" class=" btn btn-warning">Modifier</a>
+					<td>
+						<a href="{{ path('modifier_competition', {'id': competition.id})}}" class=" btn btn-warning">Modifier</a>
 
-								<a href="{{ path('delete_competition', {'id': competition.id})}}" class=" btn btn-danger" onclick="return confirm('Voulez-vous vraiment suprimmer cette compétition ?')">Suprimmer</a>
+						<a href="{{ path('delete_competition', {'id': competition.id})}}" class=" btn btn-danger" onclick="return confirm('Voulez-vous vraiment suprimmer cette compétition ?')">Suprimmer</a>
 
-                                <a href="{{ path('classement_competition', {'id': competition.id})}}" class=" btn btn-info ml-8">Classement</a>
-							</td>
-						</tr>
+						<a href="{{ path('classement_competition', {'id': competition.id})}}" class=" btn btn-info ml-8">Classement</a>
+					</td>
+				</tr>
 			{% else %}
 				<tr>
 					<td colspan="5">Il n'y a pas de compétitions</td>
 				</tr>
 			{% endfor %}
-                            
+
 		</tbody>
 	</tale>
-                        
+
 {% endblock %}

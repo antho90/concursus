@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Liste des Juges
+{% block title %}Liste des équipes
 {% endblock %}
 
 {% block body %}
@@ -48,58 +48,40 @@
 	</div>
 
 
-	<h1 class="text-center pt-5">Liste des Juges</h1>
+	<h1 class="text-center pt-5">Liste des équipes</h1>
 
 	<div class="text-center pt-5">
-		<a href="{{ path('new_utilisateur')}}" class=" btn btn-success">Ajouter</a>
+		<a href="#" class=" btn btn-success">Ajouter</a>
 	</div>
+	
 
 	<table class="table">
 		<thead>
 
 			<th>Id</th>
-			<th>Email</th>
-			<th>Prénom</th>
 			<th>Nom</th>
 			<th>Structure</th>
-			<th>Rôles</th>
-			<th>Actions</th>
+			<th>Ville</th>
 
 		</thead>
 		<tbody>
 
-			{% for user in users |sort((a, b) => a.id < b.id) %}
+			{% for equipe in equipes |sort((a, b) => a.id < b.id) %}
 				<tr>
-					{% for role in user.roles %}
-						{%  if role == "ROLE_JUGE" %}
-							<td>{{ user.id }}</td>
-							<td>{{ user.email }}</td>
-							<td>{{ user.prenom }}</td>
-							<td>{{ user.nom }}</td>
-							<td>{{ user.structure }}</td>
-							<td>
-								{% for role in user.roles %}
-									{%  if role == "ROLE_MENTOR" %}
-										Mentor
-									{% elseif role == "ROLE_ADMIN" %}
-										Admin
-									{% elseif role == "ROLE_JUGE" %}
-										Juge
-									{% endif %}
-								{% endfor %}
-							</td>
+							<td>{{ equipe.id }}</td>
+							<td>{{ equipe.nom }}</td>
+							<td>{{ equipe.structure }}</td>
+                            <td>{{ equipe.ville }}</td>
 
 							<td>
-								<a href="{{ path('modifier_utilisateur', {'id': user.id})}}" class=" btn btn-warning">Modifier</a>
+								<a href="#" class=" btn btn-warning">Modifier</a>
 
-								<a href="{{ path('delete_utilisateur', {'id': user.id})}}" class=" btn btn-danger ml-2" onclick="return confirm('Voulez-vous vraiment suprimmer cette utilisateur ?')">Suprimmer</a>
+								<a href="#" class=" btn btn-danger ml-2" onclick="return confirm('Voulez-vous vraiment suprimmer cette utilisateur ?')">Suprimmer</a>
 							</td>
-						</tr>
-					{% endif %}
-				{% endfor %}
+						</tr> 
 			{% else %}
 				<tr>
-					<td colspan="5">Il n'y a pas d'utilisateurs inscrit</td>
+					<td colspan="5">Il n'y a pas d'équipe inscrite</td>
 				</tr>
 			{% endfor %}
 
