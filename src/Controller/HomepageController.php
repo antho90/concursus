@@ -75,7 +75,7 @@ class HomepageController extends AbstractController
 
     /**
      * @IsGranted("ROLE_ADMIN")
-     * @Route("/utilisateurs", name="utilisateurs")
+     * @Route("/manage/utilisateurs", name="utilisateurs")
      */
     public function usersList(GeneralUserRepository $users){
         return $this->render('admin/users.html.twig', ['users' => $users->findBy(
@@ -85,7 +85,7 @@ class HomepageController extends AbstractController
 
     /**
      * @IsGranted("ROLE_ADMIN")
-     * @Route("/admins", name="admins")
+     * @Route("/manage/admins", name="admins")
      */
     public function adminsList(GeneralUserRepository $users){
         return $this->render('admin/adminsList.html.twig', ['users' => $users->findBy(
@@ -95,7 +95,7 @@ class HomepageController extends AbstractController
 
     /**
      * @IsGranted("ROLE_ADMIN")
-     * @Route("/juges", name="juges")
+     * @Route("/manage/juges", name="juges")
      */
     public function jugesList(GeneralUserRepository $users){
         return $this->render('admin/jugesList.html.twig', ['users' => $users->findBy(
@@ -105,7 +105,7 @@ class HomepageController extends AbstractController
 
     /**
      * @IsGranted("ROLE_ADMIN")
-     * @Route("/mentors", name="mentors")
+     * @Route("/manage/mentors", name="mentors")
      */
     public function mentorsList(GeneralUserRepository $users){
         return $this->render('admin/mentorsList.html.twig', ['users' => $users->findBy(
@@ -115,7 +115,7 @@ class HomepageController extends AbstractController
 
     /**
      * @IsGranted("ROLE_ADMIN")
-     * @Route("/competitionsList", name="competitionsList")
+     * @Route("/manage/competitions", name="competitionsList")
      */
     public function competitionsList(CompetitonRepository $competitions){
         return $this->render('admin/competitionsList.html.twig', ['competitions' => $competitions->findAll()]);
@@ -123,7 +123,7 @@ class HomepageController extends AbstractController
 
     /**
      * @IsGranted("ROLE_ADMIN")
-     * @Route("/equipes", name="equipes")
+     * @Route("/manage/equipes", name="equipes")
      */
     public function equipeList(EquipeRepository $equipes){
         return $this->render('admin/equipesList.html.twig', ['equipes' => $equipes->findAll()]);

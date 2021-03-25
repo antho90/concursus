@@ -47,13 +47,12 @@
 		</ul>
 	</div>
 
-
 	<h1 class="text-center pt-5">Liste des équipes</h1>
 
 	<div class="text-center pt-5">
 		<a href="#" class=" btn btn-success">Ajouter</a>
 	</div>
-	
+
 
 	<table class="table">
 		<thead>
@@ -62,23 +61,37 @@
 			<th>Nom</th>
 			<th>Structure</th>
 			<th>Ville</th>
+			<th>Compétitions inscrit</th>
 
 		</thead>
 		<tbody>
 
-			{% for equipe in equipes |sort((a, b) => a.id < b.id) %}
+			{% for equipes in equipes |sort((a, b) => a.id < b.id) %}
 				<tr>
-							<td>{{ equipe.id }}</td>
-							<td>{{ equipe.nom }}</td>
-							<td>{{ equipe.structure }}</td>
-                            <td>{{ equipe.ville }}</td>
+					<td>{{ equipes.id }}</td>
+					<td>{{ equipes.nom }}</td>
+					<td>{{ equipes.structure }}</td>
+					<td>{{ equipes.ville }}</td>
 
-							<td>
-								<a href="#" class=" btn btn-warning">Modifier</a>
 
-								<a href="#" class=" btn btn-danger ml-2" onclick="return confirm('Voulez-vous vraiment suprimmer cette utilisateur ?')">Suprimmer</a>
-							</td>
-						</tr> 
+					{% for competitions in equipes.getCompetitons |sort((a, b) => a.id < b.id) %}
+						<td>
+							<p>{{ competitions.nom }}</p>
+						</td>
+					{% else %}
+
+						<td>
+							<p></p>
+						</td>
+
+					{% endfor %}
+
+					<td>
+						<a href="#" class=" btn btn-warning">Modifier</a>
+
+						<a href="#" class=" btn btn-danger ml-2" onclick="return confirm('Voulez-vous vraiment suprimmer cette utilisateur ?')">Suprimmer</a>
+					</td>
+				</tr>
 			{% else %}
 				<tr>
 					<td colspan="5">Il n'y a pas d'équipe inscrite</td>
