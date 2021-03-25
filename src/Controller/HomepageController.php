@@ -271,16 +271,21 @@ class HomepageController extends AbstractController
 
     /**
      * @IsGranted("ROLE_MENTOR")
-     * @Route("/new_equipe", name="new_equipe")
+     * @Route("/competition/{id}/new_equipe", name="new_equipe")
      * @return Response
      */
-    public function newEquipe(Request $request): Response{
+    public function newEquipe(CompetitonRepository $repository, $id ,Request $request): Response{
+        $competitions = $repository->find($id);
         $equipe = new Equipe;
         $form = $this->createForm(NewEquipeType::class, $equipe);
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+
+            $test = $em->getRepository(Competiton::class)->find($id);
+
+            $equipe->addCompetiton($test);
 
             $em->persist($equipe);
             $em->flush();
@@ -290,7 +295,7 @@ class HomepageController extends AbstractController
             return $this->redirectToRoute('app_homepage_programme');
 
         }
-        return $this->render('mentor/newEquipe.html.twig', [
+        return $this->render('mentor/newEquipe.html.twig', ['competition' => $competitions,
             'equipeForm' => $form->createView()
         ]);
     }

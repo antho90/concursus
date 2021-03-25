@@ -16,7 +16,6 @@ class NewEquipeType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            // ->add('acces')
             ->add('nom', TextType::class ,[
                 'constraints' => [
                     new NotBlank([

@@ -29,11 +29,6 @@ class Equipe
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $acces;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
     private $nom;
 
     /**
@@ -74,13 +69,6 @@ class Equipe
     public function getAcces(): ?string
     {
         return $this->acces;
-    }
-
-    public function setAcces(string $acces): self
-    {
-        $this->acces = $acces;
-
-        return $this;
     }
 
     public function getNom(): ?string
