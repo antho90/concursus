@@ -8,6 +8,7 @@ use App\Entity\Competiton;
 use App\Entity\GeneralUser;
 use App\Form\EditUsersType;
 use App\Form\NewEquipeType;
+use App\Form\EditEquipeType;
 use App\Form\CompetitionType;
 use App\Form\EditCompetitionType;
 use App\Repository\EquipeRepository;
@@ -180,6 +181,28 @@ class HomepageController extends AbstractController
 
         return $this->render('admin/editcompetition.html.twig', [
             'competitionForm' => $form->createView()
+        ]);
+    }
+
+    /**
+     * @IsGranted("ROLE_ADMIN")
+     * @Route("/equipes/modifier/{id}", name="modifier_equipe")
+     */
+    public function editEquipe(Equipe $equipe, Request $request){
+        $form = $this->createForm(EditEquipeType::class, $equipe);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()){
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager ->persist($equipe);
+            $entityManager->flush();
+
+            $this->addFlash('success', 'Equipe modifié avec succès');
+            return $this->redirectToRoute('equipes');
+        }
+
+        return $this->render('admin/editequipe.html.twig', [
+            'equipeForm' => $form->createView()
         ]);
     }
 

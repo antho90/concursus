@@ -76,6 +76,11 @@ class Competiton
         return $this->nom;
     }
 
+    public function __toString()
+    {
+        return $this->getNom();
+    }
+
     public function setNom(string $nom): self
     {
         $this->nom = $nom;

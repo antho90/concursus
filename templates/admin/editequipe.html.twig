@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier Equipe
+{% endblock %}
+
+{% block body %}
+
+	<h1 class="text-center pt-5">Modifier Equipe</h1>
+
+	<div class="text-center pt-5">
+		<a href="{{ path('equipes')}}" class=" btn btn-info ">Retour</a>
+	</div>
+
+	{{ form(equipeForm) }}{% endblock %}
