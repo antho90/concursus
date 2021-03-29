@@ -188,13 +188,14 @@ class HomepageController extends AbstractController
      * @IsGranted("ROLE_ADMIN")
      * @Route("/equipes/modifier/{id}", name="modifier_equipe")
      */
-    public function editEquipe(Equipe $equipe, Request $request){
+    public function editEquipe(Equipe $equipe, Competiton $competition, Request $request){
         $form = $this->createForm(EditEquipeType::class, $equipe);
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()){
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager ->persist($equipe);
+           // $entityManager ->persist($competition);
             $entityManager->flush();
 
             $this->addFlash('success', 'Equipe modifié avec succès');

@@ -56,7 +56,7 @@ class Competiton
     private $info;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Equipe::class, inversedBy="competitons")
+     * @ORM\ManyToMany(targetEntity=Equipe::class, mappedBy="competitons")
      */
     private $equipe;
 
