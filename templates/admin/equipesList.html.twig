@@ -49,6 +49,38 @@
 		</ul>
 	</div>
 
+	{% else %}
+
+		<div id="nav_gauche" class="sidebar-container slideInLeft atss-left at-custom-sidebar addthis-animated">
+		<ul class="sidebar-navigation">
+			<li class="header">Navigation</li>
+			<li>
+				<a href="#">
+					<i class="fa fa-home" aria-hidden="true"></i>
+					Profil
+				</a>
+			</li>
+			<li>
+				<a href="#">
+					<i class="fa fa-tachometer" aria-hidden="true"></i>
+					Réglages
+				</a>
+			</li>
+			<li>
+				<a href="#">
+					<i class="fa fa-tachometer" aria-hidden="true"></i>
+					Vos competitions
+				</a>
+			</li>
+			<li>
+				<a href="{{path('mentor_equipes')}}">
+					<i class="fa fa-tachometer" aria-hidden="true"></i>
+					Equipes
+				</a>
+			</li>
+		</ul>
+	</div>
+
 {% endif %}
 
 	<h1 class="text-center pt-5">Liste des équipes</h1>
