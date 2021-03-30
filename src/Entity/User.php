@@ -166,4 +166,11 @@ class User implements UserInterface, \Serializable {
         $this->isActive = $isActive;
     }
 
+    public function setRoles(array $roles): self
+    {
+        $this->roles = $roles;
+
+        return $this;
+    }
+
 }

@@ -48,11 +48,11 @@
 	{% if is_granted('ROLE_MENTOR') %}	
 	
 	<p class="text-center">
-		M'incrire avec mon équipe à cette compétition :
+		Incrire mon équipe à cette compétition :
 	</p>
 
 		<div class="text-center">
-			<a href="#" class="btn btn-warning">M'inscrire</a>
+			<a href="{{path('new_equipe', {'id': competition.id})}}" class="btn btn-warning">M'inscrire</a>
 		</div>
 
 	{% else %}

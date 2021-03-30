@@ -6,9 +6,15 @@ use App\Repository\CompetitonRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+
 
 /**
  * @ORM\Entity(repositoryClass=CompetitonRepository::class)
+ * @UniqueEntity(
+ * fields={"nom"},
+ * message="Le nom que vous avez indiqué est déjà utilisé !"
+ * )
  */
 class Competiton
 {
@@ -49,9 +55,15 @@ class Competiton
      */
     private $info;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=Equipe::class, mappedBy="competitons")
+     */
+    private $equipe;
+
     public function __construct()
     {
         $this->admins = new ArrayCollection();
+        $this->equipe = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -62,6 +74,11 @@ class Competiton
     public function getNom(): ?string
     {
         return $this->nom;
+    }
+
+    public function __toString()
+    {
+        return $this->getNom();
     }
 
     public function setNom(string $nom): self
@@ -145,6 +162,30 @@ class Competiton
     public function setInfo(string $info): self
     {
         $this->info = $info;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Equipe[]
+     */
+    public function getEquipe(): Collection
+    {
+        return $this->equipe;
+    }
+
+    public function addEquipe(Equipe $equipe): self
+    {
+        if (!$this->equipe->contains($equipe)) {
+            $this->equipe[] = $equipe;
+        }
+
+        return $this;
+    }
+
+    public function removeEquipe(Equipe $equipe): self
+    {
+        $this->equipe->removeElement($equipe);
 
         return $this;
     }

@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\GeneralUserRepository;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -66,8 +68,14 @@ class GeneralUser implements UserInterface
      */
     private $modif;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=Equipe::class, mappedBy="generaluser")
+     */
+    private $equipes;
+
     public function __construct() {
         $this->modif = true;
+        $this->equipes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -173,6 +181,33 @@ class GeneralUser implements UserInterface
     public function setModif(bool $modif): self
     {
         $this->modif = $modif;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Equipe[]
+     */
+    public function getEquipes(): Collection
+    {
+        return $this->equipes;
+    }
+
+    public function addEquipe(Equipe $equipe): self
+    {
+        if (!$this->equipes->contains($equipe)) {
+            $this->equipes[] = $equipe;
+            $equipe->addGeneraluser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEquipe(Equipe $equipe): self
+    {
+        if ($this->equipes->removeElement($equipe)) {
+            $equipe->removeGeneraluser($this);
+        }
 
         return $this;
     }
