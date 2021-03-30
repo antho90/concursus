@@ -315,16 +315,20 @@ class HomepageController extends AbstractController
      */
     public function newEquipe(CompetitonRepository $repository, $id ,Request $request): Response{
         $competitions = $repository->find($id);
+        $generaluser = $this->getUser();
+        // $curentuser = $generaluser->getId();
         $equipe = new Equipe;
+        
         $form = $this->createForm(NewEquipeType::class, $equipe);
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
 
-            $test = $em->getRepository(Competiton::class)->find($id);
+            $compet = $em->getRepository(Competiton::class)->find($id);
 
-            $equipe->addCompetiton($test);
+            $equipe->addCompetiton($compet);
+            $equipe->addGeneraluser($generaluser);
 
             $em->persist($equipe);
             $em->flush();

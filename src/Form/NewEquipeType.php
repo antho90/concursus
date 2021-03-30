@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Equipe;
+use App\Form\NewUserType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints\NotBlank;
@@ -10,6 +11,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 
 class NewEquipeType extends AbstractType
 {
@@ -58,6 +60,12 @@ class NewEquipeType extends AbstractType
                 'label'    => 'En cochant cette case je m\'engage à faire signer une charte de droit à l\'image à tous les membres de mon équipe ',
                 'required' => true,
             ])
+
+            // ->add('generaluser', CollectionType::class, [
+            //     'entry_type' => NewUserType::class,
+            //     'entry_options' => ['label' => false],
+            //     'allow_add' => true,
+            // ])
             ->add('Valider', SubmitType::class)
         ;
     }

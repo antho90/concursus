@@ -2,10 +2,11 @@
 
 namespace App\Entity;
 
-use App\Repository\EquipeRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\EquipeRepository;
+use Doctrine\ORM\Mapping\JoinColumn;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 
@@ -56,10 +57,17 @@ class Equipe
      */
     private $competitons;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=GeneralUser::class, inversedBy="equipes")
+     * @ORM\JoinTable(name="equipe_general_user")
+     */
+    private $generaluser;
+
     public function __construct()
     {
         $this->mentors = new ArrayCollection();
         $this->competitons = new ArrayCollection();
+        $this->generaluser = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -163,6 +171,30 @@ class Equipe
         if ($this->competitons->removeElement($competiton)) {
             $competiton->removeEquipe($this);
         }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|GeneralUser[]
+     */
+    public function getGeneraluser(): Collection
+    {
+        return $this->generaluser;
+    }
+
+    public function addGeneraluser(GeneralUser $generaluser): self
+    {
+        if (!$this->generaluser->contains($generaluser)) {
+            $this->generaluser[] = $generaluser;
+        }
+
+        return $this;
+    }
+
+    public function removeGeneraluser(GeneralUser $generaluser): self
+    {
+        $this->generaluser->removeElement($generaluser);
 
         return $this;
     }
