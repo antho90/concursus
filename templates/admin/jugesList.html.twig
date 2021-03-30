@@ -11,7 +11,7 @@
 			<li>
 				<a href="{{path('utilisateurs')}}">
 					<i class="fa fa-home" aria-hidden="true"></i>
-					Tous les utilisateurs
+					Tous les Utilisateurs
 				</a>
 			</li>
 			<li>
@@ -33,6 +33,12 @@
 				</a>
 			</li>
 			<li>
+				<a href="{{path('equipes')}}">
+					<i class="fa fa-tachometer" aria-hidden="true"></i>
+					Equipes
+				</a>
+			</li>
+			<li>
 				<a href="{{path('competitionsList')}}">
 					<i class="fa fa-tachometer" aria-hidden="true"></i>
 					Compétitions
@@ -48,8 +54,8 @@
 		<a href="{{ path('new_utilisateur')}}" class=" btn btn-success">Ajouter</a>
 	</div>
 
-	<table class="table">
-		<thead>
+	<table class="table table-hover">
+		<thead class="thead-light">
 
 			<th>Id</th>
 			<th>Email</th>

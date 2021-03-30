@@ -22,7 +22,7 @@
 
 	<div class="example-wrapper">
 		<h1 class=" text-center pt-5">Programmes</h1>
-		{% for programme in programmes %}
+		{% for programme in programmes |sort((a, b) => a.id < b.id) %}
 			<div class="card1 text-center">
 				<div class="card-header">
 					{{programme.nom}}
