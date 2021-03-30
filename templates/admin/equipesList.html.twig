@@ -5,6 +5,8 @@
 
 {% block body %}
 
+{% if is_granted('ROLE_ADMIN') %}
+
 	<div id="nav_gauche" class="sidebar-container slideInLeft atss-left at-custom-sidebar addthis-animated">
 		<ul class="sidebar-navigation">
 			<li class="header">Navigation</li>
@@ -47,10 +49,12 @@
 		</ul>
 	</div>
 
+{% endif %}
+
 	<h1 class="text-center pt-5">Liste des équipes</h1>
 
 	<div class="text-center pt-5">
-		<a href="#" class=" btn btn-success">Ajouter</a>
+		<a href="{{path('new_equipe')}}" class=" btn btn-success">Ajouter</a>
 	</div>
 
 	<table class="table table-hover">
