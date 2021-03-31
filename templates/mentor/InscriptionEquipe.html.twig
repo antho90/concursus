@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Inscription equipe
+{% endblock %}
+
+{% block body %}
+
+	<h1 class="text-center pt-5">Inscription equipe</h1>
+
+	<div class="text-center pt-5">
+		<a href="{{ path('app_homepage_programme')}}" class=" btn btn-info ">Retour</a>
+	</div>
+
+	{{ form(InscriptionEquipeForm) }}{% endblock %}

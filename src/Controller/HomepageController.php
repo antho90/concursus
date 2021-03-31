@@ -11,6 +11,7 @@ use App\Form\NewEquipeType;
 use App\Form\EditEquipeType;
 use App\Form\CompetitionType;
 use App\Form\EditCompetitionType;
+use App\Form\InscriptionEquipeType;
 use App\Repository\EquipeRepository;
 use Doctrine\DBAL\Driver\Connection;
 use App\Repository\CompetitonRepository;
@@ -135,7 +136,10 @@ class HomepageController extends AbstractController
      * @Route("/mentor/equipes", name="mentor_equipes")
      */
     public function mentorequipeList(EquipeRepository $equipes){
-        return $this->render('admin/equipesList.html.twig', ['equipes' => $equipes->findAll()]);
+
+        $generaluser = $this->getUser();
+
+        return $this->render('admin/equipesList.html.twig', ['generaluser' => $generaluser, 'equipes' => $equipes->findAll()]);
     }
 
     /**
@@ -341,11 +345,28 @@ class HomepageController extends AbstractController
 
     /**
      * @IsGranted("ROLE_MENTOR")
-     * @Route("/competition/{id}/new_equipe", name="new_equipe")
+     * @Route("/competition/{id}/inscription_equipe", name="inscription_equipe")
      * @return Response
      */
+    public function inscriptionCompetition(Competiton $competition, Request $request){
+        $form = $this->createForm(InscriptionEquipeType::class, $competition);
+        $form->handleRequest($request);
 
+        if($form->isSubmitted() && $form->isValid()){
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager ->persist($competition);
+            $entityManager->flush();
 
+            $this->addFlash('success', 'Votre équipe est inscrite à cette compétition');
+            return $this->redirectToRoute('app_homepage_programme');
+        }
+
+        return $this->render('mentor/InscriptionEquipe.html.twig', [
+            'InscriptionEquipeForm' => $form->createView()
+        ]);
+    }
+
+  
     /**
      * @IsGranted("ROLE_MENTOR")
      * @Route("/mentor/equipe/new", name="new_equipe")
