@@ -137,9 +137,7 @@ class HomepageController extends AbstractController
      */
     public function mentorequipeList(EquipeRepository $equipes){
 
-        $generaluser = $this->getUser();
-
-        return $this->render('admin/equipesList.html.twig', ['generaluser' => $generaluser, 'equipes' => $equipes->findAll()]);
+        return $this->render('admin/equipesList.html.twig', ['equipes' => $equipes->findAll()]);
     } 
 
     /**
@@ -221,7 +219,7 @@ class HomepageController extends AbstractController
 
     /**
      * @IsGranted("ROLE_MENTOR")
-     * @Route("/mentor/equipes/modifier/{id}", name="modifier_equipe")
+     * @Route("/mentor/equipes/modifier/{id}", name="mentor_modifier_equipe")
      */
     public function mentoreditEquipe(Equipe $equipe, Request $request){
         $form = $this->createForm(EditEquipeType::class, $equipe);
