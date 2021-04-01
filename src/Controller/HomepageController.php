@@ -140,7 +140,7 @@ class HomepageController extends AbstractController
         $generaluser = $this->getUser();
 
         return $this->render('admin/equipesList.html.twig', ['generaluser' => $generaluser, 'equipes' => $equipes->findAll()]);
-    }
+    } 
 
     /**
      * @IsGranted("ROLE_ADMIN")
@@ -348,7 +348,10 @@ class HomepageController extends AbstractController
      * @Route("/competition/{id}/inscription_equipe", name="inscription_equipe")
      * @return Response
      */
-    public function inscriptionCompetition(Competiton $competition, Request $request){
+    public function inscriptionCompetition(Competiton $competition, Request $request): Response{
+
+        // $competition = $repository->find($id);
+
         $form = $this->createForm(InscriptionEquipeType::class, $competition);
         $form->handleRequest($request);
 

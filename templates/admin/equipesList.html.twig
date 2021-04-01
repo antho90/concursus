@@ -111,9 +111,11 @@
 
 
 					{% for competitions in equipes.getCompetitons |sort((a, b) => a.id < b.id) %}
-						<td>
-							<p>{{ competitions.nom }}</p>
-						</td>
+						<div>
+							<td class="d-flex flex-row ">
+								<p>{{ competitions.nom }}</p>
+							</td>
+						</div>
 					{% else %}
 
 						<td>
