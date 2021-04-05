@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier Equipe
+{% endblock %}
+
+{% block body %}
+
+	<h1 class="text-center pt-5">Modifier Equipe</h1>
+
+	<div class="text-center pt-5">
+
+		{% if is_granted('ROLE_ADMIN') %}
+
+			<a href="{{ path('equipes')}}" class=" btn btn-info ">Retour</a>
+
+		{% else %}
+
+			<a href="{{ path('mentor_equipes')}}" class=" btn btn-info ">Retour</a>
+
+		{% endif %}
+
+	</div>
+
+	{{ form(equipeForm) }}{% endblock %}

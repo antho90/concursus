@@ -2,12 +2,17 @@
 
 namespace App\Controller;
 
+use App\Entity\Equipe;
 use App\Form\NewUserType;
 use App\Entity\Competiton;
 use App\Entity\GeneralUser;
 use App\Form\EditUsersType;
+use App\Form\NewEquipeType;
+use App\Form\EditEquipeType;
 use App\Form\CompetitionType;
 use App\Form\EditCompetitionType;
+use App\Form\InscriptionEquipeType;
+use App\Repository\EquipeRepository;
 use Doctrine\DBAL\Driver\Connection;
 use App\Repository\CompetitonRepository;
 use App\Repository\GeneralUserRepository;
@@ -72,7 +77,7 @@ class HomepageController extends AbstractController
 
     /**
      * @IsGranted("ROLE_ADMIN")
-     * @Route("/utilisateurs", name="utilisateurs")
+     * @Route("/manage/utilisateurs", name="utilisateurs")
      */
     public function usersList(GeneralUserRepository $users){
         return $this->render('admin/users.html.twig', ['users' => $users->findBy(
@@ -82,7 +87,7 @@ class HomepageController extends AbstractController
 
     /**
      * @IsGranted("ROLE_ADMIN")
-     * @Route("/admins", name="admins")
+     * @Route("/manage/admins", name="admins")
      */
     public function adminsList(GeneralUserRepository $users){
         return $this->render('admin/adminsList.html.twig', ['users' => $users->findBy(
@@ -92,7 +97,7 @@ class HomepageController extends AbstractController
 
     /**
      * @IsGranted("ROLE_ADMIN")
-     * @Route("/juges", name="juges")
+     * @Route("/manage/juges", name="juges")
      */
     public function jugesList(GeneralUserRepository $users){
         return $this->render('admin/jugesList.html.twig', ['users' => $users->findBy(
@@ -102,7 +107,7 @@ class HomepageController extends AbstractController
 
     /**
      * @IsGranted("ROLE_ADMIN")
-     * @Route("/mentors", name="mentors")
+     * @Route("/manage/mentors", name="mentors")
      */
     public function mentorsList(GeneralUserRepository $users){
         return $this->render('admin/mentorsList.html.twig', ['users' => $users->findBy(
@@ -112,11 +117,28 @@ class HomepageController extends AbstractController
 
     /**
      * @IsGranted("ROLE_ADMIN")
-     * @Route("/competitionsList", name="competitionsList")
+     * @Route("/manage/competitions", name="competitionsList")
      */
     public function competitionsList(CompetitonRepository $competitions){
         return $this->render('admin/competitionsList.html.twig', ['competitions' => $competitions->findAll()]);
     }
+
+    /**
+     * @IsGranted("ROLE_ADMIN")
+     * @Route("/manage/equipes", name="equipes")
+     */
+    public function equipeList(EquipeRepository $equipes){
+        return $this->render('admin/equipesList.html.twig', ['equipes' => $equipes->findAll()]);
+    }
+
+    /**
+     * @IsGranted("ROLE_MENTOR")
+     * @Route("/mentor/equipes", name="mentor_equipes")
+     */
+    public function mentorequipeList(EquipeRepository $equipes){
+
+        return $this->render('admin/equipesList.html.twig', ['equipes' => $equipes->findAll()]);
+    } 
 
     /**
      * @IsGranted("ROLE_ADMIN")
@@ -141,7 +163,7 @@ class HomepageController extends AbstractController
             $entityManager ->persist($user);
             $entityManager->flush();
 
-            $this->addFlash('message', 'Utilisateur modifié avec succès');
+            $this->addFlash('success', 'Utilisateur modifié avec succès');
             return $this->redirectToRoute('utilisateurs');
         }
 
@@ -163,12 +185,58 @@ class HomepageController extends AbstractController
             $entityManager ->persist($competition);
             $entityManager->flush();
 
-            $this->addFlash('message', 'Compétition modifié avec succès');
+            $this->addFlash('success', 'Compétition modifié avec succès');
             return $this->redirectToRoute('competitionsList');
         }
 
         return $this->render('admin/editcompetition.html.twig', [
             'competitionForm' => $form->createView()
+        ]);
+    }
+
+    /**
+     * @IsGranted("ROLE_ADMIN")
+     * @Route("/equipes/modifier/{id}", name="modifier_equipe")
+     */
+    public function editEquipe(Equipe $equipe, Request $request){
+        $form = $this->createForm(EditEquipeType::class, $equipe);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()){
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager ->persist($equipe);
+           // $entityManager ->persist($competition);
+            $entityManager->flush();
+
+            $this->addFlash('success', 'Equipe modifié avec succès');
+            return $this->redirectToRoute('equipes');
+        }
+
+        return $this->render('admin/editequipe.html.twig', [
+            'equipeForm' => $form->createView()
+        ]);
+    }
+
+    /**
+     * @IsGranted("ROLE_MENTOR")
+     * @Route("/mentor/equipes/modifier/{id}", name="mentor_modifier_equipe")
+     */
+    public function mentoreditEquipe(Equipe $equipe, Request $request){
+        $form = $this->createForm(EditEquipeType::class, $equipe);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()){
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager ->persist($equipe);
+           // $entityManager ->persist($competition);
+            $entityManager->flush();
+
+            $this->addFlash('success', 'Equipe modifié avec succès');
+            return $this->redirectToRoute('mentor_equipes');
+        }
+
+        return $this->render('admin/editequipe.html.twig', [
+            'equipeForm' => $form->createView()
         ]);
     }
 
@@ -181,6 +249,8 @@ class HomepageController extends AbstractController
         $em = $this->getDoctrine()->getManager();
         $em->remove($user);
         $em->flush();
+
+        $this->addFlash('success', 'Votre utilisateur à bien été supprimer.');
 
         return $this->redirectToRoute('utilisateurs');
     }
@@ -195,7 +265,24 @@ class HomepageController extends AbstractController
         $em->remove($competition);
         $em->flush();
 
+        $this->addFlash('success', 'Votre compétition à bien été supprimer.');
+
         return $this->redirectToRoute('competitionsList');
+    }
+
+    /**
+     * @IsGranted("ROLE_ADMIN")
+     * @Route("/deleteEquipe/{id}", name="delete_equipe")
+     * @return RedirectResponse
+     */
+    public function deleteEquipe(Equipe $equipe): RedirectResponse{
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($equipe);
+        $em->flush();
+
+        $this->addFlash('success', 'Votre équipe à bien été supprimer.');
+
+        return $this->redirectToRoute('equipes');
     }
 
     /**
@@ -217,6 +304,8 @@ class HomepageController extends AbstractController
 
             $em->persist($user);
             $em->flush();
+
+            $this->addFlash('success', 'Votre nouvel utilisateur à bien été enregistré.');
 
             return $this->redirectToRoute('utilisateurs');
 
@@ -242,11 +331,70 @@ class HomepageController extends AbstractController
             $em->persist($competition);
             $em->flush();
 
+            $this->addFlash('success', 'Votre compétition à bien été enregistré.');
+
             return $this->redirectToRoute('competitionsList');
 
         }
         return $this->render('admin/newCompetition.html.twig', [
             'competitionForm' => $form->createView()
+        ]);
+    }
+
+    /**
+     * @IsGranted("ROLE_MENTOR")
+     * @Route("/competition/{id}/inscription_equipe", name="inscription_equipe")
+     * @return Response
+     */
+    public function inscriptionCompetition(Competiton $competition, Request $request): Response{
+
+        // $competition = $repository->find($id);
+
+        $form = $this->createForm(InscriptionEquipeType::class, $competition);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()){
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager ->persist($competition);
+            $entityManager->flush();
+
+            $this->addFlash('success', 'Votre équipe est inscrite à cette compétition');
+            return $this->redirectToRoute('app_homepage_programme');
+        }
+
+        return $this->render('mentor/InscriptionEquipe.html.twig', [
+            'InscriptionEquipeForm' => $form->createView()
+        ]);
+    }
+
+  
+    /**
+     * @IsGranted("ROLE_MENTOR")
+     * @Route("/mentor/equipe/new", name="new_equipe")
+     * @return Response
+     */
+    public function newEquipe(Request $request): Response{
+        $generaluser = $this->getUser();
+        $equipe = new Equipe;
+        
+        $form = $this->createForm(NewEquipeType::class, $equipe);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+
+            $equipe->addGeneraluser($generaluser);
+
+            $em->persist($equipe);
+            $em->flush();
+
+            $this->addFlash('success', 'Votre équipe à bien été enregistré.');
+
+            return $this->redirectToRoute('app_homepage_programme');
+
+        }
+        return $this->render('mentor/newEquipe.html.twig', [
+            'equipeForm' => $form->createView()
         ]);
     }
 

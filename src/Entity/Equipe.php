@@ -2,15 +2,23 @@
 
 namespace App\Entity;
 
-use App\Repository\EquipeRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\EquipeRepository;
+use Doctrine\ORM\Mapping\JoinColumn;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+
 
 /**
  * @ORM\Entity(repositoryClass=EquipeRepository::class)
+ * @UniqueEntity(
+ * fields={"nom"},
+ * message="Le nom que vous avez indiqué est déjà utilisé !"
+ * )
  */
-class Equipe
+
+class Equipe 
 {
     /**
      * @ORM\Id
@@ -22,11 +30,6 @@ class Equipe
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $acces;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
     private $nom;
 
     /**
@@ -34,9 +37,38 @@ class Equipe
      */
     private $mentors;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $structure;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $ville;
+
+    public $validation;
+    
+    public $validationImage;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Competiton::class, inversedBy="equipe")
+     * @ORM\JoinTable(name="competiton_equipe")
+
+     */
+    private $competitons;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=GeneralUser::class, inversedBy="equipes")
+     * @ORM\JoinTable(name="equipe_general_user")
+     */
+    private $generaluser;
+
     public function __construct()
     {
         $this->mentors = new ArrayCollection();
+        $this->competitons = new ArrayCollection();
+        $this->generaluser = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -49,16 +81,14 @@ class Equipe
         return $this->acces;
     }
 
-    public function setAcces(string $acces): self
-    {
-        $this->acces = $acces;
-
-        return $this;
-    }
-
     public function getNom(): ?string
     {
         return $this->nom;
+    }
+
+    public function __toString()
+    {
+        return $this->getNom();
     }
 
     public function setNom(string $nom): self
@@ -94,6 +124,81 @@ class Equipe
                 $mentor->setEquipe(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getStructure(): ?string
+    {
+        return $this->structure;
+    }
+
+    public function setStructure(string $structure): self
+    {
+        $this->structure = $structure;
+
+        return $this;
+    }
+
+    public function getVille(): ?string
+    {
+        return $this->ville;
+    }
+
+    public function setVille(string $ville): self
+    {
+        $this->ville = $ville;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Competiton[]
+     */
+    public function getCompetitons(): Collection
+    {
+        return $this->competitons;
+    }
+
+    public function addCompetiton(Competiton $competiton): self
+    {
+        if (!$this->competitons->contains($competiton)) {
+            $this->competitons[] = $competiton;
+            $competiton->addEquipe($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCompetiton(Competiton $competiton): self
+    {
+        if ($this->competitons->removeElement($competiton)) {
+            $competiton->removeEquipe($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|GeneralUser[]
+     */
+    public function getGeneraluser(): Collection
+    {
+        return $this->generaluser;
+    }
+
+    public function addGeneraluser(GeneralUser $generaluser): self
+    {
+        if (!$this->generaluser->contains($generaluser)) {
+            $this->generaluser[] = $generaluser;
+        }
+
+        return $this;
+    }
+
+    public function removeGeneraluser(GeneralUser $generaluser): self
+    {
+        $this->generaluser->removeElement($generaluser);
 
         return $this;
     }
