@@ -1,0 +1,84 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Classement
+{% endblock %}
+
+{% block body %}
+
+	<div id="nav_gauche" class="sidebar-container slideInLeft atss-left at-custom-sidebar addthis-animated">
+		<ul class="sidebar-navigation">
+			<li class="header">Navigation</li>
+			<li>
+				<a href="{{path('utilisateurs')}}">
+					<i class="fa fa-home" aria-hidden="true"></i>
+					Tous les utilisateurs
+				</a>
+			</li>
+			<li>
+				<a href="{{path('admins')}}">
+					<i class="fa fa-tachometer" aria-hidden="true"></i>
+					Admins
+				</a>
+			</li>
+            <li>
+				<a href="{{path('mentors')}}">
+					<i class="fa fa-tachometer" aria-hidden="true"></i>
+					Mentors
+				</a>
+			</li>
+            <li>
+				<a href="{{path('juges')}}">
+					<i class="fa fa-tachometer" aria-hidden="true"></i>
+					Juges
+				</a>
+			</li>
+            <li>
+				<a href="{{path('competitionsList')}}">
+					<i class="fa fa-tachometer" aria-hidden="true"></i>
+					Compétitions
+				</a>
+			</li>
+		</ul>
+	</div>
+
+	<h1 class="text-center pt-5">Classement</h1>
+
+	<div class="text-center pt-5">
+		<a href="{{ path('competitionsList')}}" class=" btn btn-info ">Retour</a>
+	</div>
+
+	<table class="table">
+		<thead>
+
+			<th>Place</th>
+			<th>Equipe</th>
+            <th>Note</th>
+			<th>Actions</th>
+
+		</thead>
+		<tbody>
+
+			{% for competition in competitions %}
+				<tr>
+							<td>test</td>
+                            <td>test</td>
+                            <td>test</td>
+
+
+							<td>
+								<a href="#" class=" btn btn-warning">Modifier</a>
+
+								<a href="#" class=" btn btn-danger">Suprimmer</a>
+
+							</td>
+						</tr>
+			{% else %}
+				<tr>
+					<td colspan="5">Il n'y a pas de classement</td>
+				</tr>
+			{% endfor %}
+
+		</tbody>
+	</tale>
+
+{% endblock %}
