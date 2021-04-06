@@ -346,9 +346,12 @@ class HomepageController extends AbstractController
      * @Route("/competition/{id}/inscription_equipe", name="inscription_equipe")
      * @return Response
      */
-    public function inscriptionCompetition(Competiton $competition, Request $request): Response{
+    public function inscriptionCompetition(EquipeRepository $em,  Competiton $competition, Request $request): Response{
 
-        // $competition = $repository->find($id);
+        $gu = $this->getUser();
+        echo (gettype($em->findMentor($gu)));
+        echo( $em->findMentor($gu));
+        
 
         $form = $this->createForm(InscriptionEquipeType::class, $competition);
         $form->handleRequest($request);

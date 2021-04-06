@@ -193,6 +193,11 @@ class GeneralUser implements UserInterface
         return $this->equipes;
     }
 
+    public function setEquipes(): Collection
+    {
+        return $this->equipes;
+    }
+
     public function addEquipe(Equipe $equipe): self
     {
         if (!$this->equipes->contains($equipe)) {
