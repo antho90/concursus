@@ -193,8 +193,9 @@ class GeneralUser implements UserInterface
         return $this->equipes;
     }
 
-    public function setEquipes(): Collection
+    public function setEquipes($equipes): Collection
     {
+        $this->equipes = $equipes;
         return $this->equipes;
     }
 

@@ -19,6 +19,28 @@ class GeneralUserRepository extends ServiceEntityRepository
         parent::__construct($registry, GeneralUser::class);
     }
 
+    public function findByMentor(): array
+    {
+        // return $this->createQueryBuilder('u')
+            // ->innerJoin('u.equipe_general_user', 'WHERE', 'id= general_user_id')
+            // ->orderBy('u.nom', 'ASC')
+            $entityManager = $this->getEntityManager();
+
+            $query = $entityManager->createQuery(
+                'SELECT *
+                FROM `general_user`
+                INNER JOIN equipe_general_user
+                WHERE id= general_user_id'
+            )
+
+            return $query->getResult();
+            // ->getQuery()
+            // ->execute()
+        ;
+    }
+
+// SELECT * FROM `general_user` INNER JOIN equipe_general_user WHERE id= general_user_id
+
     // /**
     //  * @return GeneralUser[] Returns an array of GeneralUser objects
     //  */

@@ -175,6 +175,12 @@ class Competiton
         return $this->equipe;
     }
 
+    public function setEquipe($equipe): Collection
+    {
+        $this->$equipe = $equipe;
+        return $this->$equipe;
+    }
+
     public function addEquipe(Equipe $equipe): self
     {
         if (!$this->equipe->contains($equipe)) {

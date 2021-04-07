@@ -187,6 +187,12 @@ class Equipe
         return $this->generaluser;
     }
 
+    public function setGeneraluser($generaluser): Collection
+    {
+        $this->generaluser = $generaluser;
+        return $this->generaluser;
+    }
+
     public function addGeneraluser(GeneralUser $generaluser): self
     {
         if (!$this->generaluser->contains($generaluser)) {
