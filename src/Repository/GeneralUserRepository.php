@@ -16,7 +16,7 @@ class GeneralUserRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        //parent::__construct($registry, GeneralUser::class);
+        parent::__construct($registry, GeneralUser::class);
     }
 
     // public function findByMentor(): array

@@ -1002,7 +1002,7 @@ return [[
 
 0 => 'N;',
 1 => [],
-2 => 1617800932,
+2 => 1617802755,
 3 => static function () {
     return \Symfony\Component\VarExporter\Internal\Hydrator::hydrate(
         $o = [
@@ -2104,8 +2104,7 @@ return [[
 46 => static function () {
     return \Symfony\Component\VarExporter\Internal\Hydrator::hydrate(
         $o = [
-            clone (($p = &\Symfony\Component\VarExporter\Internal\Registry::$prototypes)['Doctrine\\ORM\\Mapping\\ManyToMany'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Mapping\\ManyToMany')),
-            clone ($p['Doctrine\\ORM\\Mapping\\JoinTable'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Mapping\\JoinTable')),
+            clone (\Symfony\Component\VarExporter\Internal\Registry::$prototypes['Doctrine\\ORM\\Mapping\\ManyToMany'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Mapping\\ManyToMany')),
         ],
         null,
         [
@@ -2113,17 +2112,13 @@ return [[
                 'targetEntity' => [
                     'App\\Entity\\GeneralUser',
                 ],
-                'inversedBy' => [
+                'mappedBy' => [
                     'equipes',
-                ],
-                'name' => [
-                    1 => 'equipe_general_user',
                 ],
             ],
         ],
         [
             $o[0],
-            $o[1],
         ],
         []
     );
@@ -2291,7 +2286,8 @@ return [[
 53 => static function () {
     return \Symfony\Component\VarExporter\Internal\Hydrator::hydrate(
         $o = [
-            clone (\Symfony\Component\VarExporter\Internal\Registry::$prototypes['Doctrine\\ORM\\Mapping\\ManyToMany'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Mapping\\ManyToMany')),
+            clone (($p = &\Symfony\Component\VarExporter\Internal\Registry::$prototypes)['Doctrine\\ORM\\Mapping\\ManyToMany'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Mapping\\ManyToMany')),
+            clone ($p['Doctrine\\ORM\\Mapping\\JoinTable'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Mapping\\JoinTable')),
         ],
         null,
         [
@@ -2299,13 +2295,17 @@ return [[
                 'targetEntity' => [
                     'App\\Entity\\Equipe',
                 ],
-                'mappedBy' => [
+                'inversedBy' => [
                     'generaluser',
+                ],
+                'name' => [
+                    1 => 'equipe_general_user',
                 ],
             ],
         ],
         [
             $o[0],
+            $o[1],
         ],
         []
     );

@@ -54,13 +54,11 @@ class Equipe
     /**
      * @ORM\ManyToMany(targetEntity=Competiton::class, mappedBy="equipe")
      * @ORM\JoinTable(name="competiton_equipe")
-
      */
     private $competitons;
 
     /**
-     * @ORM\ManyToMany(targetEntity=GeneralUser::class)
-     * @ORM\JoinTable(name="equipe_general_user")
+     * @ORM\ManyToMany(targetEntity=GeneralUser::class, mappedBy="equipes")
      */
     private $generaluser;
 
