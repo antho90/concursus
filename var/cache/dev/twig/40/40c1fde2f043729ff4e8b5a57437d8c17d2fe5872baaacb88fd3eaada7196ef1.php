@@ -87,10 +87,17 @@ class __TwigTemplate_9670416fe984677ac13d443798a902916752d6e2ee1ad8ba626c551b06a
         // line 6
         echo "
     <h1 class=\"text-center pt-5\">Modifier utilisateur</h1>
+    
+\t<div class=\"text-center pt-5\">
+\t\t<a href=\"";
+        // line 10
+        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("utilisateurs");
+        echo "\" class=\" btn btn-info \">Retour</a>
+\t</div>
 
         ";
-        // line 9
-        echo         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["userForm"]) || array_key_exists("userForm", $context) ? $context["userForm"] : (function () { throw new RuntimeError('Variable "userForm" does not exist.', 9, $this->source); })()), 'form');
+        // line 13
+        echo         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["userForm"]) || array_key_exists("userForm", $context) ? $context["userForm"] : (function () { throw new RuntimeError('Variable "userForm" does not exist.', 13, $this->source); })()), 'form');
         echo "
 
 ";
@@ -114,7 +121,7 @@ class __TwigTemplate_9670416fe984677ac13d443798a902916752d6e2ee1ad8ba626c551b06a
 
     public function getDebugInfo()
     {
-        return array (  93 => 9,  88 => 6,  78 => 5,  59 => 3,  36 => 1,);
+        return array (  100 => 13,  94 => 10,  88 => 6,  78 => 5,  59 => 3,  36 => 1,);
     }
 
     public function getSourceContext()
@@ -126,6 +133,10 @@ class __TwigTemplate_9670416fe984677ac13d443798a902916752d6e2ee1ad8ba626c551b06a
 {% block body %}
 
     <h1 class=\"text-center pt-5\">Modifier utilisateur</h1>
+    
+\t<div class=\"text-center pt-5\">
+\t\t<a href=\"{{ path('utilisateurs')}}\" class=\" btn btn-info \">Retour</a>
+\t</div>
 
         {{ form(userForm) }}
 

@@ -260,7 +260,10 @@ class __TwigTemplate_143f7bf0387c6ca1929eb569a00d85cbf62512a3cd9c8295239d87f2997
 \t\t\t\t\t\t\t\t\t\t<a class=\"dropdown-item\" href=\"#\">Profil</a>
 \t\t\t\t\t\t\t\t\t\t<a class=\"dropdown-item\" href=\"#\">Réglages</a>
 \t\t\t\t\t\t\t\t\t\t<a class=\"dropdown-item\" href=\"#\">Vos compétitions</a>
-\t\t\t\t\t\t\t\t\t\t<a class=\"dropdown-item\" href=\"#\">Equipe</a>
+\t\t\t\t\t\t\t\t\t\t<a class=\"dropdown-item\" href=\"";
+            // line 52
+            echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("mentor_equipes");
+            echo "\">Equipe</a>
 \t\t\t\t\t\t\t\t\t\t</div>
 \t\t\t\t\t\t\t\t\t</li>
 
@@ -358,7 +361,10 @@ class __TwigTemplate_143f7bf0387c6ca1929eb569a00d85cbf62512a3cd9c8295239d87f2997
 \t\t\t\t\t\t\t\t\t\t<a class=\"dropdown-item\" href=\"#\">Profil</a>
 \t\t\t\t\t\t\t\t\t\t<a class=\"dropdown-item\" href=\"#\">Réglages</a>
 \t\t\t\t\t\t\t\t\t\t<a class=\"dropdown-item\" href=\"#\">Vos compétitions</a>
-\t\t\t\t\t\t\t\t\t\t<a class=\"dropdown-item\" href=\"#\">Equipe</a>
+\t\t\t\t\t\t\t\t\t\t<a class=\"dropdown-item\" href=\"";
+            // line 115
+            echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("mentor_equipes");
+            echo "\">Equipe</a>
 \t\t\t\t\t\t\t\t\t\t</div>
 \t\t\t\t\t\t\t\t\t</li>
 \t\t\t\t\t\t\t\t\t
@@ -590,7 +596,7 @@ class __TwigTemplate_143f7bf0387c6ca1929eb569a00d85cbf62512a3cd9c8295239d87f2997
 
     public function getDebugInfo()
     {
-        return array (  568 => 210,  558 => 209,  540 => 198,  530 => 196,  521 => 193,  518 => 192,  513 => 191,  504 => 188,  501 => 187,  496 => 186,  487 => 183,  484 => 182,  479 => 181,  470 => 178,  467 => 177,  462 => 176,  452 => 175,  442 => 173,  436 => 169,  429 => 162,  420 => 156,  416 => 154,  409 => 147,  405 => 146,  391 => 135,  387 => 133,  377 => 126,  368 => 120,  350 => 105,  346 => 104,  340 => 100,  329 => 89,  325 => 87,  319 => 83,  310 => 76,  301 => 70,  292 => 64,  288 => 63,  284 => 62,  280 => 61,  276 => 60,  272 => 59,  252 => 42,  248 => 41,  242 => 37,  231 => 26,  227 => 24,  225 => 23,  222 => 22,  212 => 21,  177 => 19,  163 => 18,  161 => 17,  151 => 16,  140 => 12,  133 => 10,  130 => 9,  120 => 8,  104 => 215,  102 => 209,  99 => 208,  95 => 199,  93 => 198,  90 => 197,  88 => 175,  85 => 174,  83 => 21,  80 => 20,  76 => 19,  71 => 18,  69 => 16,  65 => 14,  63 => 8,  54 => 2,  51 => 1,);
+        return array (  574 => 210,  564 => 209,  546 => 198,  536 => 196,  527 => 193,  524 => 192,  519 => 191,  510 => 188,  507 => 187,  502 => 186,  493 => 183,  490 => 182,  485 => 181,  476 => 178,  473 => 177,  468 => 176,  458 => 175,  448 => 173,  442 => 169,  435 => 162,  426 => 156,  422 => 154,  415 => 147,  411 => 146,  397 => 135,  393 => 133,  383 => 126,  374 => 120,  366 => 115,  353 => 105,  349 => 104,  343 => 100,  332 => 89,  328 => 87,  322 => 83,  313 => 76,  304 => 70,  295 => 64,  291 => 63,  287 => 62,  283 => 61,  279 => 60,  275 => 59,  265 => 52,  252 => 42,  248 => 41,  242 => 37,  231 => 26,  227 => 24,  225 => 23,  222 => 22,  212 => 21,  177 => 19,  163 => 18,  161 => 17,  151 => 16,  140 => 12,  133 => 10,  130 => 9,  120 => 8,  104 => 215,  102 => 209,  99 => 208,  95 => 199,  93 => 198,  90 => 197,  88 => 175,  85 => 174,  83 => 21,  80 => 20,  76 => 19,  71 => 18,  69 => 16,  65 => 14,  63 => 8,  54 => 2,  51 => 1,);
     }
 
     public function getSourceContext()
@@ -646,7 +652,7 @@ class __TwigTemplate_143f7bf0387c6ca1929eb569a00d85cbf62512a3cd9c8295239d87f2997
 \t\t\t\t\t\t\t\t\t\t<a class=\"dropdown-item\" href=\"#\">Profil</a>
 \t\t\t\t\t\t\t\t\t\t<a class=\"dropdown-item\" href=\"#\">Réglages</a>
 \t\t\t\t\t\t\t\t\t\t<a class=\"dropdown-item\" href=\"#\">Vos compétitions</a>
-\t\t\t\t\t\t\t\t\t\t<a class=\"dropdown-item\" href=\"#\">Equipe</a>
+\t\t\t\t\t\t\t\t\t\t<a class=\"dropdown-item\" href=\"{{path('mentor_equipes')}}\">Equipe</a>
 \t\t\t\t\t\t\t\t\t\t</div>
 \t\t\t\t\t\t\t\t\t</li>
 
@@ -709,7 +715,7 @@ class __TwigTemplate_143f7bf0387c6ca1929eb569a00d85cbf62512a3cd9c8295239d87f2997
 \t\t\t\t\t\t\t\t\t\t<a class=\"dropdown-item\" href=\"#\">Profil</a>
 \t\t\t\t\t\t\t\t\t\t<a class=\"dropdown-item\" href=\"#\">Réglages</a>
 \t\t\t\t\t\t\t\t\t\t<a class=\"dropdown-item\" href=\"#\">Vos compétitions</a>
-\t\t\t\t\t\t\t\t\t\t<a class=\"dropdown-item\" href=\"#\">Equipe</a>
+\t\t\t\t\t\t\t\t\t\t<a class=\"dropdown-item\" href=\"{{path('mentor_equipes')}}\">Equipe</a>
 \t\t\t\t\t\t\t\t\t\t</div>
 \t\t\t\t\t\t\t\t\t</li>
 \t\t\t\t\t\t\t\t\t

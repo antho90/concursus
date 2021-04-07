@@ -23,8 +23,10 @@ return [
         '/manage/mentors' => [[['_route' => 'mentors', '_controller' => 'App\\Controller\\HomepageController::mentorsList'], null, null, null, false, false, null]],
         '/manage/competitions' => [[['_route' => 'competitionsList', '_controller' => 'App\\Controller\\HomepageController::competitionsList'], null, null, null, false, false, null]],
         '/manage/equipes' => [[['_route' => 'equipes', '_controller' => 'App\\Controller\\HomepageController::equipeList'], null, null, null, false, false, null]],
+        '/mentor/equipes' => [[['_route' => 'mentor_equipes', '_controller' => 'App\\Controller\\HomepageController::mentorequipeList'], null, null, null, false, false, null]],
         '/new' => [[['_route' => 'new_utilisateur', '_controller' => 'App\\Controller\\HomepageController::newUser'], null, null, null, false, false, null]],
         '/new_competition' => [[['_route' => 'new_competition', '_controller' => 'App\\Controller\\HomepageController::newCompetition'], null, null, null, false, false, null]],
+        '/mentor/equipe/new' => [[['_route' => 'new_equipe', '_controller' => 'App\\Controller\\HomepageController::newEquipe'], null, null, null, false, false, null]],
         '/manage_competition' => [[['_route' => 'manage_competition', '_controller' => 'App\\Controller\\HomepageController::manage_competition'], null, null, null, false, false, null]],
         '/new_competiton' => [[['_route' => 'new_competiton', '_controller' => 'App\\Controller\\HomepageController::new_competiton'], null, null, null, false, false, null]],
         '/register' => [[['_route' => 'app_registration_register', '_controller' => 'App\\Controller\\RegistrationController::registerAction'], null, null, null, false, false, null]],
@@ -55,17 +57,18 @@ return [
                         .'|(*:196)'
                         .'|/(?'
                             .'|classement(*:218)'
-                            .'|new_equipe(*:236)'
+                            .'|inscription_equipe(*:244)'
                         .')'
                     .')'
-                    .'|sList/modifier/([^/]++)(*:269)'
+                    .'|sList/modifier/([^/]++)(*:277)'
                 .')'
-                .'|/utilisateurs/modifier/([^/]++)(*:309)'
-                .'|/equipes/modifier/([^/]++)(*:343)'
+                .'|/utilisateurs/modifier/([^/]++)(*:317)'
+                .'|/equipes/modifier/([^/]++)(*:351)'
+                .'|/mentor/equipes/modifier/([^/]++)(*:392)'
                 .'|/delete(?'
-                    .'|User/([^/]++)(*:374)'
-                    .'|Competition/([^/]++)(*:402)'
-                    .'|Equipe/([^/]++)(*:425)'
+                    .'|User/([^/]++)(*:423)'
+                    .'|Competition/([^/]++)(*:451)'
+                    .'|Equipe/([^/]++)(*:474)'
                 .')'
             .')/?$}sDu',
     ],
@@ -79,13 +82,14 @@ return [
         159 => [[['_route' => '_profiler', '_controller' => 'web_profiler.controller.profiler::panelAction'], ['token'], null, null, false, true, null]],
         196 => [[['_route' => 'app_homepage_competition', '_controller' => 'App\\Controller\\HomepageController::competition'], ['id'], null, null, false, true, null]],
         218 => [[['_route' => 'classement_competition', '_controller' => 'App\\Controller\\HomepageController::classement_competition'], ['id'], null, null, false, false, null]],
-        236 => [[['_route' => 'new_equipe', '_controller' => 'App\\Controller\\HomepageController::newEquipe'], ['id'], null, null, false, false, null]],
-        269 => [[['_route' => 'modifier_competition', '_controller' => 'App\\Controller\\HomepageController::editCompetition'], ['id'], null, null, false, true, null]],
-        309 => [[['_route' => 'modifier_utilisateur', '_controller' => 'App\\Controller\\HomepageController::editUser'], ['id'], null, null, false, true, null]],
-        343 => [[['_route' => 'modifier_equipe', '_controller' => 'App\\Controller\\HomepageController::editEquipe'], ['id'], null, null, false, true, null]],
-        374 => [[['_route' => 'delete_utilisateur', '_controller' => 'App\\Controller\\HomepageController::deleteUser'], ['id'], null, null, false, true, null]],
-        402 => [[['_route' => 'delete_competition', '_controller' => 'App\\Controller\\HomepageController::deleteCompetition'], ['id'], null, null, false, true, null]],
-        425 => [
+        244 => [[['_route' => 'inscription_equipe', '_controller' => 'App\\Controller\\HomepageController::inscriptionCompetition'], ['id'], null, null, false, false, null]],
+        277 => [[['_route' => 'modifier_competition', '_controller' => 'App\\Controller\\HomepageController::editCompetition'], ['id'], null, null, false, true, null]],
+        317 => [[['_route' => 'modifier_utilisateur', '_controller' => 'App\\Controller\\HomepageController::editUser'], ['id'], null, null, false, true, null]],
+        351 => [[['_route' => 'modifier_equipe', '_controller' => 'App\\Controller\\HomepageController::editEquipe'], ['id'], null, null, false, true, null]],
+        392 => [[['_route' => 'mentor_modifier_equipe', '_controller' => 'App\\Controller\\HomepageController::mentoreditEquipe'], ['id'], null, null, false, true, null]],
+        423 => [[['_route' => 'delete_utilisateur', '_controller' => 'App\\Controller\\HomepageController::deleteUser'], ['id'], null, null, false, true, null]],
+        451 => [[['_route' => 'delete_competition', '_controller' => 'App\\Controller\\HomepageController::deleteCompetition'], ['id'], null, null, false, true, null]],
+        474 => [
             [['_route' => 'delete_equipe', '_controller' => 'App\\Controller\\HomepageController::deleteEquipe'], ['id'], null, null, false, true, null],
             [null, null, null, null, false, false, 0],
         ],

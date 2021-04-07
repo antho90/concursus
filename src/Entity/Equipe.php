@@ -52,7 +52,7 @@ class Equipe
     public $validationImage;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Competiton::class, inversedBy="equipe")
+     * @ORM\ManyToMany(targetEntity=Competiton::class, mappedBy="equipe")
      * @ORM\JoinTable(name="competiton_equipe")
 
      */
