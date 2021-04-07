@@ -59,7 +59,7 @@ class Equipe
     private $competitons;
 
     /**
-     * @ORM\ManyToMany(targetEntity=GeneralUser::class, inversedBy="equipes")
+     * @ORM\ManyToMany(targetEntity=GeneralUser::class)
      * @ORM\JoinTable(name="equipe_general_user")
      */
     private $generaluser;

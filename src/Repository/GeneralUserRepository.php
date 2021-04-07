@@ -39,7 +39,7 @@ class GeneralUserRepository extends ServiceEntityRepository
     //     ;
     // }
 
-// SELECT * FROM `general_user` INNER JOIN equipe_general_user WHERE id= general_user_id
+
 
     // /**
     //  * @return GeneralUser[] Returns an array of GeneralUser objects
