@@ -90,15 +90,35 @@ class __TwigTemplate_d8f48986761735ebc8b063cc12b35ac55287d60918749df76d9edf91ad7
 \t<h1 class=\"text-center pt-5\">Modifier Equipe</h1>
 
 \t<div class=\"text-center pt-5\">
-\t\t<a href=\"";
-        // line 11
-        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("equipes");
-        echo "\" class=\" btn btn-info \">Retour</a>
+
+\t\t";
+        // line 12
+        if ($this->extensions['Symfony\Bridge\Twig\Extension\SecurityExtension']->isGranted("ROLE_ADMIN")) {
+            // line 13
+            echo "
+\t\t\t<a href=\"";
+            // line 14
+            echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("equipes");
+            echo "\" class=\" btn btn-info \">Retour</a>
+
+\t\t";
+        } else {
+            // line 17
+            echo "
+\t\t\t<a href=\"";
+            // line 18
+            echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("mentor_equipes");
+            echo "\" class=\" btn btn-info \">Retour</a>
+
+\t\t";
+        }
+        // line 21
+        echo "
 \t</div>
 
 \t";
-        // line 14
-        echo         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["equipeForm"]) || array_key_exists("equipeForm", $context) ? $context["equipeForm"] : (function () { throw new RuntimeError('Variable "equipeForm" does not exist.', 14, $this->source); })()), 'form');
+        // line 24
+        echo         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["equipeForm"]) || array_key_exists("equipeForm", $context) ? $context["equipeForm"] : (function () { throw new RuntimeError('Variable "equipeForm" does not exist.', 24, $this->source); })()), 'form');
         
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->leave($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof);
 
@@ -119,7 +139,7 @@ class __TwigTemplate_d8f48986761735ebc8b063cc12b35ac55287d60918749df76d9edf91ad7
 
     public function getDebugInfo()
     {
-        return array (  101 => 14,  95 => 11,  89 => 7,  79 => 6,  59 => 3,  36 => 1,);
+        return array (  121 => 24,  116 => 21,  110 => 18,  107 => 17,  101 => 14,  98 => 13,  96 => 12,  89 => 7,  79 => 6,  59 => 3,  36 => 1,);
     }
 
     public function getSourceContext()
@@ -134,9 +154,20 @@ class __TwigTemplate_d8f48986761735ebc8b063cc12b35ac55287d60918749df76d9edf91ad7
 \t<h1 class=\"text-center pt-5\">Modifier Equipe</h1>
 
 \t<div class=\"text-center pt-5\">
-\t\t<a href=\"{{ path('equipes')}}\" class=\" btn btn-info \">Retour</a>
+
+\t\t{% if is_granted('ROLE_ADMIN') %}
+
+\t\t\t<a href=\"{{ path('equipes')}}\" class=\" btn btn-info \">Retour</a>
+
+\t\t{% else %}
+
+\t\t\t<a href=\"{{ path('mentor_equipes')}}\" class=\" btn btn-info \">Retour</a>
+
+\t\t{% endif %}
+
 \t</div>
 
-\t{{ form(equipeForm) }}{% endblock %}", "admin/editequipe.html.twig", "C:\\wamp64\\www\\concursus\\templates\\admin\\editequipe.html.twig");
+\t{{ form(equipeForm) }}{% endblock %}
+", "admin/editequipe.html.twig", "C:\\wamp64\\www\\concursus\\templates\\admin\\editequipe.html.twig");
     }
 }

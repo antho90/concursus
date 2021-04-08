@@ -14,7 +14,7 @@ return [PHP_INT_MAX, static function () { return \Symfony\Component\VarExporter\
         ],
         'Symfony\\Component\\Routing\\Annotation\\Route' => [
             'path' => [
-                1 => '/juges',
+                1 => '/manage/juges',
             ],
             'name' => [
                 1 => 'juges',

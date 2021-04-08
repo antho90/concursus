@@ -139,7 +139,7 @@ class __TwigTemplate_0224d13a019eefd1ffc647db099d3e9bd6109380691fe7e8590813e712d
 \t\t<div class=\"text-center\">
 \t\t\t<a href=\"";
             // line 55
-            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("new_equipe", ["id" => twig_get_attribute($this->env, $this->source, (isset($context["competition"]) || array_key_exists("competition", $context) ? $context["competition"] : (function () { throw new RuntimeError('Variable "competition" does not exist.', 55, $this->source); })()), "id", [], "any", false, false, false, 55)]), "html", null, true);
+            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("inscription_equipe", ["id" => twig_get_attribute($this->env, $this->source, (isset($context["competition"]) || array_key_exists("competition", $context) ? $context["competition"] : (function () { throw new RuntimeError('Variable "competition" does not exist.', 55, $this->source); })()), "id", [], "any", false, false, false, 55)]), "html", null, true);
             echo "\" class=\"btn btn-warning\">M'inscrire</a>
 \t\t</div>
 
@@ -242,7 +242,7 @@ class __TwigTemplate_0224d13a019eefd1ffc647db099d3e9bd6109380691fe7e8590813e712d
 \t</p>
 
 \t\t<div class=\"text-center\">
-\t\t\t<a href=\"{{path('new_equipe', {'id': competition.id})}}\" class=\"btn btn-warning\">M'inscrire</a>
+\t\t\t<a href=\"{{path('inscription_equipe', {'id': competition.id})}}\" class=\"btn btn-warning\">M'inscrire</a>
 \t\t</div>
 
 \t{% else %}

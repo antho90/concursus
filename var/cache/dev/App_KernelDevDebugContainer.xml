@@ -380,6 +380,10 @@
     <service id="App\Form\EditUsersType" class="App\Form\EditUsersType" autowire="true" autoconfigure="true">
       <tag name="form.type"/>
     </service>
+    <service id="App\Form\InscriptionEquipeType" class="App\Form\InscriptionEquipeType" autowire="true" autoconfigure="true">
+      <tag name="form.type"/>
+      <argument type="service" id="App\Repository\GeneralUserRepository"/>
+    </service>
     <service id="App\Form\NewEquipeType" class="App\Form\NewEquipeType" autowire="true" autoconfigure="true">
       <tag name="form.type"/>
     </service>
@@ -887,6 +891,7 @@
         <argument>App\Form\EditCompetitionType</argument>
         <argument>App\Form\EditEquipeType</argument>
         <argument>App\Form\EditUsersType</argument>
+        <argument>App\Form\InscriptionEquipeType</argument>
         <argument>App\Form\NewEquipeType</argument>
         <argument>App\Form\NewUserType</argument>
         <argument>App\Form\RegistrationType</argument>
@@ -1248,7 +1253,7 @@
       <argument type="service" id="form.registry"/>
     </service>
     <service id="form.extension" class="Symfony\Component\Form\Extension\DependencyInjection\DependencyInjectionExtension">
-      <argument type="service" id=".service_locator.beV_Jr."/>
+      <argument type="service" id=".service_locator.t0kGSzT"/>
       <argument type="collection">
         <argument key="Symfony\Component\Form\Extension\Core\Type\FormType" type="iterator">
           <argument type="service" id="form.type_extension.form.transformation_failure_handling"/>
@@ -5313,6 +5318,8 @@
     <service id=".abstract.instanceof.App\Form\EditEquipeType" class="App\Form\EditEquipeType" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\EditUsersType" class="App\Form\EditUsersType" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Form\EditUsersType" class="App\Form\EditUsersType" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\InscriptionEquipeType" class="App\Form\InscriptionEquipeType" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Form\InscriptionEquipeType" class="App\Form\InscriptionEquipeType" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\NewEquipeType" class="App\Form\NewEquipeType" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Form\NewEquipeType" class="App\Form\NewEquipeType" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\NewUserType" class="App\Form\NewUserType" autowire="true" abstract="true"/>
@@ -5683,13 +5690,6 @@
         <argument key="competition" type="service" id=".errored..service_locator.Nz6nI5P.App\Entity\Competiton"/>
       </argument>
     </service>
-    <service id=".service_locator.LNmG8Ne" class="Symfony\Component\DependencyInjection\ServiceLocator">
-      <tag name="container.service_locator"/>
-      <argument type="collection">
-        <argument key="competition" type="service" id=".errored..service_locator.LNmG8Ne.App\Entity\Competiton"/>
-        <argument key="equipe" type="service" id=".errored..service_locator.LNmG8Ne.App\Entity\Equipe"/>
-      </argument>
-    </service>
     <service id=".service_locator.bPe7bSN" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
@@ -5700,6 +5700,13 @@
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="encoder" type="service" id="security.user_password_encoder.generic"/>
+      </argument>
+    </service>
+    <service id=".service_locator.lV5dZ0Y" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="competition" type="service" id=".errored..service_locator.lV5dZ0Y.App\Entity\Competiton"/>
+        <argument key="generalUserRepository" type="service" id="App\Repository\GeneralUserRepository"/>
       </argument>
     </service>
     <service id=".service_locator.pwZ6MTM" class="Symfony\Component\DependencyInjection\ServiceLocator">
@@ -5715,7 +5722,7 @@
         <argument key="manager" type="service" id="doctrine.orm.default_entity_manager"/>
       </argument>
     </service>
-    <service id=".service_locator.a5Z_PiY" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.pHDjwhE" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="App\Controller\HomepageController::adminsList" type="service" id=".service_locator.Vi8nPme"/>
@@ -5726,13 +5733,15 @@
         <argument key="App\Controller\HomepageController::deleteEquipe" type="service" id=".service_locator.bPe7bSN"/>
         <argument key="App\Controller\HomepageController::deleteUser" type="service" id=".service_locator.cgcr7.b"/>
         <argument key="App\Controller\HomepageController::editCompetition" type="service" id=".service_locator.Nz6nI5P"/>
-        <argument key="App\Controller\HomepageController::editEquipe" type="service" id=".service_locator.LNmG8Ne"/>
+        <argument key="App\Controller\HomepageController::editEquipe" type="service" id=".service_locator.bPe7bSN"/>
         <argument key="App\Controller\HomepageController::editUser" type="service" id=".service_locator.cgcr7.b"/>
         <argument key="App\Controller\HomepageController::equipeList" type="service" id=".service_locator.Aiaugix"/>
         <argument key="App\Controller\HomepageController::index" type="service" id=".service_locator.EpznR39"/>
+        <argument key="App\Controller\HomepageController::inscriptionCompetition" type="service" id=".service_locator.lV5dZ0Y"/>
         <argument key="App\Controller\HomepageController::jugesList" type="service" id=".service_locator.Vi8nPme"/>
+        <argument key="App\Controller\HomepageController::mentoreditEquipe" type="service" id=".service_locator.bPe7bSN"/>
+        <argument key="App\Controller\HomepageController::mentorequipeList" type="service" id=".service_locator.Aiaugix"/>
         <argument key="App\Controller\HomepageController::mentorsList" type="service" id=".service_locator.Vi8nPme"/>
-        <argument key="App\Controller\HomepageController::newEquipe" type="service" id=".service_locator.EpznR39"/>
         <argument key="App\Controller\HomepageController::newUser" type="service" id=".service_locator.gPh6X_L"/>
         <argument key="App\Controller\HomepageController::programme" type="service" id=".service_locator.EpznR39"/>
         <argument key="App\Controller\HomepageController::usersList" type="service" id=".service_locator.Vi8nPme"/>
@@ -5752,13 +5761,15 @@
         <argument key="App\Controller\HomepageController:deleteEquipe" type="service" id=".service_locator.bPe7bSN"/>
         <argument key="App\Controller\HomepageController:deleteUser" type="service" id=".service_locator.cgcr7.b"/>
         <argument key="App\Controller\HomepageController:editCompetition" type="service" id=".service_locator.Nz6nI5P"/>
-        <argument key="App\Controller\HomepageController:editEquipe" type="service" id=".service_locator.LNmG8Ne"/>
+        <argument key="App\Controller\HomepageController:editEquipe" type="service" id=".service_locator.bPe7bSN"/>
         <argument key="App\Controller\HomepageController:editUser" type="service" id=".service_locator.cgcr7.b"/>
         <argument key="App\Controller\HomepageController:equipeList" type="service" id=".service_locator.Aiaugix"/>
         <argument key="App\Controller\HomepageController:index" type="service" id=".service_locator.EpznR39"/>
+        <argument key="App\Controller\HomepageController:inscriptionCompetition" type="service" id=".service_locator.lV5dZ0Y"/>
         <argument key="App\Controller\HomepageController:jugesList" type="service" id=".service_locator.Vi8nPme"/>
+        <argument key="App\Controller\HomepageController:mentoreditEquipe" type="service" id=".service_locator.bPe7bSN"/>
+        <argument key="App\Controller\HomepageController:mentorequipeList" type="service" id=".service_locator.Aiaugix"/>
         <argument key="App\Controller\HomepageController:mentorsList" type="service" id=".service_locator.Vi8nPme"/>
-        <argument key="App\Controller\HomepageController:newEquipe" type="service" id=".service_locator.EpznR39"/>
         <argument key="App\Controller\HomepageController:newUser" type="service" id=".service_locator.gPh6X_L"/>
         <argument key="App\Controller\HomepageController:programme" type="service" id=".service_locator.EpznR39"/>
         <argument key="App\Controller\HomepageController:usersList" type="service" id=".service_locator.Vi8nPme"/>
@@ -5828,13 +5839,14 @@
       <argument type="service" id="debug.argument_resolver.not_tagged_controller.inner"/>
       <argument type="service" id="debug.stopwatch"/>
     </service>
-    <service id=".service_locator.beV_Jr." class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.t0kGSzT" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="App\Form\CompetitionType" type="service" id="App\Form\CompetitionType"/>
         <argument key="App\Form\EditCompetitionType" type="service" id="App\Form\EditCompetitionType"/>
         <argument key="App\Form\EditEquipeType" type="service" id="App\Form\EditEquipeType"/>
         <argument key="App\Form\EditUsersType" type="service" id="App\Form\EditUsersType"/>
+        <argument key="App\Form\InscriptionEquipeType" type="service" id="App\Form\InscriptionEquipeType"/>
         <argument key="App\Form\NewEquipeType" type="service" id="App\Form\NewEquipeType"/>
         <argument key="App\Form\NewUserType" type="service" id="App\Form\NewUserType"/>
         <argument key="App\Form\RegistrationType" type="service" id="App\Form\RegistrationType"/>
@@ -6250,12 +6262,12 @@
       <argument type="service" id="security.token_storage"/>
     </service>
     <service id="debug.argument_resolver.service.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">
-      <argument type="service" id=".service_locator.a5Z_PiY"/>
+      <argument type="service" id=".service_locator.pHDjwhE"/>
     </service>
     <service id="debug.argument_resolver.default.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver"/>
     <service id="debug.argument_resolver.variadic.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\VariadicValueResolver"/>
     <service id="debug.argument_resolver.not_tagged_controller.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\NotTaggedControllerValueResolver">
-      <argument type="service" id=".service_locator.a5Z_PiY"/>
+      <argument type="service" id=".service_locator.pHDjwhE"/>
     </service>
     <service id=".debug.http_client.inner" class="Symfony\Contracts\HttpClient\HttpClientInterface">
       <argument type="collection"/>
@@ -6269,9 +6281,8 @@
     <service id=".errored..service_locator.KfbR3DY.Symfony\Component\Config\Loader\LoaderInterface" class="Symfony\Component\Config\Loader\LoaderInterface"/>
     <service id=".errored..service_locator.cgcr7.b.App\Entity\GeneralUser" class="App\Entity\GeneralUser"/>
     <service id=".errored..service_locator.Nz6nI5P.App\Entity\Competiton" class="App\Entity\Competiton"/>
-    <service id=".errored..service_locator.LNmG8Ne.App\Entity\Competiton" class="App\Entity\Competiton"/>
-    <service id=".errored..service_locator.LNmG8Ne.App\Entity\Equipe" class="App\Entity\Equipe"/>
     <service id=".errored..service_locator.bPe7bSN.App\Entity\Equipe" class="App\Entity\Equipe"/>
+    <service id=".errored..service_locator.lV5dZ0Y.App\Entity\Competiton" class="App\Entity\Competiton"/>
     <service id="console.command_loader" class="Symfony\Component\Console\CommandLoader\ContainerCommandLoader" public="true">
       <tag name="container.no_preload"/>
       <argument type="service" id=".service_locator.mQAlvpm"/>
@@ -6670,7 +6681,7 @@
     <service id="Psr\Log\LoggerInterface" alias="monolog.logger"/>
     <service id="container.env_var_processors_locator" alias=".service_locator.Kbr2i2X" public="true"/>
     <service id="twig.loader.filesystem" alias="twig.loader.native_filesystem"/>
-    <service id="argument_resolver.controller_locator" alias=".service_locator.a5Z_PiY"/>
+    <service id="argument_resolver.controller_locator" alias=".service_locator.pHDjwhE"/>
     <service id="twig.loader" alias="twig.loader.native_filesystem"/>
     <service id="Psr\Log\LoggerInterface $requestLogger" alias="monolog.logger.request"/>
     <service id="Psr\Log\LoggerInterface $consoleLogger" alias="monolog.logger.console"/>

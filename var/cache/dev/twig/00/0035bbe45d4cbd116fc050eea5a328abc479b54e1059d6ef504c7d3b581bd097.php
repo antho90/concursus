@@ -96,7 +96,7 @@ class __TwigTemplate_ca07321d75c9e835671ea1a09bbf9d369289371d21c4b44ce9766625a09
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("utilisateurs");
         echo "\">
 \t\t\t\t\t<i class=\"fa fa-home\" aria-hidden=\"true\"></i>
-\t\t\t\t\tTous les utilisateurs
+\t\t\t\t\tTous les Utilisateurs
 \t\t\t\t</a>
 \t\t\t</li>
 \t\t\t<li>
@@ -108,7 +108,7 @@ class __TwigTemplate_ca07321d75c9e835671ea1a09bbf9d369289371d21c4b44ce9766625a09
 \t\t\t\t\tAdmins
 \t\t\t\t</a>
 \t\t\t</li>
-            <li>
+\t\t\t<li>
 \t\t\t\t<a href=\"";
         // line 24
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("mentors");
@@ -117,13 +117,31 @@ class __TwigTemplate_ca07321d75c9e835671ea1a09bbf9d369289371d21c4b44ce9766625a09
 \t\t\t\t\tMentors
 \t\t\t\t</a>
 \t\t\t</li>
-            <li>
+\t\t\t<li>
 \t\t\t\t<a href=\"";
         // line 30
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("juges");
         echo "\">
 \t\t\t\t\t<i class=\"fa fa-tachometer\" aria-hidden=\"true\"></i>
 \t\t\t\t\tJuges
+\t\t\t\t</a>
+\t\t\t</li>
+\t\t\t<li>
+\t\t\t\t<a href=\"";
+        // line 36
+        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("equipes");
+        echo "\">
+\t\t\t\t\t<i class=\"fa fa-tachometer\" aria-hidden=\"true\"></i>
+\t\t\t\t\tEquipes
+\t\t\t\t</a>
+\t\t\t</li>
+\t\t\t<li>
+\t\t\t\t<a href=\"";
+        // line 42
+        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("competitionsList");
+        echo "\">
+\t\t\t\t\t<i class=\"fa fa-tachometer\" aria-hidden=\"true\"></i>
+\t\t\t\t\tCompétitions
 \t\t\t\t</a>
 \t\t\t</li>
 \t\t</ul>
@@ -134,18 +152,19 @@ class __TwigTemplate_ca07321d75c9e835671ea1a09bbf9d369289371d21c4b44ce9766625a09
 
 \t<div class=\"text-center pt-5\">
 \t\t<a href=\"";
-        // line 42
+        // line 54
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("new_utilisateur");
         echo "\" class=\" btn btn-success\">Ajouter</a>
 \t</div>
 
-\t<table class=\"table\">
-\t\t<thead>
+\t<table class=\"table table-hover\">
+\t\t<thead class=\"thead-light\">
 
 \t\t\t<th>Id</th>
 \t\t\t<th>Email</th>
 \t\t\t<th>Prénom</th>
 \t\t\t<th>Nom</th>
+\t\t\t<th>Structure</th>
 \t\t\t<th>Rôles</th>
 \t\t\t<th>Actions</th>
 
@@ -153,99 +172,99 @@ class __TwigTemplate_ca07321d75c9e835671ea1a09bbf9d369289371d21c4b44ce9766625a09
 \t\t<tbody>
 
 \t\t\t";
-        // line 58
+        // line 71
         $context['_parent'] = $context;
-        $context['_seq'] = twig_ensure_traversable((isset($context["users"]) || array_key_exists("users", $context) ? $context["users"] : (function () { throw new RuntimeError('Variable "users" does not exist.', 58, $this->source); })()));
+        $context['_seq'] = twig_ensure_traversable(twig_sort_filter((isset($context["users"]) || array_key_exists("users", $context) ? $context["users"] : (function () { throw new RuntimeError('Variable "users" does not exist.', 71, $this->source); })()), function ($__a__, $__b__) use ($context, $macros) { $context["a"] = $__a__; $context["b"] = $__b__; return (-1 === twig_compare(twig_get_attribute($this->env, $this->source, (isset($context["a"]) || array_key_exists("a", $context) ? $context["a"] : (function () { throw new RuntimeError('Variable "a" does not exist.', 71, $this->source); })()), "id", [], "any", false, false, false, 71), twig_get_attribute($this->env, $this->source, (isset($context["b"]) || array_key_exists("b", $context) ? $context["b"] : (function () { throw new RuntimeError('Variable "b" does not exist.', 71, $this->source); })()), "id", [], "any", false, false, false, 71))); }));
         $context['_iterated'] = false;
         foreach ($context['_seq'] as $context["_key"] => $context["user"]) {
-            // line 59
+            // line 72
             echo "\t\t\t\t<tr>
 \t\t\t\t\t";
-            // line 60
+            // line 73
             $context['_parent'] = $context;
-            $context['_seq'] = twig_ensure_traversable(twig_get_attribute($this->env, $this->source, $context["user"], "roles", [], "any", false, false, false, 60));
+            $context['_seq'] = twig_ensure_traversable(twig_get_attribute($this->env, $this->source, $context["user"], "roles", [], "any", false, false, false, 73));
             foreach ($context['_seq'] as $context["_key"] => $context["role"]) {
-                // line 61
+                // line 74
                 echo "\t\t\t\t\t\t";
                 if ((0 === twig_compare($context["role"], "ROLE_JUGE"))) {
-                    // line 62
+                    // line 75
                     echo "\t\t\t\t\t\t\t<td>";
-                    echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["user"], "id", [], "any", false, false, false, 62), "html", null, true);
+                    echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["user"], "id", [], "any", false, false, false, 75), "html", null, true);
                     echo "</td>
 \t\t\t\t\t\t\t<td>";
-                    // line 63
-                    echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["user"], "email", [], "any", false, false, false, 63), "html", null, true);
+                    // line 76
+                    echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["user"], "email", [], "any", false, false, false, 76), "html", null, true);
                     echo "</td>
 \t\t\t\t\t\t\t<td>";
-                    // line 64
-                    echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["user"], "prenom", [], "any", false, false, false, 64), "html", null, true);
+                    // line 77
+                    echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["user"], "prenom", [], "any", false, false, false, 77), "html", null, true);
                     echo "</td>
 \t\t\t\t\t\t\t<td>";
-                    // line 65
-                    echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["user"], "nom", [], "any", false, false, false, 65), "html", null, true);
+                    // line 78
+                    echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["user"], "nom", [], "any", false, false, false, 78), "html", null, true);
                     echo "</td>
 \t\t\t\t\t\t\t<td>";
-                    // line 66
-                    echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["user"], "structure", [], "any", false, false, false, 66), "html", null, true);
+                    // line 79
+                    echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["user"], "structure", [], "any", false, false, false, 79), "html", null, true);
                     echo "</td>
 \t\t\t\t\t\t\t<td>
 \t\t\t\t\t\t\t\t";
-                    // line 68
+                    // line 81
                     $context['_parent'] = $context;
-                    $context['_seq'] = twig_ensure_traversable(twig_get_attribute($this->env, $this->source, $context["user"], "roles", [], "any", false, false, false, 68));
+                    $context['_seq'] = twig_ensure_traversable(twig_get_attribute($this->env, $this->source, $context["user"], "roles", [], "any", false, false, false, 81));
                     foreach ($context['_seq'] as $context["_key"] => $context["role"]) {
-                        // line 69
+                        // line 82
                         echo "\t\t\t\t\t\t\t\t\t";
                         if ((0 === twig_compare($context["role"], "ROLE_MENTOR"))) {
-                            // line 70
+                            // line 83
                             echo "\t\t\t\t\t\t\t\t\t\tMentor
 \t\t\t\t\t\t\t\t\t";
-                        } elseif ((0 === twig_compare(                        // line 71
+                        } elseif ((0 === twig_compare(                        // line 84
 $context["role"], "ROLE_ADMIN"))) {
-                            // line 72
+                            // line 85
                             echo "\t\t\t\t\t\t\t\t\t\tAdmin
 \t\t\t\t\t\t\t\t\t";
-                        } elseif ((0 === twig_compare(                        // line 73
+                        } elseif ((0 === twig_compare(                        // line 86
 $context["role"], "ROLE_JUGE"))) {
-                            // line 74
+                            // line 87
                             echo "\t\t\t\t\t\t\t\t\t\tJuge
 \t\t\t\t\t\t\t\t\t";
                         }
-                        // line 76
+                        // line 89
                         echo "\t\t\t\t\t\t\t\t";
                     }
                     $_parent = $context['_parent'];
                     unset($context['_seq'], $context['_iterated'], $context['_key'], $context['role'], $context['_parent'], $context['loop']);
                     $context = array_intersect_key($context, $_parent) + $_parent;
-                    // line 77
+                    // line 90
                     echo "\t\t\t\t\t\t\t</td>
 
 \t\t\t\t\t\t\t<td>
 \t\t\t\t\t\t\t\t<a href=\"";
-                    // line 80
-                    echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("modifier_utilisateur", ["id" => twig_get_attribute($this->env, $this->source, $context["user"], "id", [], "any", false, false, false, 80)]), "html", null, true);
+                    // line 93
+                    echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("modifier_utilisateur", ["id" => twig_get_attribute($this->env, $this->source, $context["user"], "id", [], "any", false, false, false, 93)]), "html", null, true);
                     echo "\" class=\" btn btn-warning\">Modifier</a>
 
 \t\t\t\t\t\t\t\t<a href=\"";
-                    // line 82
-                    echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("delete_utilisateur", ["id" => twig_get_attribute($this->env, $this->source, $context["user"], "id", [], "any", false, false, false, 82)]), "html", null, true);
+                    // line 95
+                    echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("delete_utilisateur", ["id" => twig_get_attribute($this->env, $this->source, $context["user"], "id", [], "any", false, false, false, 95)]), "html", null, true);
                     echo "\" class=\" btn btn-danger ml-2\" onclick=\"return confirm('Voulez-vous vraiment suprimmer cette utilisateur ?')\">Suprimmer</a>
 \t\t\t\t\t\t\t</td>
 \t\t\t\t\t\t</tr>
 \t\t\t\t\t";
                 }
-                // line 86
+                // line 99
                 echo "\t\t\t\t";
             }
             $_parent = $context['_parent'];
             unset($context['_seq'], $context['_iterated'], $context['_key'], $context['role'], $context['_parent'], $context['loop']);
             $context = array_intersect_key($context, $_parent) + $_parent;
-            // line 87
+            // line 100
             echo "\t\t\t";
             $context['_iterated'] = true;
         }
         if (!$context['_iterated']) {
-            // line 88
+            // line 101
             echo "\t\t\t\t<tr>
 \t\t\t\t\t<td colspan=\"5\">Il n'y a pas d'utilisateurs inscrit</td>
 \t\t\t\t</tr>
@@ -254,7 +273,7 @@ $context["role"], "ROLE_JUGE"))) {
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['user'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 92
+        // line 105
         echo "
 \t\t</tbody>
 \t</tale>
@@ -280,7 +299,7 @@ $context["role"], "ROLE_JUGE"))) {
 
     public function getDebugInfo()
     {
-        return array (  258 => 92,  249 => 88,  244 => 87,  238 => 86,  231 => 82,  226 => 80,  221 => 77,  215 => 76,  211 => 74,  209 => 73,  206 => 72,  204 => 71,  201 => 70,  198 => 69,  194 => 68,  189 => 66,  185 => 65,  181 => 64,  177 => 63,  172 => 62,  169 => 61,  165 => 60,  162 => 59,  157 => 58,  138 => 42,  123 => 30,  114 => 24,  105 => 18,  96 => 12,  89 => 7,  79 => 6,  59 => 3,  36 => 1,);
+        return array (  277 => 105,  268 => 101,  263 => 100,  257 => 99,  250 => 95,  245 => 93,  240 => 90,  234 => 89,  230 => 87,  228 => 86,  225 => 85,  223 => 84,  220 => 83,  217 => 82,  213 => 81,  208 => 79,  204 => 78,  200 => 77,  196 => 76,  191 => 75,  188 => 74,  184 => 73,  181 => 72,  176 => 71,  156 => 54,  141 => 42,  132 => 36,  123 => 30,  114 => 24,  105 => 18,  96 => 12,  89 => 7,  79 => 6,  59 => 3,  36 => 1,);
     }
 
     public function getSourceContext()
@@ -298,7 +317,7 @@ $context["role"], "ROLE_JUGE"))) {
 \t\t\t<li>
 \t\t\t\t<a href=\"{{path('utilisateurs')}}\">
 \t\t\t\t\t<i class=\"fa fa-home\" aria-hidden=\"true\"></i>
-\t\t\t\t\tTous les utilisateurs
+\t\t\t\t\tTous les Utilisateurs
 \t\t\t\t</a>
 \t\t\t</li>
 \t\t\t<li>
@@ -307,16 +326,28 @@ $context["role"], "ROLE_JUGE"))) {
 \t\t\t\t\tAdmins
 \t\t\t\t</a>
 \t\t\t</li>
-            <li>
+\t\t\t<li>
 \t\t\t\t<a href=\"{{path('mentors')}}\">
 \t\t\t\t\t<i class=\"fa fa-tachometer\" aria-hidden=\"true\"></i>
 \t\t\t\t\tMentors
 \t\t\t\t</a>
 \t\t\t</li>
-            <li>
+\t\t\t<li>
 \t\t\t\t<a href=\"{{path('juges')}}\">
 \t\t\t\t\t<i class=\"fa fa-tachometer\" aria-hidden=\"true\"></i>
 \t\t\t\t\tJuges
+\t\t\t\t</a>
+\t\t\t</li>
+\t\t\t<li>
+\t\t\t\t<a href=\"{{path('equipes')}}\">
+\t\t\t\t\t<i class=\"fa fa-tachometer\" aria-hidden=\"true\"></i>
+\t\t\t\t\tEquipes
+\t\t\t\t</a>
+\t\t\t</li>
+\t\t\t<li>
+\t\t\t\t<a href=\"{{path('competitionsList')}}\">
+\t\t\t\t\t<i class=\"fa fa-tachometer\" aria-hidden=\"true\"></i>
+\t\t\t\t\tCompétitions
 \t\t\t\t</a>
 \t\t\t</li>
 \t\t</ul>
@@ -329,20 +360,21 @@ $context["role"], "ROLE_JUGE"))) {
 \t\t<a href=\"{{ path('new_utilisateur')}}\" class=\" btn btn-success\">Ajouter</a>
 \t</div>
 
-\t<table class=\"table\">
-\t\t<thead>
+\t<table class=\"table table-hover\">
+\t\t<thead class=\"thead-light\">
 
 \t\t\t<th>Id</th>
 \t\t\t<th>Email</th>
 \t\t\t<th>Prénom</th>
 \t\t\t<th>Nom</th>
+\t\t\t<th>Structure</th>
 \t\t\t<th>Rôles</th>
 \t\t\t<th>Actions</th>
 
 \t\t</thead>
 \t\t<tbody>
 
-\t\t\t{% for user in users %}
+\t\t\t{% for user in users |sort((a, b) => a.id < b.id) %}
 \t\t\t\t<tr>
 \t\t\t\t\t{% for role in user.roles %}
 \t\t\t\t\t\t{%  if role == \"ROLE_JUGE\" %}
