@@ -10,6 +10,7 @@ use App\Form\EditUsersType;
 use App\Form\NewEquipeType;
 use App\Form\EditEquipeType;
 use App\Form\CompetitionType;
+use App\Form\JugeEditEquipeType;
 use App\Form\EditCompetitionType;
 use App\Form\InscriptionEquipeType;
 use App\Repository\EquipeRepository;
@@ -132,6 +133,14 @@ class HomepageController extends AbstractController
     }
 
     /**
+     * @IsGranted("ROLE_JUGE")
+     * @Route("juge/manage/equipes", name="juge_equipes")
+     */
+    public function jugeEquipeList(EquipeRepository $equipes){
+        return $this->render('admin/equipesList.html.twig', ['equipes' => $equipes->findAll()]);
+    }
+
+    /**
      * @IsGranted("ROLE_MENTOR")
      * @Route("/mentor/equipes", name="mentor_equipes")
      */
@@ -210,6 +219,29 @@ class HomepageController extends AbstractController
 
             $this->addFlash('success', 'Equipe modifié avec succès');
             return $this->redirectToRoute('equipes');
+        }
+
+        return $this->render('admin/editequipe.html.twig', [
+            'equipeForm' => $form->createView()
+        ]);
+    }
+
+    /**
+     * @IsGranted("ROLE_JUGE")
+     * @Route("/juge/equipes/modifier/{id}", name="juge_modifier_equipe")
+     */
+    public function jugeEditEquipe(Equipe $equipe, Request $request){
+        $form = $this->createForm(JugeEditEquipeType::class, $equipe);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()){
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager ->persist($equipe);
+           // $entityManager ->persist($competition);
+            $entityManager->flush();
+
+            $this->addFlash('success', 'Note ajouté avec succès');
+            return $this->redirectToRoute('juge_equipes');
         }
 
         return $this->render('admin/editequipe.html.twig', [

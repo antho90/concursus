@@ -12,10 +12,16 @@
 		{% if is_granted('ROLE_ADMIN') %}
 
 			<a href="{{ path('equipes')}}" class=" btn btn-info ">Retour</a>
+			
+		{% elseif is_granted('ROLE_JUGE') %}
+
+			<a href="{{ path('juge_equipes')}}" class=" btn btn-info ">Retour</a>
 
 		{% else %}
 
 			<a href="{{ path('mentor_equipes')}}" class=" btn btn-info ">Retour</a>
+
+		
 
 		{% endif %}
 

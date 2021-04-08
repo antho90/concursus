@@ -54,6 +54,16 @@
 									</li>
 
 									<li class="nav-item dropdown">
+										<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Juges</a>
+										<div class="dropdown-menu">
+										<a class="dropdown-item" href="#">Profil</a>
+										<a class="dropdown-item" href="#">Réglages</a>
+										<a class="dropdown-item" href="{{path('juge_equipes')}}">Equipes</a>
+										<a class="dropdown-item" href="#">Classement</a>
+										</div>
+					           		</li>
+
+									<li class="nav-item dropdown">
 										<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Manage</a>
 										<div class="dropdown-menu">
 										<a class="dropdown-item" href="{{path('utilisateurs')}}">Utilisateurs</a>
@@ -81,9 +91,53 @@
 
 				{# {% else %} #}
 
+{% elseif is_granted('ROLE_JUGE') %}
+
+					<nav class="navbar navbar-default navbar-expand-lg navbar-dark bg-primary">
+						<a class="navbar-brand" href="{{path('app_homepage_index')}}"><img width="130" height="50" src="/images/logo_concursus.png" alt=""></a>
+						<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+							<span class="navbar-toggler-icon"></span>
+						</button>
+
+						<div class="collapse navbar-collapse" id="navbarColor01">
+							<ul class="navbar-nav mr-auto">
 
 
-				{% elseif is_granted('ROLE_MENTOR') %}
+								      <li class="nav-item dropdown">
+										<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Evenement</a>
+										<div class="dropdown-menu">
+										<a class="dropdown-item" href="{{path('app_homepage_programme')}}">Programmes</a>
+										<a class="dropdown-item" href="{{path('app_homepage_livevideos')}}">Lives/Vidéos</a>
+										</div>
+									</li>
+
+									<li class="nav-item dropdown">
+										<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Juges</a>
+										<div class="dropdown-menu">
+										<a class="dropdown-item" href="#">Profil</a>
+										<a class="dropdown-item" href="#">Réglages</a>
+										<a class="dropdown-item" href="{{path('juge_equipes')}}">Equipes</a>
+										<a class="dropdown-item" href="#">Classement</a>
+										</div>
+					           		</li>
+
+									
+									<li class="nav-item">
+										<a class="nav-link" href="{{path('app_homepage_aide')}}"><img width="20" height="20" src="https://img.icons8.com/doodle/48/000000/help.png"/> Aide</a>
+									</li>
+
+							</ul>
+							<ul class="navbar-nav ml-auto">
+									<li class="nav-item">
+										<a class="nav-link" href="{{path('security_logout')}}">Déconnexion</a>
+									</li>
+							</ul>
+						</div>
+					</nav>
+
+
+
+{% elseif is_granted('ROLE_MENTOR') %}
 
 					<nav class="navbar navbar-default navbar-expand-lg navbar-dark bg-primary">
 						<a class="navbar-brand" href="{{path('app_homepage_index')}}"><img width="130" height="50" src="/images/logo_concursus.png" alt=""></a>
@@ -129,7 +183,7 @@
 						</div>
 					</nav>
 
-				{% else %}
+{% else %}
 
 					<nav class="navbar navbar-default navbar-expand-lg navbar-dark bg-primary">
 						<a class="navbar-brand" href="{{path('app_homepage_index')}}"><img width="130" height="50" src="/images/logo_concursus.png" alt=""></a>
@@ -169,7 +223,7 @@
 
 						</div>
 					</nav>
-					{% endif %}
+{% endif %}
 				{% endblock %}
 
 				{% block flash %}
