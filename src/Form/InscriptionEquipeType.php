@@ -29,13 +29,14 @@ class InscriptionEquipeType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('equipe', EntityType::class, [
-                'class' => GeneralUser::class,
-                'choice_label' =>function(GeneralUser $generalUser){
-                    return sprintf('(%d) %s', $generalUser->getId());
-                },
-                'choices' => $this->generalUserRepository->findByMentor(),
-            ])
+            ->add('equipe', EntityType::class)
+            // , [
+            //     'class' => GeneralUser::class,
+            //     'choice_label' =>function(GeneralUser $generalUser){
+            //         return sprintf('(%d) %s', $generalUser->getId());
+            //     },
+            //     'choices' => $this->generalUserRepository->findByMentor(),
+            // ])
 
             // ->add('equipe')
                 
