@@ -52,15 +52,20 @@ class Equipe
     public $validationImage;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Competiton::class, mappedBy="equipe")
+     * @ORM\ManyToMany(targetEntity=Competiton::class, inversedBy="equipe")
      * @ORM\JoinTable(name="competiton_equipe")
      */
     private $competitons;
 
     /**
-     * @ORM\ManyToMany(targetEntity=GeneralUser::class, mappedBy="equipes")
+     * @ORM\ManyToMany(targetEntity=GeneralUser::class, inversedBy="equipes")
      */
     private $generaluser;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $notes;
 
     public function __construct()
     {
@@ -203,6 +208,18 @@ class Equipe
     public function removeGeneraluser(GeneralUser $generaluser): self
     {
         $this->generaluser->removeElement($generaluser);
+
+        return $this;
+    }
+
+    public function getNotes(): ?int
+    {
+        return $this->notes;
+    }
+
+    public function setNotes(?int $notes): self
+    {
+        $this->notes = $notes;
 
         return $this;
     }
