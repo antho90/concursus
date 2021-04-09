@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\EquipeRepository;
 use Doctrine\ORM\Mapping\JoinColumn;
@@ -64,6 +65,11 @@ class Equipe
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Assert\Range(
+     *      min = 0,
+     *      max = 100,
+     *       notInRangeMessage = "La note doit être compris entre 0 et 100",
+     * )
      */
     private $notes;
 
