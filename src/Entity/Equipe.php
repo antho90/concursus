@@ -52,15 +52,12 @@ class Equipe
     public $validationImage;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Competiton::class, inversedBy="equipe")
-     * @ORM\JoinTable(name="competiton_equipe")
-
+     * @ORM\ManyToMany(targetEntity=Competiton::class, mappedBy="equipe")
      */
     private $competitons;
 
     /**
-     * @ORM\ManyToMany(targetEntity=GeneralUser::class, inversedBy="equipes")
-     * @ORM\JoinTable(name="equipe_general_user")
+     * @ORM\ManyToMany(targetEntity=GeneralUser::class, mappedBy="equipes")
      */
     private $generaluser;
 
@@ -184,6 +181,12 @@ class Equipe
      */
     public function getGeneraluser(): Collection
     {
+        return $this->generaluser;
+    }
+
+    public function setGeneraluser($generaluser): Collection
+    {
+        $this->generaluser = $generaluser;
         return $this->generaluser;
     }
 

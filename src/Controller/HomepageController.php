@@ -346,9 +346,13 @@ class HomepageController extends AbstractController
      * @Route("/competition/{id}/inscription_equipe", name="inscription_equipe")
      * @return Response
      */
-    public function inscriptionCompetition(Competiton $competition, Request $request): Response{
+    public function inscriptionCompetition(GeneralUserRepository $generalUserRepository, Competiton $competition, Request $request): Response{
 
-        // $competition = $repository->find($id);
+        // $gu = $this->getUser();
+        $generalusers = $generalUserRepository->findByMentor();
+        //  echo (gettype($em->findByMentor($gu)));
+        //  echo( $em->findByMentor($gu));
+        
 
         $form = $this->createForm(InscriptionEquipeType::class, $competition);
         $form->handleRequest($request);
@@ -362,7 +366,7 @@ class HomepageController extends AbstractController
             return $this->redirectToRoute('app_homepage_programme');
         }
 
-        return $this->render('mentor/InscriptionEquipe.html.twig', [
+        return $this->render('mentor/InscriptionEquipe.html.twig', ['equipe' => $generalusers,
             'InscriptionEquipeForm' => $form->createView()
         ]);
     }

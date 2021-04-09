@@ -69,7 +69,8 @@ class GeneralUser implements UserInterface
     private $modif;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Equipe::class, mappedBy="generaluser")
+     * @ORM\ManyToMany(targetEntity=Equipe::class, inversedBy="generaluser")
+     * @ORM\JoinTable(name="equipe_general_user")
      */
     private $equipes;
 
@@ -190,6 +191,12 @@ class GeneralUser implements UserInterface
      */
     public function getEquipes(): Collection
     {
+        return $this->equipes;
+    }
+
+    public function setEquipes($equipes): Collection
+    {
+        $this->equipes = $equipes;
         return $this->equipes;
     }
 

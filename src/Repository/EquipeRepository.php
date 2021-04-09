@@ -19,6 +19,18 @@ class EquipeRepository extends ServiceEntityRepository
         parent::__construct($registry, Equipe::class);
     }
 
+    // public function findMentor($value)
+    // {
+    //     return $this->createQueryBuilder("e")
+    //     ->andWhere('e.exampleField = :val')
+    //         ->setParameter('val', $value)
+    //         ->orderBy('e.id', 'ASC')
+    //         ->setMaxResults(10)
+    //         ->getQuery()
+    //         ->getResult()
+    //     ;
+
+    // }
     // /**
     //  * @return Equipe[] Returns an array of Equipe objects
     //  */
