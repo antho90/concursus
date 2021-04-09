@@ -2,6 +2,7 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\Equipe;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use App\Entity\GeneralUser;
@@ -10,6 +11,7 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 class MentorFixtures extends Fixture
 {
     private $passwordEncoder;
+
     public function __construct(UserPasswordEncoderInterface $passwordEncoder)
 {
     $this->passwordEncoder = $passwordEncoder;        
@@ -25,10 +27,17 @@ class MentorFixtures extends Fixture
                         ->setPassword("rootroot$i")
                         ->setStructure("Toto$i")
                         ->setRoles(["ROLE_MENTOR"]);
-                        
+            for($e = 1; $e <= 5; $e++){
+                $equipe = new Equipe();
+                $equipe ->setNom("Equipe$e")
+                        ->setStructure("Cacao$e")
+                        ->setVille("chocolat$e");
+            }            
             $hash = $this->passwordEncoder->encodePassword($generalUser, $generalUser->getPassword());
             $generalUser->setPassword($hash);
+            $generalUser->addEquipe($equipe);
             $manager->persist($generalUser);
+            $manager->persist($equipe);
         }
 
         $manager->flush();
@@ -42,4 +51,5 @@ class MentorFixtures extends Fixture
         $this->passwordEncoder = $passwordEncoder;
         return $this;
     }
+    
 }
