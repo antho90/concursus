@@ -10,7 +10,7 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class SuperAdminFixtures extends Fixture
 {
-    public $passwordEncoder;
+    private $passwordEncoder;
 
     public function __construct(UserPasswordEncoderInterface $passwordEncoder)
 {
@@ -32,5 +32,14 @@ class SuperAdminFixtures extends Fixture
 
         $manager->persist($generalUser);
         $manager->flush();
+    }
+
+    public function getPasswordEncoder() {
+        return $this->passwordEncoder;
+    }
+ 
+    public function setPasswordEncoder($passwordEncoder) {
+        $this->passwordEncoder = $passwordEncoder;
+        return $this;
     }
 }

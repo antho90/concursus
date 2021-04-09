@@ -9,11 +9,12 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class MentorFixtures extends Fixture
 {
-    public $passwordEncoder;
+    private $passwordEncoder;
     public function __construct(UserPasswordEncoderInterface $passwordEncoder)
 {
     $this->passwordEncoder = $passwordEncoder;        
 }
+
     public function load(ObjectManager $manager)
     {
         for($i = 1; $i <= 5; $i++){
@@ -31,5 +32,14 @@ class MentorFixtures extends Fixture
         }
 
         $manager->flush();
+    }
+
+    public function getPasswordEncoder() {
+        return $this->passwordEncoder;
+    }
+ 
+    public function setPasswordEncoder($passwordEncoder) {
+        $this->passwordEncoder = $passwordEncoder;
+        return $this;
     }
 }
