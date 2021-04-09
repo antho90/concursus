@@ -53,7 +53,6 @@ class Equipe
 
     /**
      * @ORM\ManyToMany(targetEntity=Competiton::class, mappedBy="equipe")
-     * @ORM\JoinTable(name="competiton_equipe")
      */
     private $competitons;
 
