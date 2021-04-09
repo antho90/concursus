@@ -29,15 +29,17 @@ class MentorFixtures extends Fixture
                         ->setRoles(["ROLE_MENTOR"]);
             for($e = 1; $e <= 5; $e++){
                 $equipe = new Equipe();
-                $equipe ->setNom("Equipe$e")
+                $equipe ->setNom("Equipe$e-$i")
                         ->setStructure("Cacao$e")
                         ->setVille("chocolat$e");
+                        $manager->persist($equipe);
+                        $generalUser->addEquipe($equipe);
             }            
             $hash = $this->passwordEncoder->encodePassword($generalUser, $generalUser->getPassword());
             $generalUser->setPassword($hash);
-            $generalUser->addEquipe($equipe);
+            
             $manager->persist($generalUser);
-            $manager->persist($equipe);
+           
         }
 
         $manager->flush();
