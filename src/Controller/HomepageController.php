@@ -129,12 +129,12 @@ class HomepageController extends AbstractController
      * @Route("/manage/equipes", name="equipes")
      */
     public function equipeList(EquipeRepository $equipes){
-        return $this->render('admin/equipesList.html.twig', ['equipes' => $equipes->findAll()]);
+        return $this->render('admin/adminEquipesList.html.twig', ['equipes' => $equipes->findAll()]);
     }
 
     /**
      * @IsGranted("ROLE_JUGE")
-     * @Route("juge/manage/equipes", name="juge_equipes")
+     * @Route("/juge/equipes", name="juge_equipes")
      */
     public function jugeEquipeList(EquipeRepository $equipes){
         return $this->render('admin/equipesList.html.twig', ['equipes' => $equipes->findAll()]);

@@ -62,6 +62,7 @@
 			<th>Date</th>
 			<th>Description</th>
 			<th>Info</th>
+			<th>Equipes</th>
 			<th>Actions</th>
 
 		</thead>
@@ -74,6 +75,22 @@
 					<td>{{ competition.date | date('d/m/Y H:i:s')}}</td>
 					<td>{{ competition.description }}</td>
 					<td>{{ competition.info }}</td>
+
+					{% for equipes in competition.getEquipe |sort((a, b) => a.id < b.id) %}
+							<div>
+								<td class="d-flex flex-row ">
+									<p>{{ equipes.nom }}</p>
+								</td>
+							</div>
+
+						{% else %}
+
+							<td>
+							
+								<p></p>
+							</td>
+
+						{% endfor %}
 
 					<td>
 						<a href="{{ path('modifier_competition', {'id': competition.id})}}" class=" btn btn-warning">Modifier</a>

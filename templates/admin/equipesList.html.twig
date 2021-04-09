@@ -107,46 +107,8 @@
 		</thead>
 		<tbody>
 
-			{% if is_granted('ROLE_ADMIN') %}
 
-				{% for equipes in equipes |sort((a, b) => a.id < b.id) %}
-					<tr>
-						<td>{{ equipes.id }}</td>
-						<td>{{ equipes.nom }}</td>
-						<td>{{ equipes.structure }}</td>
-						<td>{{ equipes.ville }}</td>
-
-
-						{% for competitions in equipes.getCompetitons |sort((a, b) => a.id < b.id) %}
-							<div>
-								<td class="d-flex flex-row ">
-									<p>{{ competitions.nom }}</p>
-								</td>
-							</div>
-						{% else %}
-
-							<td>
-							
-								<p></p>
-							</td>
-
-						{% endfor %}
-						<td>{{ equipes.notes }}/100</td>
-
-
-						<td>
-							<a href="{{ path('modifier_equipe', {'id': equipes.id})}}" class=" btn btn-warning">Modifier</a>
-
-							<a href="{{ path('delete_equipe', {'id': equipes.id})}}" class=" btn btn-danger ml-2" onclick="return confirm('Voulez-vous vraiment suprimmer cette utilisateur ?')">Suprimmer</a>
-						</td>
-					</tr>
-				{% else %}
-					<tr>
-						<td colspan="5">Il n'y a pas d'équipe inscrite</td>
-					</tr>
-				{% endfor %}
-
-			{% elseif is_granted('ROLE_JUGE') %}
+			{% if is_granted('ROLE_JUGE') %}
 
 				{% for equipes in equipes |sort((a, b) => a.id < b.id) %}
 					<tr>
@@ -182,7 +144,7 @@
 				</tr>
 			{% endfor %}
 
-		{% else %}
+		{% elseif is_granted('ROLE_MENTOR') %}
 
 			{% for equipes in app.user.equipes |sort((a, b) => a.id < b.id) %}
 				<tr>
