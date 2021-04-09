@@ -368,6 +368,14 @@
     <service id="App\DataFixtures\CompetitionFixtures" class="App\DataFixtures\CompetitionFixtures" autowire="true" autoconfigure="true">
       <tag name="doctrine.fixture.orm"/>
     </service>
+    <service id="App\DataFixtures\MentorFixtures" class="App\DataFixtures\MentorFixtures" autowire="true" autoconfigure="true">
+      <tag name="doctrine.fixture.orm"/>
+      <argument type="service" id="security.user_password_encoder.generic"/>
+    </service>
+    <service id="App\DataFixtures\SuperAdminFixtures" class="App\DataFixtures\SuperAdminFixtures" autowire="true" autoconfigure="true">
+      <tag name="doctrine.fixture.orm"/>
+      <argument type="service" id="security.user_password_encoder.generic"/>
+    </service>
     <service id="App\Form\CompetitionType" class="App\Form\CompetitionType" autowire="true" autoconfigure="true">
       <tag name="form.type"/>
     </service>
@@ -5291,6 +5299,14 @@
             <argument key="fixture" type="service" id="App\DataFixtures\CompetitionFixtures"/>
             <argument key="groups" type="collection"/>
           </argument>
+          <argument type="collection">
+            <argument key="fixture" type="service" id="App\DataFixtures\MentorFixtures"/>
+            <argument key="groups" type="collection"/>
+          </argument>
+          <argument type="collection">
+            <argument key="fixture" type="service" id="App\DataFixtures\SuperAdminFixtures"/>
+            <argument key="groups" type="collection"/>
+          </argument>
         </argument>
       </call>
     </service>
@@ -5310,6 +5326,10 @@
     <service id=".abstract.instanceof.App\DataFixtures\AppFixtures" class="App\DataFixtures\AppFixtures" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Doctrine\Bundle\FixturesBundle\ORMFixtureInterface.0.App\DataFixtures\CompetitionFixtures" class="App\DataFixtures\CompetitionFixtures" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\DataFixtures\CompetitionFixtures" class="App\DataFixtures\CompetitionFixtures" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Doctrine\Bundle\FixturesBundle\ORMFixtureInterface.0.App\DataFixtures\MentorFixtures" class="App\DataFixtures\MentorFixtures" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\DataFixtures\MentorFixtures" class="App\DataFixtures\MentorFixtures" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Doctrine\Bundle\FixturesBundle\ORMFixtureInterface.0.App\DataFixtures\SuperAdminFixtures" class="App\DataFixtures\SuperAdminFixtures" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\DataFixtures\SuperAdminFixtures" class="App\DataFixtures\SuperAdminFixtures" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\CompetitionType" class="App\Form\CompetitionType" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Form\CompetitionType" class="App\Form\CompetitionType" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\EditCompetitionType" class="App\Form\EditCompetitionType" autowire="true" abstract="true"/>

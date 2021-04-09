@@ -1002,7 +1002,7 @@ return [[
 
 0 => 'N;',
 1 => [],
-2 => 1617802755,
+2 => 1617956144,
 3 => static function () {
     return \Symfony\Component\VarExporter\Internal\Hydrator::hydrate(
         $o = [
@@ -2077,8 +2077,7 @@ return [[
 45 => static function () {
     return \Symfony\Component\VarExporter\Internal\Hydrator::hydrate(
         $o = [
-            clone (($p = &\Symfony\Component\VarExporter\Internal\Registry::$prototypes)['Doctrine\\ORM\\Mapping\\ManyToMany'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Mapping\\ManyToMany')),
-            clone ($p['Doctrine\\ORM\\Mapping\\JoinTable'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Mapping\\JoinTable')),
+            clone (\Symfony\Component\VarExporter\Internal\Registry::$prototypes['Doctrine\\ORM\\Mapping\\ManyToMany'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Mapping\\ManyToMany')),
         ],
         null,
         [
@@ -2089,14 +2088,10 @@ return [[
                 'mappedBy' => [
                     'equipe',
                 ],
-                'name' => [
-                    1 => 'competiton_equipe',
-                ],
             ],
         ],
         [
             $o[0],
-            $o[1],
         ],
         []
     );
