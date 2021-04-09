@@ -108,18 +108,20 @@
 						
 
 
-						{# {% for competitions in equipes.getCompetitons |sort((a, b) => a.id < b.id) %}
-																			<div>
-																				<td class="d-flex flex-row ">
-																					<p>{{ competitions.nom }}</p>
-																				</td>
-																			</div>
-																		{% else %} #}
+						{% for competitions in equipes.getCompetitons |sort((a, b) => a.id < b.id) %}
+							<div>
+								<td class="d-flex flex-row ">
+									<p>{{ competitions.nom }}</p>
+								</td>
+							</div>
+						{% else %}
 
 						<td>
 						
 							<p></p>
 						</td>
+						
+						{% endfor %}
 						<td>{{ equipes.notes }}/100</td>
 
 
