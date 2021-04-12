@@ -164,7 +164,7 @@
 						<td>
 							<a href="{{ path('mentor_modifier_equipe', {'id': equipes.id})}}" class=" btn btn-warning">Modifier</a>
 
-							<a href="{{ path('delete_equipe', {'id': equipes.id})}}" class=" btn btn-danger ml-2" onclick="return confirm('Voulez-vous vraiment suprimmer cette utilisateur ?')">Suprimmer</a>
+							<a href="{{ path('mentor_delete_equipe', {'id': equipes.id})}}" class=" btn btn-danger ml-2" onclick="return confirm('Voulez-vous vraiment suprimmer cette utilisateur ?')">Suprimmer</a>
 						</td>
 					</tr>
 				{% else %}

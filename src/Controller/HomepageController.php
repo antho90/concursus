@@ -326,6 +326,21 @@ class HomepageController extends AbstractController
     }
 
     /**
+     * @IsGranted("ROLE_MENTOR")
+     * @Route("mentor/deleteEquipe/{id}", name="mentor_delete_equipe")
+     * @return RedirectResponse
+     */
+    public function mentorDeleteEquipe(Equipe $equipe): RedirectResponse{
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($equipe);
+        $em->flush();
+
+        $this->addFlash('success', 'Votre équipe à bien été supprimer.');
+
+        return $this->redirectToRoute('mentor_equipes');
+    }
+
+    /**
      * @IsGranted("ROLE_ADMIN")
      * @Route("/new", name="new_utilisateur")
      * @return Response
