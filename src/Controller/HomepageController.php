@@ -30,11 +30,11 @@ class HomepageController extends AbstractController
     /**
      * @Route("/")
      */
-    public function index(CompetitonRepository $repository)
+    public function index(CompetitonRepository $repository, EquipeRepository $equipes)
     {
         $programmes = $repository->findAll();
         
-        return $this->render('homepage/index.html.twig', ['programmes' => $programmes,'mainNavHome' => true, 'title' => 'Accueil']);
+        return $this->render('homepage/index.html.twig', ['programmes' => $programmes,'mainNavHome' => true, 'title' => 'Accueil','competitions' => $repository->findAll(),'equipes' => $equipes->findAll()]);
     }
 
     /**

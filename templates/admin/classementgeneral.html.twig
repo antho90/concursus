@@ -9,11 +9,11 @@
 		<ul class="sidebar-navigation">
 			<li class="header">Classement</li>
 			<li>
-					<a href="{{path('classement_general')}}">
-						<i class="fa fa-tachometer" aria-hidden="true"></i>
-						Général
-					</a>
-				</li>
+				<a href="{{path('classement_general')}}">
+					<i class="fa fa-tachometer" aria-hidden="true"></i>
+					Général
+				</a>
+			</li>
 			{% for competition in competitions |sort((a, b) => a.id < b.id) %}
 				<li>
 					<a href="{{path('classement_competition', {'id': competition.nom})}}">
@@ -47,16 +47,16 @@
 			{% for equipes in equipes |sort((a, b) => a.notes < b.notes)%}
 				<tr>
 
-					<td>{{ loop.index }} </td>
+					<td>{{ loop.index }}</td>
 					<td>{{ equipes.nom }}</td>
-                    {% if equipes.notes != null %}
-					<td>{{ equipes.notes }}/100</td>
-                    {% else %}
+					{% if equipes.notes != null %}
+						<td>{{ equipes.notes }}/100</td>
+					{% else %}
 
-                    <td>
-                        <p></p>
-                    </td>
-{% endif %}
+						<td>
+							<p></p>
+						</td>
+					{% endif %}
 					<td>
 						<a href="#" class=" btn btn-warning">Modifier</a>
 
