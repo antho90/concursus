@@ -69,7 +69,7 @@ class GeneralUser implements UserInterface
     private $modif;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Equipe::class, inversedBy="generaluser")
+     * @ORM\ManyToMany(targetEntity=Equipe::class, mappedBy="generaluser")
      * @ORM\JoinTable(name="equipe_general_user")
      */
     private $equipes;

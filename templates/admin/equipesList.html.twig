@@ -73,8 +73,9 @@
 	{% endif %}
 
 	{# {{ dump(app.user) }}
-				
-					<li> Test : {{app.user.id}} </li> #}
+
+					<li> Test : {{app.user.id}} </li>
+	 #}
 
 	<h1 class="text-center pt-5">Liste des équipes</h1>
 
@@ -138,42 +139,41 @@
 		{% elseif is_granted('ROLE_MENTOR') %}
 
 			{% for equipes in app.user.equipes |sort((a, b) => a.id < b.id) %}
-				<tr>
-					<td>{{ equipes.id }}</td>
-					<td>{{ equipes.nom }}</td>
-					<td>{{ equipes.structure }}</td>
-					<td>{{ equipes.ville }}</td>
+					<tr>
+						<td>{{ equipes.id }}</td>
+						<td>{{ equipes.nom }}</td>
+						<td>{{ equipes.structure }}</td>
+						<td>{{ equipes.ville }}</td>
 
 
 					{% for competitions in equipes.getCompetitons |sort((a, b) => a.id < b.id) %}
-						<div>
-							<td class="d-flex flex-row ">
-								<p>{{ competitions.nom }}</p>
+							<div>
+								<td class="d-flex flex-row ">
+									<p>{{ competitions.nom }}</p>
+								</td>
+							</div>
+						{% else %}
+
+							<td>
+								<p></p>
 							</td>
-						</div>
-					{% else %}
+
+						{% endfor %}
+
 
 						<td>
-							<p></p>
+							<a href="{{ path('mentor_modifier_equipe', {'id': equipes.id})}}" class=" btn btn-warning">Modifier</a>
+
+							<a href="{{ path('delete_equipe', {'id': equipes.id})}}" class=" btn btn-danger ml-2" onclick="return confirm('Voulez-vous vraiment suprimmer cette utilisateur ?')">Suprimmer</a>
 						</td>
+					</tr>
+				{% else %}
+					<tr>
+						<td colspan="5">Il n'y a pas d'équipe inscrite</td>
+					</tr>
+				{% endfor %}
 
-					{% endfor %}
-					<td>{{ equipes.notes }}/100</td>
-
-
-					<td>
-						<a href="{{ path('mentor_modifier_equipe', {'id': equipes.id})}}" class=" btn btn-warning">Modifier</a>
-
-						<a href="{{ path('delete_equipe', {'id': equipes.id})}}" class=" btn btn-danger ml-2" onclick="return confirm('Voulez-vous vraiment suprimmer cette utilisateur ?')">Suprimmer</a>
-					</td>
-				</tr>
-			{% else %}
-				<tr>
-					<td colspan="5">Il n'y a pas d'équipe inscrite</td>
-				</tr>
-			{% endfor %}
-
-		{% endif %}
+			{% endif %}
 
 	</tbody>
 </tale>{% endblock %}
