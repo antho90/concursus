@@ -5,77 +5,47 @@
 
 {% block body %}
 
-	{% if is_granted('ROLE_JUGE') %}
-
 		<div id="nav_gauche" class="sidebar-container slideInLeft atss-left at-custom-sidebar addthis-animated">
 			<ul class="sidebar-navigation">
 				<li class="header">Navigation</li>
 				<li>
-					<a href="#">
+					<a href="{{path('utilisateurs')}}">
 						<i class="fa fa-home" aria-hidden="true"></i>
-						Profil
+						Tous les utilisateurs
 					</a>
 				</li>
 				<li>
-					<a href="#">
+					<a href="{{path('admins')}}">
 						<i class="fa fa-tachometer" aria-hidden="true"></i>
-						Réglages
+						Admins
 					</a>
 				</li>
 				<li>
-					<a href="{{path('juge_equipes')}}">
+					<a href="{{path('mentors')}}">
+						<i class="fa fa-tachometer" aria-hidden="true"></i>
+						Mentors
+					</a>
+				</li>
+				<li>
+					<a href="{{path('juges')}}">
+						<i class="fa fa-tachometer" aria-hidden="true"></i>
+						Juges
+					</a>
+				</li>
+				<li>
+					<a href="{{path('equipes')}}">
 						<i class="fa fa-tachometer" aria-hidden="true"></i>
 						Equipes
 					</a>
 				</li>
 				<li>
-					<a href="#">
+					<a href="{{path('competitionsList')}}">
 						<i class="fa fa-tachometer" aria-hidden="true"></i>
-						Classement
+						Compétitions
 					</a>
 				</li>
 			</ul>
 		</div>
-
-
-	{% else %}
-
-		<div id="nav_gauche" class="sidebar-container slideInLeft atss-left at-custom-sidebar addthis-animated">
-			<ul class="sidebar-navigation">
-				<li class="header">Navigation</li>
-				<li>
-					<a href="#">
-						<i class="fa fa-home" aria-hidden="true"></i>
-						Profil
-					</a>
-				</li>
-				<li>
-					<a href="#">
-						<i class="fa fa-tachometer" aria-hidden="true"></i>
-						Réglages
-					</a>
-				</li>
-				<li>
-					<a href="#">
-						<i class="fa fa-tachometer" aria-hidden="true"></i>
-						Vos competitions
-					</a>
-				</li>
-				<li>
-					<a href="{{path('mentor_equipes')}}">
-						<i class="fa fa-tachometer" aria-hidden="true"></i>
-						Equipes
-					</a>
-				</li>
-			</ul>
-		</div>
-
-	{% endif %}
-
-	{# {{ dump(app.user) }}
-
-					<li> Test : {{app.user.id}} </li>
-	 #}
 
 	<h1 class="text-center pt-5">Liste des équipes</h1>
 
@@ -98,15 +68,12 @@
 		<tbody>
 
 
-			{% if is_granted('ROLE_JUGE') %}
-
 				{% for equipes in equipes |sort((a, b) => a.id < b.id) %}
 					<tr>
 						<td>{{ equipes.id }}</td>
 						<td>{{ equipes.nom }}</td>
 						<td>{{ equipes.structure }}</td>
 						<td>{{ equipes.ville }}</td>
-						
 
 
 						{% for competitions in equipes.getCompetitons |sort((a, b) => a.id < b.id) %}
@@ -117,52 +84,17 @@
 							</div>
 						{% else %}
 
-						<td>
-						
-							<p></p>
-						</td>
-						
-						{% endfor %}
-						<td>{{ equipes.notes }}/100</td>
-
-
-					<td>
-						<a href="{{ path('juge_modifier_equipe', {'id': equipes.id})}}" class=" btn btn-warning">Notes</a>
-					</td>
-				</tr>
-			{% else %}
-				<tr>
-					<td colspan="5">Il n'y a pas d'équipe inscrite</td>
-				</tr>
-			{% endfor %}
-
-		{% elseif is_granted('ROLE_MENTOR') %}
-
-			{% for equipes in app.user.equipes |sort((a, b) => a.id < b.id) %}
-					<tr>
-						<td>{{ equipes.id }}</td>
-						<td>{{ equipes.nom }}</td>
-						<td>{{ equipes.structure }}</td>
-						<td>{{ equipes.ville }}</td>
-
-
-					{% for competitions in equipes.getCompetitons |sort((a, b) => a.id < b.id) %}
-							<div>
-								<td class="d-flex flex-row ">
-									<p>{{ competitions.nom }}</p>
-								</td>
-							</div>
-						{% else %}
-
 							<td>
+							
 								<p></p>
 							</td>
 
 						{% endfor %}
+						<td>{{ equipes.notes }}/100</td>
 
 
 						<td>
-							<a href="{{ path('mentor_modifier_equipe', {'id': equipes.id})}}" class=" btn btn-warning">Modifier</a>
+							<a href="{{ path('modifier_equipe', {'id': equipes.id})}}" class=" btn btn-warning">Modifier</a>
 
 							<a href="{{ path('delete_equipe', {'id': equipes.id})}}" class=" btn btn-danger ml-2" onclick="return confirm('Voulez-vous vraiment suprimmer cette utilisateur ?')">Suprimmer</a>
 						</td>
@@ -172,8 +104,6 @@
 						<td colspan="5">Il n'y a pas d'équipe inscrite</td>
 					</tr>
 				{% endfor %}
-
-			{% endif %}
 
 	</tbody>
 </tale>{% endblock %}

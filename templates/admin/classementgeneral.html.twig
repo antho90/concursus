@@ -43,15 +43,20 @@
 
 		</thead>
 		<tbody>
-{# 
+
 			{% for equipes in equipes |sort((a, b) => a.notes < b.notes)%}
 				<tr>
 
 					<td>{{ loop.index }} </td>
 					<td>{{ equipes.nom }}</td>
+                    {% if equipes.notes != null %}
 					<td>{{ equipes.notes }}/100</td>
+                    {% else %}
 
-
+                    <td>
+                        <p></p>
+                    </td>
+{% endif %}
 					<td>
 						<a href="#" class=" btn btn-warning">Modifier</a>
 
@@ -61,7 +66,7 @@
 				<tr>
 					<td colspan="5">Il n'y a pas de classement</td>
 				</tr>
-			{% endfor %} #}
+			{% endfor %}
 
 		</tbody>
 	</tale>

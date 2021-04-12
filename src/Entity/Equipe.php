@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\EquipeRepository;
 use Doctrine\ORM\Mapping\JoinColumn;
@@ -52,14 +53,26 @@ class Equipe
     public $validationImage;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Competiton::class, mappedBy="equipe")
+     * @ORM\ManyToMany(targetEntity=Competiton::class, inversedBy="equipe")
+     * @ORM\JoinTable(name="competiton_equipe")
      */
     private $competitons;
 
     /**
-     * @ORM\ManyToMany(targetEntity=GeneralUser::class, mappedBy="equipes")
+     * @ORM\ManyToMany(targetEntity=GeneralUser::class, inversedBy="equipes")
+     * @ORM\JoinTable(name="equipe_general_user")
      */
     private $generaluser;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     * @Assert\Range(
+     *      min = 0,
+     *      max = 100,
+     *       notInRangeMessage = "La note doit être compris entre 0 et 100",
+     * )
+     */
+    private $notes;
 
     public function __construct()
     {
@@ -202,6 +215,18 @@ class Equipe
     public function removeGeneraluser(GeneralUser $generaluser): self
     {
         $this->generaluser->removeElement($generaluser);
+
+        return $this;
+    }
+
+    public function getNotes(): ?int
+    {
+        return $this->notes;
+    }
+
+    public function setNotes(?int $notes): self
+    {
+        $this->notes = $notes;
 
         return $this;
     }
