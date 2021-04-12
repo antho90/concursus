@@ -10,7 +10,7 @@ class CompetitionFixtures extends Fixture
 {
     public function load(ObjectManager $manager)
     {
-        for($i = 1; $i <= 1; $i++){
+        for($i = 1; $i <= 10; $i++){
             $competition = new Competiton();
             $competition->setNom("Competition $i")
                         ->setDate(new \DateTime())
