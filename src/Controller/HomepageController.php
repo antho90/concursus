@@ -153,8 +153,12 @@ class HomepageController extends AbstractController
      * @IsGranted("ROLE_ADMIN")
      * @Route("/competition/{id}/classement", name="classement_competition")
      */
-    public function classement_competition(CompetitonRepository $competitions, EquipeRepository $equipes){
-        return $this->render('admin/classement_competition.html.twig', ['competitions' => $competitions->findAll(),'equipes' => $equipes->findAll()]);
+    public function classement_competition(CompetitonRepository $repository, $id, EquipeRepository $equipes){
+
+        $competitions = $repository->find($id);
+        $Allcompetions = $repository->findAll();
+
+        return $this->render('admin/classement_competition.html.twig', ['competition' => $competitions,'competitions' => $Allcompetions,'equipes' => $equipes->findAll()]);
     }
 
     /**
@@ -238,7 +242,7 @@ class HomepageController extends AbstractController
      * @IsGranted("ROLE_JUGE")
      * @Route("/juge/equipes/modifier/{id}", name="juge_modifier_equipe")
      */
-    public function jugeEditEquipe(Equipe $equipe, Request $request){
+    public function jugeEditEquipe(Equipe $equipe, Request $request): Response{
         $form = $this->createForm(JugeEditEquipeType::class, $equipe);
         $form->handleRequest($request);
 
