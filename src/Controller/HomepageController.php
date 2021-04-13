@@ -217,9 +217,12 @@ class HomepageController extends AbstractController
 
     /**
      * @IsGranted("ROLE_ADMIN")
-     * @Route("/equipes/modifier/{id}", name="modifier_equipe")
+     * @Route("/equipes/{id}/modifier", name="modifier_equipe")
      */
-    public function editEquipe(Equipe $equipe, Request $request){
+    public function editEquipe(Equipe $equipe, Request $request, EquipeRepository $repository, $id){
+
+        $equipes = $repository->find($id);
+
         $form = $this->createForm(EditEquipeType::class, $equipe);
         $form->handleRequest($request);
 
@@ -233,16 +236,19 @@ class HomepageController extends AbstractController
             return $this->redirectToRoute('equipes');
         }
 
-        return $this->render('admin/editequipe.html.twig', [
+        return $this->render('admin/editequipe.html.twig', ['equipe' => $equipes,
             'equipeForm' => $form->createView()
         ]);
     }
 
     /**
      * @IsGranted("ROLE_JUGE")
-     * @Route("/juge/equipes/modifier/{id}", name="juge_modifier_equipe")
+     * @Route("/juge/equipes/{id}/modifier", name="juge_modifier_equipe")
      */
-    public function jugeEditEquipe(Equipe $equipe, Request $request): Response{
+    public function jugeEditEquipe(Equipe $equipe, Request $request, EquipeRepository $repository, $id): Response{
+
+        $equipes = $repository->find($id);
+
         $form = $this->createForm(JugeEditEquipeType::class, $equipe);
         $form->handleRequest($request);
 
@@ -256,16 +262,19 @@ class HomepageController extends AbstractController
             return $this->redirectToRoute('juge_equipes');
         }
 
-        return $this->render('admin/editequipe.html.twig', [
+        return $this->render('admin/editequipe.html.twig', ['equipe' => $equipes,
             'equipeForm' => $form->createView()
         ]);
     }
 
     /**
      * @IsGranted("ROLE_MENTOR")
-     * @Route("/mentor/equipes/modifier/{id}", name="mentor_modifier_equipe")
+     * @Route("/mentor/equipes/{id}/modifier", name="mentor_modifier_equipe")
      */
-    public function mentoreditEquipe(Equipe $equipe, Request $request){
+    public function mentoreditEquipe(Equipe $equipe, Request $request, EquipeRepository $repository, $id){
+
+        $equipes = $repository->find($id);
+
         $form = $this->createForm(EditEquipeType::class, $equipe);
         $form->handleRequest($request);
 
@@ -279,7 +288,7 @@ class HomepageController extends AbstractController
             return $this->redirectToRoute('mentor_equipes');
         }
 
-        return $this->render('admin/editequipe.html.twig', [
+        return $this->render('admin/editequipe.html.twig', ['equipe' => $equipes,
             'equipeForm' => $form->createView()
         ]);
     }
