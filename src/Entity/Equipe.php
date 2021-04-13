@@ -170,6 +170,12 @@ class Equipe
         return $this->competitons;
     }
 
+    public function setCompetitons($competiton): Collection
+    {
+        $this->competitons = $competiton;
+        return $this->competitons;
+    }
+
     public function addCompetiton(Competiton $competiton): self
     {
         if (!$this->competitons->contains($competiton)) {

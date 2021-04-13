@@ -2,3 +2,5 @@
 .var/
 .env
 .vendor/
+/vendor/*
+/var/*

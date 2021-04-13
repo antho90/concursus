@@ -9,6 +9,7 @@ use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Component\Form\AbstractType;
 use App\Repository\GeneralUserRepository;
+use Doctrine\ORM\Query\Expr;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\ChoiceList\ChoiceList;
@@ -16,6 +17,7 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 class InscriptionEquipeType extends AbstractType
@@ -29,7 +31,21 @@ class InscriptionEquipeType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('equipe', EntityType::class)
+            ->add('equipe', EntityType::class, [
+                'class' => Equipe::class,
+                'choice_label' => 'nom',
+                'query_builder' => function (EntityRepository $repo) {
+                    return $repo->createQueryBuilder('e')
+                        ->leftjoin('e.generaluser', 'g',Expr\Join::WITH,'g.general_user_id')
+                        //->from('equipe_general_user', 'g')
+                        //->where('e.id')
+                        //->orderBy('g.id', 'DESC')
+                        ;
+                },
+                'label' => 'Mes compétitions',
+                'multiple' => true
+
+            ])
             // , [
             //     'class' => GeneralUser::class,
             //     'choice_label' =>function(GeneralUser $generalUser){
