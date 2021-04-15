@@ -136,8 +136,20 @@ class HomepageController extends AbstractController
      * @IsGranted("ROLE_JUGE")
      * @Route("/juge/equipes", name="juge_equipes")
      */
-    public function jugeEquipeList(EquipeRepository $equipes){
-        return $this->render('admin/equipesList.html.twig', ['equipes' => $equipes->findAll()]);
+    public function jugeEquipeList(CompetitonRepository $competitions, EquipeRepository $equipes){
+        return $this->render('admin/equipesList.html.twig', ['competitions' => $competitions->findAll(),'equipes' => $equipes->findAll()]);
+    }
+
+    /**
+     * @IsGranted("ROLE_ADMIN")
+     * @Route("/juge/competition/{id}/equipes", name="note_equipe")
+     */
+    public function note_equipe(CompetitonRepository $repository, $id, EquipeRepository $equipes){
+
+        $competitions = $repository->find($id);
+        $Allcompetions = $repository->findAll();
+
+        return $this->render('admin/noteEquipe.html.twig', ['competition' => $competitions,'competitions' => $Allcompetions,'equipes' => $equipes->findAll()]);
     }
 
     /**
@@ -247,6 +259,8 @@ class HomepageController extends AbstractController
      */
     public function jugeEditEquipe(Equipe $equipe, Request $request, EquipeRepository $repository, $id): Response{
 
+
+        
         $equipes = $repository->find($id);
 
         $form = $this->createForm(JugeEditEquipeType::class, $equipe);

@@ -9,31 +9,23 @@
 
 		<div id="nav_gauche" class="sidebar-container slideInLeft atss-left at-custom-sidebar addthis-animated">
 			<ul class="sidebar-navigation">
-				<li class="header">Navigation</li>
+				<li class="header">Classement</li>
+			<li>
+				<a href="{{path('juge_equipes')}}">
+					<i class="fa fa-tachometer" aria-hidden="true"></i>
+					Général
+				</a>
+			</li>
+			{% for competition in competitions |sort((a, b) => a.id < b.id) %}
 				<li>
-					<a href="#">
+					<a href="{{path('note_equipe', {'id': competition.id})}}">
 						<i class="fa fa-home" aria-hidden="true"></i>
-						Profil
+						{{ competition.nom }}
 					</a>
 				</li>
-				<li>
-					<a href="#">
-						<i class="fa fa-tachometer" aria-hidden="true"></i>
-						Réglages
-					</a>
-				</li>
-				<li>
-					<a href="{{path('juge_equipes')}}">
-						<i class="fa fa-tachometer" aria-hidden="true"></i>
-						Equipes
-					</a>
-				</li>
-				<li>
-					<a href="#">
-						<i class="fa fa-tachometer" aria-hidden="true"></i>
-						Classement
-					</a>
-				</li>
+			{% else %}
+				<p>Il n'y a pas de compétition</p>
+			{% endfor %}
 			</ul>
 		</div>
 
@@ -74,8 +66,8 @@
 
 	{# {{ dump(equipes) }} #}
 
-					{# <li> Test : {{equipes.nom}} </li> #}
-	
+	{# <li> Test : {{equipes.nom}} </li> #}
+
 
 	<h1 class="text-center pt-5">Liste des équipes</h1>
 
@@ -90,7 +82,6 @@
 			<th>Nom</th>
 			<th>Structure</th>
 			<th>Ville</th>
-			<th>Compétitions inscrit</th>
 			<th>Notes</th>
 			<th>Actions</th>
 
@@ -106,39 +97,24 @@
 						<td>{{ equipes.nom }}</td>
 						<td>{{ equipes.structure }}</td>
 						<td>{{ equipes.ville }}</td>
-						
-
-
-						{% for competitions in equipes.getCompetitons |sort((a, b) => a.id < b.id) %}
-							<div>
-								<td class="d-flex flex-row ">
-									<p>{{ competitions.nom }}</p>
-								</td>
-							</div>
+						{% if equipes.notes != null %}
+							<td>{{ equipes.notes }}/100</td>
 						{% else %}
-
+							<td></td>
+						{% endif %}
 						<td>
-						
-							<p></p>
+							<a href="{{ path('juge_modifier_equipe', {'id': equipes.id})}}" class=" btn btn-warning">Notes</a>
 						</td>
-						
-						{% endfor %}
-						<td>{{ equipes.notes }}/100</td>
+					</tr>
+				{% else %}
+					<tr>
+						<td colspan="5">Il n'y a pas d'équipe inscrite</td>
+					</tr>
+				{% endfor %}
 
+			{% elseif is_granted('ROLE_MENTOR') %}
 
-					<td>
-						<a href="{{ path('juge_modifier_equipe', {'id': equipes.id})}}" class=" btn btn-warning">Notes</a>
-					</td>
-				</tr>
-			{% else %}
-				<tr>
-					<td colspan="5">Il n'y a pas d'équipe inscrite</td>
-				</tr>
-			{% endfor %}
-
-		{% elseif is_granted('ROLE_MENTOR') %}
-
-			{% for equipes in app.user.equipes |sort((a, b) => a.id < b.id) %}
+				{% for equipes in app.user.equipes |sort((a, b) => a.id < b.id) %}
 					<tr>
 						<td>{{ equipes.id }}</td>
 						<td>{{ equipes.nom }}</td>
@@ -146,7 +122,7 @@
 						<td>{{ equipes.ville }}</td>
 
 
-					{% for competitions in equipes.getCompetitons |sort((a, b) => a.id < b.id) %}
+						{% for competitions in equipes.getCompetitons |sort((a, b) => a.id < b.id) %}
 							<div>
 								<td class="d-flex flex-row ">
 									<p>{{ competitions.nom }}</p>
@@ -175,5 +151,6 @@
 
 			{% endif %}
 
-	</tbody>
-</tale>{% endblock %}
+		</tbody>
+	</tale>
+{% endblock %}
