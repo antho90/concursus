@@ -36,10 +36,11 @@ class InscriptionEquipeType extends AbstractType
                 'choice_label' => 'nom',
                 'query_builder' => function (EntityRepository $repo) {
                     return $repo->createQueryBuilder('e')
-                        ->leftjoin('e.generaluser', 'g',Expr\Join::WITH,'g.general_user_id')
-                        //->from('equipe_general_user', 'g')
-                        //->where('e.id')
+                    ->innerJoin('e.generaluser', 'g')
+                    ->where('g.id = :general_user_id')
+                    ->setParameter('general_user_id', 1)
                         //->orderBy('g.id', 'DESC')
+                    
                         ;
                 },
                 'label' => 'Mes compétitions',
