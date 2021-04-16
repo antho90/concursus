@@ -175,10 +175,33 @@ class HomepageController extends AbstractController
 
     /**
      * @IsGranted("ROLE_MENTOR")
+     * @Route("/mentor/competition/{id}/classement", name="mentor_classement_competition")
+     */
+    public function mentor_classement_competition(CompetitonRepository $repository, $id, EquipeRepository $equipes){
+
+        $competitions = $repository->find($id);
+        $Allcompetions = $repository->findAll();
+
+        return $this->render('mentor/mentor_classement_competition.html.twig', ['competition' => $competitions,'competitions' => $Allcompetions,'equipes' => $equipes->findAll()]);
+    }
+
+    /**
+     * @IsGranted("ROLE_ADMIN")
      * @Route("/classement/général", name="classement_general")
      */
     public function classementGeneral(CompetitonRepository $competitions, EquipeRepository $equipes){
         return $this->render('admin/classementgeneral.html.twig', ['competitions' => $competitions->findAll(),'equipes' => $equipes->findAll()]);
+    }
+
+    /**
+     * @IsGranted("ROLE_MENTOR")
+     * @Route("mentor/classement/général", name="mentor_classement_general")
+     */
+    public function mentorClassementGeneral(CompetitonRepository $repository, EquipeRepository $equipes){
+
+        $competitions = $repository->findAll();
+
+        return $this->render('mentor/mentorClassementgeneral.html.twig', ['competitions' => $competitions,'equipes' => $equipes->findAll()]);
     }
 
 

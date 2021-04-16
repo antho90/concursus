@@ -1,0 +1,73 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Classement
+{% endblock %}
+
+{% block body %}
+
+	<div id="nav_gauche" class="sidebar-container slideInLeft atss-left at-custom-sidebar addthis-animated">
+		<ul class="sidebar-navigation">
+			<li class="header">Classement</li>
+			<li>
+				<a href="{{path('mentor_classement_general')}}">
+					<i class="fa fa-tachometer" aria-hidden="true"></i>
+					Général
+				</a>
+			</li>
+			{% for equipes in app.user.equipes %}
+				{% for competitions in equipes.getCompetitons |sort((a, b) => a.id < b.id) %}
+					<li>
+						<a href="{{path('mentor_classement_competition', {'id': competitions.id})}}">
+							<i class="fa fa-home" aria-hidden="true"></i>
+							{{ competitions.nom }}
+						</a>
+					</li>
+				{% endfor %}
+			{% endfor %}
+		</ul>
+	</div>
+
+	<h1 class="text-center pt-5">Classement
+		{{ competition.nom }}</h1>
+	{# {{ dump(equipes) }} #}
+
+	<div class="text-center pt-5">
+		<a href="{{ path('competitionsList')}}" class=" btn btn-info ">Retour</a>
+	</div>
+
+	<table class="table table-hover">
+		<thead class="thead-light">
+
+			<th>Place</th>
+			<th>Equipe</th>
+			<th>Note</th>
+			<th>Actions</th>
+
+		</thead>
+		<tbody>
+
+			{% for competitions in competitions %}
+
+				{% if competitions.nom == competition.nom %}
+
+					{% for equipes in competitions.getEquipe |sort((a, b) => a.notes < b.notes)%}
+						<tr>
+
+							<td>{{ loop.index }}</td>
+							<td>{{ equipes.nom }}</td>
+
+							<td>{{ equipes.notes }}/100</td>
+
+							<td>
+								<a href="#" class=" btn btn-warning">Modifier</a>
+
+							</td>
+						</tr>
+					{% endfor %}
+				{% endif %}
+			{% endfor %}
+
+		</tbody>
+	</tale>
+
+{% endblock %}
