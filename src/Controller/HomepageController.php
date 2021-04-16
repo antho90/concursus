@@ -388,8 +388,17 @@ class HomepageController extends AbstractController
      */
     public function inscriptionCompetition(EquipeRepository $equipeRepository, CompetitonRepository $repository, Competiton $competition, Request $request): Response{
 
+        #
+        # On récupère l'utilisateur courant 
+        #
         $gu = $this->getUser();
+
+        #
+        # Puis son ID
+        #
         $gu = $gu->getId();
+
+
         // $equipe = $gu->getEquipes();
 
         // $equipe = new Equipe();
@@ -400,8 +409,16 @@ class HomepageController extends AbstractController
         //  echo (gettype($em->findByMentor($gu)));
         //  echo( $em->findByMentor($gu));
 
+        #
+        #On récupère une array qui contient toutes les equipes selon le mentor connecté
+        #
         $equipes = $equipeRepository->findMentor($gu);
+
         dump($competition);
+
+        #
+        # Pour chaque equipe dans le tableau equipes je l'ajoute à compétitions (en tant que #collection)
+        #
         foreach($equipes as $equipe){
             $competition->getEquipe()->add($equipe);
             dump($competition);
@@ -409,7 +426,14 @@ class HomepageController extends AbstractController
         // $competition->getEquipe()->add($equipes);
 
         $form = $this->createForm(InscriptionEquipeType::class, $competition);
+
+        #
+        # On modifie le field "equipe" du formulaire et on lui passe l'array contenu dans Equipe, compétition. (à vérifier)
+        #
         $form->get('equipe')->setData($competition->getEquipe()->getValues());
+
+
+
         //TODO: Créer le forum ici et essayer de passer $gu à la query
 
 
