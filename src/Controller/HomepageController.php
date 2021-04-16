@@ -409,7 +409,7 @@ class HomepageController extends AbstractController
         // $competition->getEquipe()->add($equipes);
 
         $form = $this->createForm(InscriptionEquipeType::class, $competition);
-
+        $form->get('equipe')->setData($competition->getEquipe()->getValues());
         //TODO: Créer le forum ici et essayer de passer $gu à la query
 
 
