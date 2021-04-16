@@ -20,6 +20,7 @@ class EquipeRepository extends ServiceEntityRepository
         parent::__construct($registry, Equipe::class);
     }
 
+    
     public function findMentor($value)
     {
         $qb = $this->createQueryBuilder("e");
@@ -29,7 +30,7 @@ class EquipeRepository extends ServiceEntityRepository
             ->where('g.id = :general_user_id')
             ->setParameter('general_user_id', $value)
             ;
-            dump($qb->getQuery()->getResult());
+            //dump($qb->getQuery()->getResult());
 
         return $qb->getQuery()->getResult();
 

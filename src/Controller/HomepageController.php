@@ -389,6 +389,7 @@ class HomepageController extends AbstractController
     public function inscriptionCompetition(EquipeRepository $equipeRepository, CompetitonRepository $repository, Competiton $competition, Request $request): Response{
 
         $gu = $this->getUser();
+        $gu = $gu->getId();
         // $equipe = $gu->getEquipes();
 
         // $equipe = new Equipe();
@@ -398,14 +399,25 @@ class HomepageController extends AbstractController
         //$generalusers = $generalUserRepository->findByMentor();
         //  echo (gettype($em->findByMentor($gu)));
         //  echo( $em->findByMentor($gu));
+
         $equipes = $equipeRepository->findMentor($gu);
+        dump($competition);
+        foreach($equipes as $equipe){
+            $competition->getEquipe()->add($equipe);
+            dump($competition);
+        }
+        // $competition->getEquipe()->add($equipes);
 
         $form = $this->createForm(InscriptionEquipeType::class, $competition);
+
+        //TODO: Créer le forum ici et essayer de passer $gu à la query
+
+
         //$gu = $this->getUser();
         //$competition->setEquipe($gu->getEquipes());
         //$competition->setEquipe($equipe);
         //$equipe->setCompetitons($competition);
-        $competition->getEquipe()->add($equipes);
+        
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()){
@@ -417,7 +429,7 @@ class HomepageController extends AbstractController
             return $this->redirectToRoute('app_homepage_programme');
         }
 
-        return $this->render('mentor/InscriptionEquipe.html.twig', ['equipes' => $equipes,
+        return $this->render('mentor/InscriptionEquipe.html.twig', [
             'InscriptionEquipeForm' => $form->createView()
         ]);
     }
