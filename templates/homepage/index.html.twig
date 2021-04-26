@@ -43,7 +43,7 @@
 
 		<p class="text-justify">
 			Lors des compétitions MakerFight Jr., les kids créent des robots qui s'affrontent sur plusieurs playgrounds. Le plaisir d'apprendre, les échanges entre élèves et le travail d'équipe sont au premier plan. Cet événement permet aux kids de s'enthousiasmer pour les mathématiques, l'informatique, les sciences naturelles et la technologie grâce à la résolution de problèmes pratiques liés aux challenges.
-			La plupart des compétitions sont internationales et ouvertes aux groupes de la région et du monde entier. Les meilleurs équipes poursuivront leur aventure au niveau national, européen voire international… que la science soit avec vous !
+									La plupart des compétitions sont internationales et ouvertes aux groupes de la région et du monde entier. Les meilleurs équipes poursuivront leur aventure au niveau national, européen voire international… que la science soit avec vous !
 		</p>
 
 	</div>
@@ -213,8 +213,47 @@
 				</div>
 			</div>
 
-		</div>
+		</section>
 
+	<div class="text-center pt-5 ">
+
+		<h2>Classement des 10 meilleurs équipes</h2>
+
+		<section class="pt-5">
+
+			<table class="table table-hover">
+				<thead class="thead-light">
+
+					<th>Place</th>
+					<th>Equipes</th>
+					<th>Note</th>
+
+				</thead>
+				<tbody>
+
+					{% for equipes in equipes |sort((a, b) => a.notes < b.notes) | slice(0, 10)%}
+						<tr>
+
+							<td>{{ loop.index }}</td>
+							<td>{{ equipes.nom }}</td>
+							{% if equipes.notes != null %}
+								<td>{{ equipes.notes }}/100</td>
+							{% else %}
+
+								<td>
+									<p></p>
+								</td>
+							{% endif %}
+						</tr>
+					{% else %}
+						<tr>
+							<td colspan="5">Il n'y a pas de classement</td>
+						</tr>
+					{% endfor %}
+
+				</tbody>
+			</tale>
+		</section>
 
 	</div>
 {% endblock %}

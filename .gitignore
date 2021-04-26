@@ -1,6 +1,6 @@
 .vscode/
-.var/
+/var/cache/*
 .env
-.vendor/
-/vendor/*
+
+/vendor/
 /var/*
