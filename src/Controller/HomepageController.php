@@ -451,15 +451,62 @@ class HomepageController extends AbstractController
      * @Route("/competition/{id}/inscription_equipe", name="inscription_equipe")
      * @return Response
      */
-    public function inscriptionCompetition(GeneralUserRepository $generalUserRepository, Competiton $competition, Request $request): Response{
+    public function inscriptionCompetition(EquipeRepository $equipeRepository, CompetitonRepository $repository, Competiton $competition, Request $request): Response{
 
-        // $gu = $this->getUser();
-        $generalusers = $generalUserRepository->findByMentor();
+        #
+        # On récupère l'utilisateur courant 
+        #
+        $gu = $this->getUser();
+
+        #
+        # Puis son ID
+        #
+        $gu = $gu->getId();
+
+
+        // $equipe = $gu->getEquipes();
+
+        // $equipe = new Equipe();
+
+        //$repository->find
+        //$gu->getEquipes();
+        //$generalusers = $generalUserRepository->findByMentor();
         //  echo (gettype($em->findByMentor($gu)));
         //  echo( $em->findByMentor($gu));
-        
+
+        #
+        #On récupère une array qui contient toutes les equipes selon le mentor connecté
+        #
+        $equipes = $equipeRepository->findMentor($gu);
+
+        dump($competition);
+
+        #
+        # Pour chaque equipe dans le tableau equipes je l'ajoute à compétitions (en tant que #collection)
+        #
+        foreach($equipes as $equipe){
+            $competition->getEquipe()->add($equipe);
+            dump($competition);
+        }
+        // $competition->getEquipe()->add($equipes);
 
         $form = $this->createForm(InscriptionEquipeType::class, $competition);
+
+        #
+        # On modifie le field "equipe" du formulaire et on lui passe l'array contenu dans Equipe, compétition. (à vérifier)
+        #
+        $form->get('equipe')->setData($competition->getEquipe()->getValues());
+
+
+
+        //TODO: Créer le forum ici et essayer de passer $gu à la query
+
+
+        //$gu = $this->getUser();
+        //$competition->setEquipe($gu->getEquipes());
+        //$competition->setEquipe($equipe);
+        //$equipe->setCompetitons($competition);
+        
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()){
@@ -471,7 +518,7 @@ class HomepageController extends AbstractController
             return $this->redirectToRoute('app_homepage_programme');
         }
 
-        return $this->render('mentor/InscriptionEquipe.html.twig', ['equipe' => $generalusers,
+        return $this->render('mentor/InscriptionEquipe.html.twig', [
             'InscriptionEquipeForm' => $form->createView()
         ]);
     }

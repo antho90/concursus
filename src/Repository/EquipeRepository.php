@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Equipe;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Query\AST\Join;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -19,6 +20,21 @@ class EquipeRepository extends ServiceEntityRepository
         parent::__construct($registry, Equipe::class);
     }
 
+    
+    public function findMentor($value)
+    {
+        $qb = $this->createQueryBuilder("e");
+        $qb
+            //->select('g.generaluser.id')
+            ->innerJoin('e.generaluser', 'g')
+            ->where('g.id = :general_user_id')
+            ->setParameter('general_user_id', $value)
+            ;
+            //dump($qb->getQuery()->getResult());
+
+        return $qb->getQuery()->getResult();
+
+    }
     // public function findMentor($value)
     // {
     //     return $this->createQueryBuilder("e")
