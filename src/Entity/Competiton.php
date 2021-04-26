@@ -56,8 +56,7 @@ class Competiton
     private $info;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Equipe::class, mappedBy="competitons")
-     * @ORM\JoinTable(name="competiton_equipe")
+     * @ORM\OneToMany(targetEntity="NotesEquipe", mappedBy="competiton")
      */
     private $equipe;
 

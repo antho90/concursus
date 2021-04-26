@@ -17,6 +17,7 @@ use App\Repository\EquipeRepository;
 use Doctrine\DBAL\Driver\Connection;
 use App\Repository\CompetitonRepository;
 use App\Repository\GeneralUserRepository;
+use App\Repository\NotesEquipeRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -128,15 +129,31 @@ class HomepageController extends AbstractController
      * @IsGranted("ROLE_ADMIN")
      * @Route("/manage/equipes", name="equipes")
      */
-    public function equipeList(EquipeRepository $equipes){
-        return $this->render('admin/adminEquipesList.html.twig', ['equipes' => $equipes->findAll()]);
+    public function equipeList(EquipeRepository $equipes, NotesEquipeRepository $notes){
+        return $this->render('admin/adminEquipesList.html.twig', ['equipes' => $equipes->findAll(), 'notes' => $notes->findAll()]);
     }
 
     /**
      * @IsGranted("ROLE_JUGE")
      * @Route("/juge/equipes", name="juge_equipes")
      */
-    public function jugeEquipeList(CompetitonRepository $competitions, EquipeRepository $equipes){
+    public function jugeEquipeList( CompetitonRepository $competitions, EquipeRepository $equipes){
+
+        // // $compets = new Competiton();
+        // // $equipes->findAll();
+        // // $compets->getEquipe()->add($equipes);
+        // // dump($compets);
+
+        // $compets = $this->getDoctrine()
+        // ->getRepository(Competiton::class)
+        // ->find(1);
+
+        // $equipes = $compets->getEquipe();
+
+        // // prints "Proxies\AppEntityCategoryProxy"
+        // dump(get_class($equipes));
+        // die();
+
         return $this->render('admin/equipesList.html.twig', ['competitions' => $competitions->findAll(),'equipes' => $equipes->findAll()]);
     }
 
