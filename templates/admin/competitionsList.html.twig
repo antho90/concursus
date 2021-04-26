@@ -68,6 +68,8 @@
 		</thead>
 		<tbody>
 
+		{# AFFICHAGE LISTE DES COMPETITIONS #}
+
 			{% for competition in competitions |sort((a, b) => a.id < b.id) %}
 				<tr>
 					<td>{{ competition.id }}</td>

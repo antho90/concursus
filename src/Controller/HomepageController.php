@@ -81,6 +81,9 @@ class HomepageController extends AbstractController
      * @Route("/manage/utilisateurs", name="utilisateurs")
      */
     public function usersList(GeneralUserRepository $users){
+
+        // affichage des utilisateur si dans la bdd le champs modif = 1 
+
         return $this->render('admin/users.html.twig', ['users' => $users->findBy(
             array('modif' =>'1')
         )]);
@@ -91,6 +94,9 @@ class HomepageController extends AbstractController
      * @Route("/manage/admins", name="admins")
      */
     public function adminsList(GeneralUserRepository $users){
+
+        // affichage des admins si dans la bdd le champs modif = 1 
+
         return $this->render('admin/adminsList.html.twig', ['users' => $users->findBy(
             array('modif' =>'1')
         )]);
@@ -101,6 +107,9 @@ class HomepageController extends AbstractController
      * @Route("/manage/juges", name="juges")
      */
     public function jugesList(GeneralUserRepository $users){
+
+        // affichage des juges si dans la bdd le champs modif = 1 
+
         return $this->render('admin/jugesList.html.twig', ['users' => $users->findBy(
             array('modif' =>'1')
         )]);
@@ -111,6 +120,9 @@ class HomepageController extends AbstractController
      * @Route("/manage/mentors", name="mentors")
      */
     public function mentorsList(GeneralUserRepository $users){
+
+        // affichage des mentors si dans la bdd le champs modif = 1 
+
         return $this->render('admin/mentorsList.html.twig', ['users' => $users->findBy(
             array('modif' =>'1')
         )]);
@@ -146,6 +158,8 @@ class HomepageController extends AbstractController
      */
     public function note_equipe(CompetitonRepository $repository, $id, EquipeRepository $equipes){
 
+        // affichage classement equipe par competitions
+
         $competitions = $repository->find($id);
         $Allcompetions = $repository->findAll();
 
@@ -167,6 +181,8 @@ class HomepageController extends AbstractController
      */
     public function classement_competition(CompetitonRepository $repository, $id, EquipeRepository $equipes){
 
+        // affichage classement equipe par competitions
+
         $competitions = $repository->find($id);
         $Allcompetions = $repository->findAll();
 
@@ -178,6 +194,8 @@ class HomepageController extends AbstractController
      * @Route("/mentor/competition/{id}/classement", name="mentor_classement_competition")
      */
     public function mentor_classement_competition(CompetitonRepository $repository, $id, EquipeRepository $equipes){
+
+        // affichage classement equipe par competitions
 
         $competitions = $repository->find($id);
         $Allcompetions = $repository->findAll();
@@ -211,13 +229,20 @@ class HomepageController extends AbstractController
      * @Route("/utilisateurs/modifier/{id}", name="modifier_utilisateur")
      */
     public function editUser(GeneralUser $user, Request $request){
+
+        // création formulaire
+
         $form = $this->createForm(EditUsersType::class, $user);
         $form->handleRequest($request);
+
+        // si le formulaire est correct
 
         if($form->isSubmitted() && $form->isValid()){
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager ->persist($user);
             $entityManager->flush();
+
+            // message de success
 
             $this->addFlash('success', 'Utilisateur modifié avec succès');
             return $this->redirectToRoute('utilisateurs');
@@ -233,13 +258,20 @@ class HomepageController extends AbstractController
      * @Route("/competitionsList/modifier/{id}", name="modifier_competition")
      */
     public function editCompetition(Competiton $competition, Request $request){
+
+        // création formulaire
+
         $form = $this->createForm(EditCompetitionType::class, $competition);
         $form->handleRequest($request);
+
+        // si le formulaire est correct
 
         if($form->isSubmitted() && $form->isValid()){
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager ->persist($competition);
             $entityManager->flush();
+
+            // message de success
 
             $this->addFlash('success', 'Compétition modifié avec succès');
             return $this->redirectToRoute('competitionsList');
@@ -256,16 +288,24 @@ class HomepageController extends AbstractController
      */
     public function editEquipe(Equipe $equipe, Request $request, EquipeRepository $repository, $id){
 
+        // On récupère l'équipe par l'id
+
         $equipes = $repository->find($id);
+
+        // création formulaire
 
         $form = $this->createForm(EditEquipeType::class, $equipe);
         $form->handleRequest($request);
+
+        // si le formulaire est correct
 
         if($form->isSubmitted() && $form->isValid()){
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager ->persist($equipe);
            // $entityManager ->persist($competition);
             $entityManager->flush();
+
+            // message de success
 
             $this->addFlash('success', 'Equipe modifié avec succès');
             return $this->redirectToRoute('equipes');
@@ -282,18 +322,24 @@ class HomepageController extends AbstractController
      */
     public function jugeEditEquipe(Equipe $equipe, Request $request, EquipeRepository $repository, $id): Response{
 
-
+        // On récupère l'équipe par l'id
         
         $equipes = $repository->find($id);
 
+        // création formulaire
+
         $form = $this->createForm(JugeEditEquipeType::class, $equipe);
         $form->handleRequest($request);
+
+        // si le formulaire est correct
 
         if($form->isSubmitted() && $form->isValid()){
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager ->persist($equipe);
            // $entityManager ->persist($competition);
             $entityManager->flush();
+
+            // message de success
 
             $this->addFlash('success', 'Note ajouté avec succès');
             return $this->redirectToRoute('juge_equipes');
@@ -310,16 +356,24 @@ class HomepageController extends AbstractController
      */
     public function mentoreditEquipe(Equipe $equipe, Request $request, EquipeRepository $repository, $id){
 
+        // On récupère l'équipe par l'id
+
         $equipes = $repository->find($id);
+
+        // création formulaire
 
         $form = $this->createForm(EditEquipeType::class, $equipe);
         $form->handleRequest($request);
+
+        // si le formulaire est correct
 
         if($form->isSubmitted() && $form->isValid()){
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager ->persist($equipe);
            // $entityManager ->persist($competition);
             $entityManager->flush();
+
+            // message de success
 
             $this->addFlash('success', 'Equipe modifié avec succès');
             return $this->redirectToRoute('mentor_equipes');
@@ -396,12 +450,22 @@ class HomepageController extends AbstractController
      * @return Response
      */
     public function newUser(Request $request,UserPasswordEncoderInterface $encoder): Response{
+
+        // ajout d'un nouvel utilisateur
+        
         $user = new GeneralUser;
+
+         // création formulaire
+
         $form = $this->createForm(NewUserType::class, $user);
         $form->handleRequest($request);
 
+        // si le formulaire est correct
+
         if($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+
+            // encodage du mot de passe
 
             $hash = $encoder->encodePassword($user, $user->getPassword());
 
@@ -409,6 +473,8 @@ class HomepageController extends AbstractController
 
             $em->persist($user);
             $em->flush();
+
+            // message de success
 
             $this->addFlash('success', 'Votre nouvel utilisateur à bien été enregistré.');
 
@@ -426,15 +492,25 @@ class HomepageController extends AbstractController
      * @return Response
      */
     public function newCompetition(Request $request): Response{
+
+         // ajout d'une nouvelle compétition
+
         $competition = new Competiton;
+
+        // création formulaire
+
         $form = $this->createForm(CompetitionType::class, $competition);
         $form->handleRequest($request);
+
+        // si le formulaire est correct
 
         if($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
 
             $em->persist($competition);
             $em->flush();
+
+            // message de success
 
             $this->addFlash('success', 'Votre compétition à bien été enregistré.');
 
@@ -530,11 +606,21 @@ class HomepageController extends AbstractController
      * @return Response
      */
     public function newEquipe(Request $request): Response{
+
+        // On récupère l'utilisitateur connecté à la session
+
         $generaluser = $this->getUser();
+
+         // ajout d'une nouvelle equipe
+
         $equipe = new Equipe;
+
+         // création formulaire
         
         $form = $this->createForm(NewEquipeType::class, $equipe);
         $form->handleRequest($request);
+
+          // si le formulaire est correct
 
         if($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
@@ -543,6 +629,8 @@ class HomepageController extends AbstractController
 
             $em->persist($equipe);
             $em->flush();
+
+            // message de success
 
             $this->addFlash('success', 'Votre équipe à bien été enregistré.');
 

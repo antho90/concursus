@@ -68,6 +68,8 @@
 		</thead>
 		<tbody>
 
+		{# AFFICHAGE LISTE DES ADMINS #}
+
 			{% for user in users |sort((a, b) => a.id < b.id) %}
 				<tr>
 					{% for role in user.roles %}

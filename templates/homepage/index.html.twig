@@ -25,6 +25,8 @@
 
 			<h4>Programme</h4>
 
+			{# LISTE DES COMPETITIONS A LA UNE #}
+
 			{% for programme in programmes |sort((a, b) => a.id < b.id) |slice(0, 6) %}
 				<a href="{{path('app_homepage_competition', {'id': programme.id})}}">
 					<strong>{{programme.nom}}</strong>
@@ -49,6 +51,8 @@
 	</div>
 
 	<div class="text-center pt-5">
+
+	{# CARD DE L'ORGANISTION #}
 
 		<h2>L'équipe Organisatrice</h2>
 
@@ -230,6 +234,8 @@
 
 				</thead>
 				<tbody>
+
+				{# AFFICHAGE CLASSEMENT MEILLEUR EQUIPES #}
 
 					{% for equipes in equipes |sort((a, b) => a.notes < b.notes) | slice(0, 10)%}
 						<tr>

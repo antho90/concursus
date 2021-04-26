@@ -44,6 +44,8 @@
 		</thead>
 		<tbody>
 
+		{# AFFICHAGE CLASSEMENT TOUTES LES EQUIPES #}
+
 			{% for equipe in equipes |sort((a, b) => a.notes < b.notes)%}
 
 				<tr>

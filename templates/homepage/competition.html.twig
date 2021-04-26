@@ -20,6 +20,7 @@
 		</ul>
 	</div>
 
+{# AFFICHAGE DESCRIPTION COMPETITION #}
 
 	<h1 class="text-center pt-5">
 		{{competition.nom}}
@@ -43,7 +44,7 @@
 		Cette compétition vous intéresse ?
 	</h3>
 
-
+{# REDIRECTION VERS CONNECTION SI L'UTILISATEUR N'EST PAS CONNECTE #}
 
 	{% if is_granted('ROLE_MENTOR') %}	
 	
@@ -56,6 +57,8 @@
 		</div>
 
 	{% else %}
+
+	{# REDIRECTION VERS INSCRIPTION EQUIPE SI L'UTILISATEUR EST CONNECTE #}
 
 		<p class="text-center">
 			M'incrire en tant que Mentor :

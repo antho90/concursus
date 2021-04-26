@@ -67,7 +67,8 @@
 		</thead>
 		<tbody>
 
-
+			{# AFFICHAGE EQUIPES #}
+			
 				{% for equipes in equipes |sort((a, b) => a.id < b.id) %}
 					<tr>
 						<td>{{ equipes.id }}</td>

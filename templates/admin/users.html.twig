@@ -68,6 +68,8 @@
 		</thead>
 		<tbody>
 
+	{# AFFICHAGE DE TOUT LES UTILISATEURS #}
+
 			{% for user in users |sort((a, b) => a.id < b.id) %}
 				<tr>
 					<td>{{ user.id }}</td>

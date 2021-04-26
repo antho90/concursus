@@ -68,6 +68,8 @@
 		</thead>
 		<tbody>
 
+		{# AFFICHAGE DE LA LISTE DES JUGES #}
+
 			{% for user in users |sort((a, b) => a.id < b.id) %}
 				<tr>
 					{% for role in user.roles %}

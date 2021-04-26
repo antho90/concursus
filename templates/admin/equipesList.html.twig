@@ -88,6 +88,7 @@
 		</thead>
 		<tbody>
 
+{# AFFICHAGE EQUIPES POUR LE ROLE JUGE #}
 
 			{% if is_granted('ROLE_JUGE') %}
 
@@ -111,6 +112,8 @@
 						<td colspan="5">Il n'y a pas d'équipe inscrite</td>
 					</tr>
 				{% endfor %}
+
+{# AFFICHAGE EQUIPES POUR LE ROLE MENTOR #}
 
 			{% elseif is_granted('ROLE_MENTOR') %}
 

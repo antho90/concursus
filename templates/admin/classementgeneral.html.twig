@@ -44,6 +44,8 @@
 		</thead>
 		<tbody>
 
+		{# AFFICHAGE CLASSEMENT GENERAL #}
+
 			{% for equipes in equipes |sort((a, b) => a.notes < b.notes)%}
 				<tr>
 
